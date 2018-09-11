@@ -5,13 +5,43 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Isura Pharmacies</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
+            body  {
+                background-image: url('{{URL::to('/')}}/assets/img/home.jpg') ;
+                background-color: #cccccc;
+            }
+          
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+
+
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -47,6 +77,8 @@
 
             .title {
                 font-size: 84px;
+                color: darkslateblue;
+                font-family: 'Times New Roman', Times, serif; 
             }
 
             .links > a {
@@ -68,29 +100,27 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+                    <ul>
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <li><a href="{{ url('/home') }}">Home</a></li>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                     @endauth
+                    </ul>
                 </div>
             @endif
 
+            <div class = "text-center">
+                <img src="{{asset('assets/img/medical-logo-design.jpg')}}" alt="logo" height="250" width="250"> 
+            </div> 
+
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Isura Pharmacies (PVT) Ltd
                 </div>
             </div>
+
         </div>
     </body>
 </html>
