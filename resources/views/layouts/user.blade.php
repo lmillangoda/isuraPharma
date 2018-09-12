@@ -19,10 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <Style>
-            .navbar {
-                background:#AEACE1;
-            }
-        </style>
+        .navbar {
+            background:#AEACE1;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
