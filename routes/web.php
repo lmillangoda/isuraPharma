@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('profile', 'pagescontroller@profile')->name('profile');
+
+Route::get('messages', 'pagescontroller@messages')->name('messages');
