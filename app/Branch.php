@@ -22,4 +22,11 @@ class Branch extends Model
   {
     return $this->hasMany('App\Cashier');
   }
+
+  public function products()
+  {
+    return $this->belongsToMany('App\Product', 'stock')
+      ->withPivot('amount', 'price')
+      ->withTimeStamps();
+  }
 }
