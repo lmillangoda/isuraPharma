@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('profile', 'pagescontroller@profile')->name('profile');
 
 Route::get('messages', 'pagescontroller@messages')->name('messages');
+
+Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
