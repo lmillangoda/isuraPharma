@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -13,7 +15,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('product');
+        $products = Product::with('Suppliers')->get();
+        return view('products.index')->with('products', $products);
     }
 
     /**
@@ -23,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -34,7 +37,27 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          'brandName' => 'required',
+          'medicalName' => 'required',
+          'price' => 'required',
+          'image' => 'image'
+        ]);
+
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $filenameToStore = $filename.'_'.time().'.'.$extension;
+        $path = $request->file('image')->storeAs('public/product_images', $filenameToStore);
+
+        $product = new Product;
+        $product->brandName = $request->Input('brandName');
+        $product->medicalName = $request->Input('medicalName');
+        $product->price = $request->Input('price');
+        $product->image = $filenameToStore;
+        $product->save();
+
+        return redirect('/products')->with('success', 'Product Details Added Successfully!');
     }
 
     /**
