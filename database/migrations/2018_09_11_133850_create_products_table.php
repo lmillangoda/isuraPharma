@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('brandName');
             $table->string('medicalName');
             $table->double('price');
+            $table->string('image');
             $table->timestamps();
         });
     }
