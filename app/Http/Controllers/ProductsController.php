@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use DB;
+use Storage;
 
 class ProductsController extends Controller
 {
@@ -41,20 +42,13 @@ class ProductsController extends Controller
           'brandName' => 'required',
           'medicalName' => 'required',
           'price' => 'required',
-          'image' => 'image'
         ]);
-
-        $filenameWithExt = $request->file('image')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $filenameToStore = $filename.'_'.time().'.'.$extension;
-        $path = $request->file('image')->storeAs('public/product_images', $filenameToStore);
 
         $product = new Product;
         $product->brandName = $request->Input('brandName');
         $product->medicalName = $request->Input('medicalName');
         $product->price = $request->Input('price');
-        $product->image = $filenameToStore;
+        $product->image = $this->filenameToStore($request);
         $product->save();
 
         return redirect('/products')->with('success', 'Product Details Added Successfully!');
@@ -79,7 +73,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.create')->with('product', $product);
     }
 
     /**
@@ -91,7 +86,18 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $product = Product::find($id);
+      $product->brandName = $request->Input('brandName');
+      $product->medicalName = $request->Input('medicalName');
+      $product->price = $request->Input('price');
+      if($request->hasFile('image')){
+        $oldFilename = 'public/product_images/'.$product->image;
+        $product->image = $this->filenameToStore($request);
+        Storage::delete($oldFilename);
+      }
+      $product->save();
+
+      return redirect('/products')->with('success', 'Product Details Saved Successfully!');
     }
 
     /**
@@ -102,6 +108,22 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $file = 'public/product_images/'.$product->image;
+        Storage::delete($file);
+        $product->delete();
+
+        return redirect('/products')->with('success', 'Product Removed Successfully!');
+    }
+
+    public function filenameToStore($request)
+    {
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $filenameToStore = $filename.'_'.time().'.'.$extension;
+        $path = $request->file('image')->storeAs('public/product_images', $filenameToStore);
+
+        return $filenameToStore;
     }
 }
