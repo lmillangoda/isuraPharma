@@ -11,11 +11,11 @@ class pagescontroller extends Controller
         $this->middleware('auth:web');
     }
 
-    public function profile(){
-        return view('pages.profile');
-    }
-
     public function messages(){
         return view('pages.messages');
+    }
+
+    public function profile(){
+        return view('pages.profile');
     }
 }
