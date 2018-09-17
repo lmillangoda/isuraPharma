@@ -12,12 +12,20 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form action = "profile" method = "get" enctype = "multipart/form-data">
+                    <div><form action = "profile" method = "get" enctype = "multipart/form-data">
                         <div><img src="{{$user->name}}" alt = "" width ="150" height ="150">
                     </form>
-                    <form action = "propic" method = "get" enctype = "multipart/form-data">
-                        <div><button type = "submit">Change Profile Picture</button></div>
-                    </form>
+                </div> 
+                <div>
+                <form action = "propic" method = "get" enctype = "multipart/form-data">
+                    <div><button type = "submit">Change Profile Picture</button></div>
+                </form>
+            </div>
+                <div>
+                        <form action = "profile" method = "get" enctype = "multipart/form-data">
+                            <strong>Name</Strong> <p>{{$user2->name}}</p>
+                            <strong>E mail</strong> <p>{{$user2->email}}</p>           
+                        </form>
                 </div>
             </div>
         </div>

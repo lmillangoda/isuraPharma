@@ -80,7 +80,7 @@ class userprofcontroller extends Controller
         if(is_null($user)){
             return view('pages.profile');
         }
-        return view("pages.profile",compact('user'));
+        return view("pages.profile",compact('user','user2'));
         }
 
     /**
