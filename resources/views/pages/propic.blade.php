@@ -21,6 +21,12 @@
                         <label for = "image">Image</label>
                         <input type = "file" name = "image"><br/>
 
+                        <label for = "name">Name</label>
+                        <input type = "text" name = "name"><br/>
+
+                        <label for = "email">Email</label>
+                        <input type = "text" name = "email"><br/>
+
                     <input type = "hidden" name = "_token" value = "{{csrf_token()}}">
 
                     <button type = "submit">Submit</button>

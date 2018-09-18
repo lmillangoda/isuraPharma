@@ -21,7 +21,8 @@ class userprofcontroller extends Controller
      */
     public function index()
     {
-        return view("pages.propic");
+        $user2 = (Auth::user());
+        return view("pages.propic",compact('user2'));
     }
 
     /**
@@ -46,7 +47,7 @@ class userprofcontroller extends Controller
         $id = $user2->id;
         $test = propic::where('id',$user2->id)->first();
         
-        if(Input::hasFile('image')){ 
+        
 
             if(is_null($test)){
                 $user = new propic;  
@@ -54,15 +55,24 @@ class userprofcontroller extends Controller
             if(!is_null($test)){
                 $user = propic::where('id',$id)->first();
             }
+            if(Input::hasFile('image')){ 
             $file = Input::file('image');
-            $file->move(public_path().'/assets/img',$request->image->getClientOriginalName());
             $user->name = $request->image->getClientOriginalName();
+            $file->move(public_path().'/assets/img',$request->image->getClientOriginalName());
             $user->id = $user2->id;
             }
-        else{
-            return view("pages.propic");
-        }
+            $Nme = Input::get('name');
+           if(!is_null($Nme)){
+            $name = Input::get('name');
+            $user2->name = $name;
+           }
+           $Eml = Input::get('email');
+           if(!is_null($Eml)){
+            $email = Input::get('email');
+            $user2->email = $email;
+           }
         $user->save();
+        $user2->save();
         return redirect()->route('profile');
         } 
     
