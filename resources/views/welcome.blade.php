@@ -16,7 +16,7 @@
                 background-image: url('{{URL::to('/')}}/assets/img/home.jpg') ;
                 background-color: #cccccc;
             }
-          
+            
             ul {
                 list-style-type: none;
                 margin: 0;
@@ -82,7 +82,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #636b6f;  
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -96,7 +96,7 @@
             }
         </style>
     </head>
-    <body>
+    <body>      
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -104,8 +104,8 @@
                     @auth
                         <li><a href="{{ url('/home') }}">Home</a></li>
                     @else
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}" >Login</a></li>
+                        <li><a href="{{ route('register') }}" >Register</a></li>
                     @endauth
                     </ul>
                 </div>
@@ -120,7 +120,8 @@
                     Isura Pharmacies (PVT) Ltd
                 </div>
             </div>
-
         </div>
+
     </body>
+    
 </html>
