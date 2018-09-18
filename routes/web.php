@@ -19,8 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('profile', 'pagescontroller@profile')->name('profile');
-
 Route::get('messages', 'pagescontroller@messages')->name('messages');
 
 Route::resource('products', 'ProductsController');
+
+Route::get("propic",'userprofcontroller@index');
+
+Route::post("store",'userprofcontroller@store');
+
+Route::get("profile",'userprofcontroller@profile')->name('profile');
+
+Route::get('admin','adminUIController@adminDash')->name('admin');
