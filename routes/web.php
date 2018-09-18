@@ -24,3 +24,5 @@ Route::get('profile', 'pagescontroller@profile')->name('profile');
 Route::get('messages', 'pagescontroller@messages')->name('messages');
 
 Route::resource('products', 'ProductsController');
+
+Route::resource('suppliers', 'SuppliersController');

@@ -14,12 +14,13 @@ class CreateStockTable extends Migration
     public function up()
     {
         Schema::create('stock', function (Blueprint $table) {
+          $table->increments('id');
           $table->integer('branch_id')->unsigned();
           $table->integer('product_id')->unsigned();
           $table->DateTime('expDate');
           $table->integer('amount');
 
-          $table->primary(['branch_id', 'product_id']);
+          // $table->primary(['branch_id', 'product_id']);
           $table->timestamps();
 
           $table->foreign('product_id')
@@ -31,6 +32,8 @@ class CreateStockTable extends Migration
             ->references('id')
             ->on('branches')
             ->onDelete('cascade');
+
+          $table->unique(['branch_id', 'product_id']);
         });
     }
 

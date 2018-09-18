@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 
 class pagescontroller extends Controller
 {
-    public function profile(){
-        return view('pages.profile');
+    public function __constructer()
+    {
+      $this->middleware('auth:web');
     }
 
     public function messages(){
         return view('pages.messages');
+    }
+
+    public function profile(){
+        return view('pages.profile');
     }
 }

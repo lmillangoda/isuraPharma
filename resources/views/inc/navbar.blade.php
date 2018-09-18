@@ -1,31 +1,56 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Isura Pharmacies</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample04">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown04">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
+<!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Portfolio
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Blog
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
+                <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
+                <a class="dropdown-item" href="blog-post.html">Blog Post</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Other Pages
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="full-width.html">Full Width Page</a>
+                <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
+                <a class="dropdown-item" href="faq.html">FAQ</a>
+                <a class="dropdown-item" href="404.html">404</a>
+                <a class="dropdown-item" href="pricing.html">Pricing Table</a>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>

@@ -16,7 +16,7 @@
                 background-image: url('{{URL::to('/')}}/assets/img/home.jpg') ;
                 background-color: #cccccc;
             }
-          
+
             ul {
                 list-style-type: none;
                 margin: 0;
@@ -78,7 +78,7 @@
             .title {
                 font-size: 84px;
                 color: darkslateblue;
-                font-family: 'Times New Roman', Times, serif; 
+                font-family: 'Times New Roman', Times, serif;
             }
 
             .links > a {
@@ -112,8 +112,8 @@
             @endif
 
             <div class = "text-center">
-                <img src="{{asset('assets/img/medical-logo-design.jpg')}}" alt="logo" height="250" width="250"> 
-            </div> 
+                <img src="{{asset('assets/img/medical-logo-design.jpg')}}" alt="logo" height="250" width="250">
+            </div>
 
             <div class="content">
                 <div class="title m-b-md">
