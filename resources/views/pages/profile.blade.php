@@ -17,9 +17,6 @@
                     </form>
                 </div> 
                 <div>
-                <form action = "propic" method = "get" enctype = "multipart/form-data">
-                    <div><button type = "submit">Change Profile Picture</button></div>
-                </form>
             </div>
                 <div>
                         <form action = "profile" method = "get" enctype = "multipart/form-data">
@@ -27,6 +24,11 @@
                             <strong>E mail</strong> <p>{{$user2->email}}</p>           
                         </form>
                 </div>
+                <div>
+                <form action = "propic" method = "get" enctype = "multipart/form-data">
+                    <div><button type = "submit">Edit</button></div>
+                </form>
+            </div>
             </div>
         </div>
     </div>
