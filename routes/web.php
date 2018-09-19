@@ -30,3 +30,5 @@ Route::post("store",'userprofcontroller@store');
 Route::get("profile",'userprofcontroller@profile')->name('profile');
 
 Route::get('admin','adminUIController@adminDash')->name('admin');
+
+Route::resource('products', 'ProductsController');
