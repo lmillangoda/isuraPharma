@@ -10,7 +10,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="storage\site_images\banner-medical-indemnity.jpg" alt="First slide">
+            <img class="first-slide" src="storage\site_images\FormatFactorypharmacy_logo~4.jpg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Example headline.</h1>
@@ -18,9 +18,9 @@
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
               </div>
             </div>
-          </div>
+          <!-- </div>
           <div class="carousel-item">
-            <img class="second-slide" src="storage\site_images\Medical-Insurance.jpg" alt="Second slide">
+            <img class="second-slide" src="storage\site_images\FormatFactorybanner-medical-indemnity.jpg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption">
                 <h1>Another example headline.</h1>
@@ -38,7 +38,7 @@
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
