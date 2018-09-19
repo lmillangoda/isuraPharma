@@ -1,11 +1,29 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+   
       <a class="navbar-brand" href="#">Isura Pharmacies</a>
+  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExample04">
+
         <ul class="navbar-nav mr-auto">
+    
+                @if (Route::has('login'))
+                        @auth
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/home') }}">Dashboard<span class="sr-only">(current)</span></a>
+                        </li>
+                        @else
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('login') }}">Login<span class="sr-only">(current)</span></a>
+                        </li>
+                            <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('register') }}">Register<span class="sr-only">(current)</span></a>
+                            </li>
+                        @endauth
+                    @endif
           <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
