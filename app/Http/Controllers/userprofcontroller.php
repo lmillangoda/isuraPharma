@@ -86,9 +86,13 @@ class userprofcontroller extends Controller
     public function profile()
     {
         $user2 = Auth::user();
+        $id = 0;
         $user = propic::where('id',$user2->id)->first();
         if(is_null($user)){
-            return view('pages.profile');
+        $user = propic::where('id',$id)->first();
+        }
+        if(is_null($user)){
+            return view('pages.profile',compact('user','user2'));
         }
         return view("pages.profile",compact('user','user2'));
         }

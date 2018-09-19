@@ -31,9 +31,6 @@ Route::get("profile",'userprofcontroller@profile')->name('profile');
 
 Route::get('admin','adminUIController@adminDash')->name('admin');
 
-<<<<<<< HEAD
-Route::resource('products', 'ProductsController');
-=======
 Route::resource('products', 'ProductsController');
 
 
@@ -43,4 +40,3 @@ Route::resource('products', 'ProductsController');
 
 
 
->>>>>>> origin/test2
