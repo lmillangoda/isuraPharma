@@ -36,3 +36,7 @@ Route::resource('products', 'ProductsController');
 Route::resource('suppliers', 'SuppliersController');
 
 Route::resource('branches', 'BranchesController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
