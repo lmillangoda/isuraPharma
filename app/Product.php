@@ -13,13 +13,13 @@ class Product extends Model
 
     public function suppliers()
     {
-      return $this->belongsTo('App\Supplier');
+      return $this->belongsToMany('App\Supplier');
     }
 
     public function branches()
     {
-      return $this->belongsToMany('App\Product', 'stock')
-      ->withPivot('amount', 'price')
+      return $this->belongsToMany('App\Branch', 'stock')
+      ->withPivot('expDate', 'amount')
       ->withTimeStamps();
     }
 }
