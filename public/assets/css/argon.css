@@ -7632,6 +7632,7 @@ button.close
     overflow: hidden; 
 
     width: 100%;
+	
 }
 
 .carousel-item
@@ -18756,3 +18757,5 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     right: 10px;
     left: auto;
 }
+
+
