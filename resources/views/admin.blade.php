@@ -1,22 +1,34 @@
-@extends('layouts.users')
-
+@extends('layouts.admin')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Admin Dashboard</div>
+  <!-- Sidenav -->
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    You are logged in!
-                </div>
-            </div>
         </div>
+      </div>
     </div>
-</div>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2018 <a href="" class="font-weight-bold ml-1" target="_blank">Isura Pharmacies (PVT) Ltd</a>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+              <li class="nav-item">
+                <a href="" class="nav-link" target="_blank">Isura Pharmacies (PVT) Ltd</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link" target="_blank">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 @endsection
