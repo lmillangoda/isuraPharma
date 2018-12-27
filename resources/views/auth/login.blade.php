@@ -79,6 +79,11 @@
               </a>
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-md-8 col-md-offset-4">
+              <a href="{{url('/login/facebook')}}" class="btn btn-primary">Login with Facebook</a>
+            </div>
+        </div>
         </div>
       </div>
     </div>

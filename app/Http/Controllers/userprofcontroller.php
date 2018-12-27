@@ -73,17 +73,14 @@ class userprofcontroller extends Controller
             }
             $Nme = Input::get('input-name');
            if(!is_null($Nme)){
-            $name = Input::get('input-name');
-            $user2->name = $name;
+            $user2->name = $Nme;
            }
            $Eml = Input::get('input-email');
            if(!is_null($Eml)){
-            $email = Input::get('input-email');
-            $user2->email = $email;
+            $user2->email = $Eml;
            }
            $tel =  Input::get('input-telno');
            if(!is_null($tel)){
-            $tel = Input::get('input-telno');
             $user2->tel_no = $tel;
            }
         

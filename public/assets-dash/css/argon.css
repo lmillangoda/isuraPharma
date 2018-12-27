@@ -33,7 +33,7 @@
     --light: #ced4da;
     --lighter: #e9ecef;
     --primary: #5e72e4;
-    --secondary: #f7fafc;
+    --secondary: #f4f5f7;
     --success: #2dce89;
     --info: #11cdef;
     --warning: #fb6340;
@@ -48,7 +48,7 @@
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
+    --breakpoint-xl: 1200px
     --font-family-sans-serif: Open Sans, sans-serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
@@ -5794,23 +5794,6 @@ input[type='button'].btn-block
 .navbar-dark .navbar-text a:focus
 {
     color: rgba(255, 255, 255, .65);
-}
-
-.card
-{
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-
-    word-wrap: break-word;
-
-    border: 1px solid rgba(0, 0, 0, .05);
-    border-radius: .375rem; 
-    background-color: #fff;
-    background-clip: border-box;
 }
 .card > hr
 {

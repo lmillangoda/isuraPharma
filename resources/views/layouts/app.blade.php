@@ -12,16 +12,16 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
-    <link href="./assets-dash/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-    <link href="./assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="{{URL::asset('assets-dash/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
     <!-- Argon CSS -->
-    <link type="text/css" href="./assets-dash/css/argon.css?v=1.0.0" rel="stylesheet">
+    <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
   </head>
   
   <body>
     <header class="header-global">
-      <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+      <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent bg-default headroom">
         <div class="container">
           <a class="navbar-brand mr-lg-5" href="./">
             Isura Pharmacies
@@ -144,12 +144,13 @@
     </footer>
 
     <!-- Core -->
-    <script src="./assets-dash/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="./assets-dash/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{URL::asset('assets-dash/vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{URL::asset('assets-dash/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <!-- Optional JS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxkZBrDJNxRlReduc7v-z4NMvgzvNTgLw "></script>
     <!-- Argon JS -->
-    <script src="./assets-dash/js/argon.js?v=1.0.0"></script>
+    <script src="{{URL::asset('assets-dash/js/argon.js?v=1.0.0')}}"></script>
+  
   </body>
   
   

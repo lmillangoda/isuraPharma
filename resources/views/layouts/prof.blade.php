@@ -12,12 +12,12 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
-    <link href="./assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-    <link href="./assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{URL::asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- Argon CSS -->
-    <link type="text/css" href="./assets/css/argon.css?v=1.0.1" rel="stylesheet">
+    <link type="text/css" href="{{URL::asset('assets/css/argon.css?v=1.0.1')}}" rel="stylesheet">
     <!-- Docs CSS -->
-    <link type="text/css" href="./assets/css/docs.min.css" rel="stylesheet">
+    <link type="text/css" href="{{URL::asset('assets/css/docs.min.css')}}" rel="stylesheet">
   </head>
   
   <body>
@@ -67,7 +67,7 @@
             <li><a class="nav-link" href = "/home">Home</a></li>
                             <li><a class="nav-link" href = "/profile">Profile</a></li>
                             <li><a class="nav-link" href = "/messages">Messages</a></li>
-                            <li><a class="nav-link" href = "/produ">Products</a></li>
+                            <li><a class="nav-link" href = "/products">Products</a></li>
           </ul>
         <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
@@ -129,16 +129,16 @@
     </footer>
 
     <!-- Core -->
-    <script src="./assets/vendor/jquery/jquery.min.js"></script>
-    <script src="./assets/vendor/popper/popper.min.js"></script>
-    <script src="./assets/vendor/bootstrap/bootstrap.min.js"></script>
-    <script src="./assets/vendor/headroom/headroom.min.js"></script>
+    <script src="{{URL::asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{URL::asset('assets/vendor/popper/popper.min.js')}}"></script>
+    <script src="{{URL::asset('assets/vendor/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{URL::asset('assets/vendor/headroom/headroom.min.js')}}"></script>
     <!-- Optional JS -->
-    <script src="./assets/vendor/onscreen/onscreen.min.js"></script>
-    <script src="./assets/vendor/nouislider/js/nouislider.min.js"></script>
-    <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{URL::asset('assets/vendor/onscreen/onscreen.min.js')}}"></script>
+    <script src="{{URL::asset('assets/vendor/nouislider/js/nouislider.min.js')}}"></script>
+    <script src="{{URL::asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
     <!-- Argon JS -->
-    <script src="./assets/js/argon.js?v=1.0.1"></script>
+    <script src="{{URL::asset('assets/js/argon.js?v=1.0.1')}}"></script>
   </body>
   
   </html>

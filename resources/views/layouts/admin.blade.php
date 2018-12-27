@@ -10,10 +10,10 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
-  <link href="./assets-dash/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-  <link href="./assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="{{URL::asset('assets-dash/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+  <link href="{{URL::asset('assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <!-- Argon CSS -->
-  <link type="text/css" href="./assets-dash/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0" rel=')}}" rel ="stylesheet">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
           </button>
           <!-- Brand -->
           <a class="navbar-brand pt-0" href="admin">
-            <img src="./assets-dash/img/theme/isura.jpg" class="navbar-brand-img" alt="..."><br>
+            <img src="{{URL::asset('assets-dash/img/theme/isura.jpg" class="navbar-brand-img')}}" alt="..."><br>
             Isura Pharmacies
           </a>
           <!-- User -->
@@ -34,7 +34,7 @@
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="./assets-dash/img/default.png">
+                    <img alt="Image placeholder" src="{{URL::asset('assets-dash/img/default.png')}}">
                   </span>
                 </div>
               </a>
@@ -73,7 +73,7 @@
               <div class="row">
                 <div class="col-6 collapse-brand">
                   <a href="admin">
-                    <img src="./assets-dash/img/theme/isura.png">
+                    <img src="{{URL::asset('assets-dash/img/theme/isura.png')}}">
                   </a>
                 </div>
                 <div class="col-6 collapse-close">
@@ -148,7 +148,7 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="media align-items-center">
                     <span class="avatar avatar-sm rounded-circle">
-                      <img alt="Image placeholder" src="./assets-dash/img/default.png">
+                      <img alt="Image placeholder" src="{{URL::asset('assets-dash/img/default.png')}}">
                     </span>
                     <div class="media-body ml-2 d-none d-lg-block">
                       <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
@@ -188,13 +188,13 @@
 @yield('content')
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="./assets-dash/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="./assets-dash/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{URL::asset('assets-dash/vendor/jquery/dist/jquery.min.js')}}"></script>
+  <script src="{{URL::asset('assets-dash/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <!-- Optional JS -->
-  <script src="./assets-dash/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="./assets-dash/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="{{URL::asset('assets-dash/vendor/chart.js/dist/Chart.min.js')}}"></script>
+  <script src="{{URL::asset('assets-dash/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <!-- Argon JS -->
-  <script src="./assets-dash/js/argon.js?v=1.0.0"></script>
+  <script src="{{URL::asset('assets-dash/js/argon.js?v=1.0.0')}}"></script>
 </body>
 
 </html>
