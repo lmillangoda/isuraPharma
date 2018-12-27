@@ -40,6 +40,27 @@
         {{Form::label('image', 'Image')}}
         {{Form::file('image',   ['class' => 'form-control'])}}
       </div>
+
+      <!-- Supplier Section -->
+      <?php
+          $idArray = $product->suppliers->pluck('id')->toArray();
+       ?>
+
+      <div class="checkbox">
+          {{Form::label('suppliers', 'Suppliers')}}
+          @foreach($suppliers as $supplier)
+            @if (isset($product))
+              <input type="checkbox" name="suppliers[]" value="{{$supplier->id}}" {{ (in_array($supplier->id, $idArray)) ? 'checked' : null }}>
+                {{$supplier->name}}
+                <br>
+            @else
+              <input type="checkbox" name="suppliers[]" value="{{$supplier->id}}">
+                {{$supplier->name}}>
+                <br>
+            @endif
+          @endforeach
+      </div>
+
       <div class="">
         {{Form::submit('Submit', ['class'=> 'btn btn-primary'])}}
       </div>

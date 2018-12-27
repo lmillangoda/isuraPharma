@@ -3,23 +3,27 @@
 @section('content')
 <div class="container">
 
-  <!-- Page Heading -->
-  <h1 class="my-4">Our Products</h1>
-  <div class="row">
-    @foreach($products as $product)
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="storage/product_images/{{$product->image}}" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">{{$product->medicalName}}</a>
-            </h4>
-            <p class="card-text">Price : {{$product->price}}LKR</p>
-            <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
-            {!! Form::open(['action' => ['ProductsController@destroy', $product->id],'method' => 'POST', 'class' => 'pull-right'])!!}
-              {{  Form::hidden('_method', 'DELETE')}}
-              {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
-            {!! Form::close() !!}
+      <!-- Page Heading -->
+      <h1 class="my-4">Our Products</h1>
+      <div class="row">
+        @foreach($products as $product)
+          <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <a href="/products/{{$product->id}}">
+                <img class="card-img-top" src="storage/product_images/{{$product->image}}" alt="">
+              </a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">{{$product->medicalName}}</a>
+                </h4>
+                <p class="card-text">Price : {{$product->price}}LKR</p>
+                <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
+                {!! Form::open(['action' => ['ProductsController@destroy', $product->id],'method' => 'POST', 'class' => 'pull-right'])!!}
+                  {{  Form::hidden('_method', 'DELETE')}}
+                  {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
+                {!! Form::close() !!}
+              </div>
+            </div>
           </div>
         </div>
       </div>
