@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.users')
 @section('content')
-<div class="well">
+<div class="container">
   @if(isset($branch))
     {!! Form::model($branch, [
       'action' => ['BranchesController@update', $branch->id],

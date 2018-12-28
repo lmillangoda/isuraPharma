@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.users')
 @section('content')
 <div class="well">
   @if(isset($product))
@@ -66,4 +66,4 @@
       </div>
     {!! Form::close() !!}
 </div>
-@endsection()
+@endsection

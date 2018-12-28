@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.users')
 
 @section('content')
 <div class="container">
@@ -13,8 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    Welcome to your messages
                 </div>
             </div>
         </div>
