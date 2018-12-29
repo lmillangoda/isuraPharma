@@ -56,7 +56,12 @@ class ProductsController extends Controller
 
         $product->save();
 
+        //sync suppliers
         $product->suppliers()->sync($request->suppliers, false);
+
+        //sync branches
+        $branches = Branch::all();
+        $product->branches()->sync($branches);
 
         return redirect('/products')->with('success', 'Product Details Added Successfully!');
     }
@@ -85,11 +90,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $suppliers = Supplier::all();
-        $supplierArray = array();
-        foreach ($suppliers as $supplier) {
-          $supplierArray[$supplier->id] = $supplier->name;
-        }
-        return view('products.create')->with('product', $product)->withSuppliers($suppliers);
+        return view('products.create')->withProduct($product)->withSuppliers($suppliers);
     }
 
     /**

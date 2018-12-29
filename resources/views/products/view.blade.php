@@ -67,7 +67,7 @@
                 <tbody>
                   @foreach($branches as $branch)
                   <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{$branch->id}}</th>
                     <td>{{$branch->town}}</td>
                     <td>{{$branch->pivot->expDate}}</td>
                     <td>{{$branch->pivot->amount}}</td>

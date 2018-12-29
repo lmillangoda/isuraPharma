@@ -14,7 +14,7 @@
               </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">{{$product->medicalName}}</a>
+                  <a href="/products/{{$product->id}}/">{{$product->medicalName}}</a>
                 </h4>
                 <p class="card-text">Price : {{$product->price}}LKR</p>
                 <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
