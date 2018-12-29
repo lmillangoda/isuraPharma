@@ -23,9 +23,12 @@ class CreateCustomersTable extends Migration
             $table->string('add2');
             $table->string('town');
             $table->string('tel');
-            $table->DateTime('dob');
+            $table->date('dob');
             $table->string('nic')->unique();
             $table->integer('branch_id')->unsigned();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
 

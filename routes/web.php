@@ -43,5 +43,3 @@ Route::resource('branches', 'BranchesController');
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-
-
