@@ -26,7 +26,7 @@ class Branch extends Model
   public function products()
   {
     return $this->belongsToMany('App\Product', 'stock')
-      ->withPivot('amount', 'price')
+      ->withPivot('expDate', 'amount')
       ->withTimeStamps();
   }
 }

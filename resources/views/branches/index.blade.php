@@ -20,7 +20,7 @@
         <div class="col-md-5">
           <h3>{{$branch->name}}</h3>
           <p>{{$branch->town}}</p>
-          <a class="btn btn-primary" href="#">View Project
+          <a class="btn btn-primary" href="/branches/{{$branch->id}}/">Branch Overview
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>
