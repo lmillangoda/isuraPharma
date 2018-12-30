@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('messages', 'pagescontroller@messages')->name('messages');
 
-Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
+// Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
 
 Route::get("propic",'userprofcontroller@index')->name('propic');
 
@@ -38,6 +38,13 @@ Route::resource('products', 'ProductsController');
 Route::resource('suppliers', 'SuppliersController');
 
 Route::resource('branches', 'BranchesController');
+
+//Stock Routes
+Route::resource('stock', 'StockController');
+Route::get('/stock/create/branch/{branch}/product/{product}', 'StockController@create')->name('stock.create');
+Route::get('/stock/edit/branch/{branch}/product/{product}', 'StockController@edit')->name('stock.edit');
+Route::put('/stock/add/branch/{branch}/product/{product}', 'StockController@update')->name('stock.update');
+Route::put('/stock/substract/branch/{branch}/product/{product}', 'StockController@substract')->name('stock.substract'); //substracts from the currnt Stock
 
 //facebook socialite routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');

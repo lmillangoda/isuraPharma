@@ -26,7 +26,7 @@ class BranchesController extends Controller
      */
     public function create()
     {
-        return view('branches.create');
+      return view('branches.create');
     }
 
     /**
@@ -53,7 +53,10 @@ class BranchesController extends Controller
      */
     public function show($id)
     {
-        //
+        $branch = Branch::find($id);
+        $products = $branch->products;
+        // dd($products);
+        return view('branches.view')->withBranch($branch)->withProducts($products);
     }
 
     /**
