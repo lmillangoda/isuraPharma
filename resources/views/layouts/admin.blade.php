@@ -25,7 +25,7 @@
           </button>
           <!-- Brand -->
           <a class="navbar-brand pt-0" href="admin">
-            <img src="{{URL::asset('assets-dash/img/theme/isura.jpg" class="navbar-brand-img')}}" alt="..."><br>
+            <img src="{{URL::asset('assets-dash/img/theme/isura.jpg')}}" class="navbar-brand-img" alt="..."><br>
             Isura Pharmacies
           </a>
           <!-- User -->
@@ -79,7 +79,7 @@
               <div class="row">
                 <div class="col-6 collapse-brand">
                   <a href="admin">
-                    <img src="{{URL::asset('assets-dash/img/theme/isura.png')}}">
+                    <img src="{{URL::asset('assets-dash/img/theme/isura.jpg')}}">
                   </a>
                 </div>
                 <div class="col-6 collapse-close">
@@ -114,6 +114,24 @@
                   <i class="ni ni-bag-17 text-orange"></i> Products
                 </a>
               </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="branches">
+                      <i class="ni ni-building text-orange"></i> Branches
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="suppliers">
+                        <i class="ni ni-ambulance text-orange"></i> Suppliers
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="employees">
+                          <i class="ni ni-ambulance text-orange"></i> Employees
+                        </a>
+                      </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">

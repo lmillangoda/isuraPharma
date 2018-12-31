@@ -43,6 +43,8 @@ Route::resource('suppliers', 'SuppliersController');
 
 Route::resource('branches', 'BranchesController');
 
+Route::resource('employees', 'EmployeeController');
+
 //dash components
 Route::get('employeeReg',function(){
     $branch = Branch::all();

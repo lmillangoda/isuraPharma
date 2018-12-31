@@ -1,5 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+
+      </div>
+    </div>
+  </div>
 <div class="well">
   @if(isset($supplier))
     {!! Form::model($supplier, [

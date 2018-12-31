@@ -1,6 +1,3 @@
-@extends('layouts.dash_comp')
-
-@section('content')
 <div class ="section">
 <div class ="container col-12">
 <div class="col-8">
@@ -239,4 +236,4 @@
   </div>
 </div> 
 </div>
-@endsection
+
