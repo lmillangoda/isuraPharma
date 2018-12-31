@@ -59,10 +59,16 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf 
+                  </form>
                 </a>
+              </div>
               </div>
             </li>
           </ul>
@@ -176,7 +182,12 @@
                     <span>Support</span>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a href="#!" class="dropdown-item">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf 
+                    </form>
                     <i class="ni ni-user-run"></i>
                     <span>Logout</span>
                   </a>

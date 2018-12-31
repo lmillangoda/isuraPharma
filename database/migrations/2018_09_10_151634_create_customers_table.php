@@ -26,8 +26,6 @@ class CreateCustomersTable extends Migration
             $table->date('dob');
             $table->string('nic')->unique();
             $table->integer('branch_id')->unsigned();
-            $table->string('email')->unique();
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

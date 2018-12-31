@@ -1,14 +1,22 @@
-@extends('layouts.auth')
+@extends('layouts.dash_comp')
 
 @section('content')
-<div class = "conatainer">
-<div class="card bg-default shadow">
+<div class ="section">
+<div class ="container col-12">
+<div class="col-8">
+    <div class="card bg-secondary shadow">
+      <div class="card-header bg-white border-0">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h3 class="mb-0">Employee Registration Form</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+          <form method="POST" action="">
+              @csrf
 
-<form method="POST" action="{{ route('register') }}">
-        @csrf
-        <div class="card-body">
-
-            <h6 class="heading-small mb-4">Registration</h6>
+            <h6 class="heading-small mb-4">Basic Info</h6>
 
             <div class="pl-lg-4">
                 <div class="row">
@@ -120,6 +128,7 @@
                   </div>
                 </div>
 
+                <hr class="my-4" />
                 <h6 class="heading-small mb-4">Address</h6>
 
                 <div class="pl-lg-4">
@@ -161,20 +170,6 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                              <label class="form-control-label" for="input-town">Last Name</label>
-                              <input id="input-town" class="form-control{{ $errors->has('town') ? ' is-invalid' : '' }}" placeholder ="Town" name="town" value="{{ old('town') }}" type="text" required autofocus>
-        
-                                        @if ($errors->has('town'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('town') }}</strong>
-                                            </span>
-                                        @endif
-                          </div>
-                        </div>
-                      </div>
                 </div>
 
 
@@ -200,6 +195,28 @@
                             </div>
                           </div>
 
+                          <div class="row" id="checkRadios">
+
+                              <div class="col-sm-6 col-lg-3 mb-4">
+                                  <p class="category">Role</p>
+                                  <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="1">
+                                      <span class="form-check-sign"></span>
+                                      Pharmacist
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="2">
+                                      <span class="form-check-sign"></span>
+                                      Cashier
+                                    </label>
+                                  </div>
+                                </div>
+                             
+                            </div>
+
                           <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group">
@@ -207,26 +224,19 @@
                                     <select class = "form-control" id = "input-branch" name = "branch">
                                       @foreach ($branch as $item)
                                          <option>{{$item->id}} - {{$item->town}}</option> 
-                                      @endforeach
+                                      @endforeach 
                                     </select>
                                 </div>
                               </div>
                             </div>
-                    </div> 
-                    
+                    </div>   
                     <div class="pl-lg-4">
-                        <button class="btn btn-primary" type="submit">Register</button>
-                          <div class="text-center">
-                          <h6>
-                           <a href="/login" class="link">Already have an account? Login</a>
-                          </h6>
+                        <center><button class="btn btn-primary" type="submit">Submit</button></center>
                         </div>
-                        </div>
-          
-                  </div>
-                </div>         
-      </form>
-</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
 </div>
 @endsection
-

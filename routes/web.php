@@ -1,5 +1,6 @@
 <?php
 use App\Product;
+use App\Branch;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+
+Route::get('register',"Auth\RegisterController@reg");
+Route::post('register',"Auth\RegisterController@register")->name('register');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,6 +42,12 @@ Route::resource('products', 'ProductsController');
 Route::resource('suppliers', 'SuppliersController');
 
 Route::resource('branches', 'BranchesController');
+
+//dash components
+Route::get('employeeReg',function(){
+    $branch = Branch::all();
+    return view('dash_comp.employee_reg',compact('branch'));
+});
 
 //Stock Routes
 Route::resource('stock', 'StockController');

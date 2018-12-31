@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-
+<div class="card card-login card-plain col-md-10">
 <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="card-header text-center">
@@ -37,44 +37,6 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                  </div>
-                </div>
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
-                </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary my-4">Login</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-6">
-              <a href="{{ route('password.request') }}" class="text-light">
-                <small>Forgot password?</small>
-              </a>
-            </div>
-            <div class="col-6 text-right">
-              <a href="{{ route('register') }}" class="text-light">
-                <small>Create new account</small>
-              </a>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-8 col-md-offset-4">
-              <a href="{{url('/login/facebook')}}" class="btn btn-primary">Login with Facebook</a>
-            </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  </section>
           </div>
           <div class="form-check">
                 <label class="form-check-label">
@@ -100,6 +62,5 @@
               </div>
               
       </form>
-
-
+</div>
 @endsection

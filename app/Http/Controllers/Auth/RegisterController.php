@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Branch;
 use App\User;
+use App\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +41,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function reg()
+    {
+        $branch = Branch::all();
+        return view('Auth.register',compact('branch'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,7 +56,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -64,11 +71,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['name'],
+            'name' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
-            'tel_no' => $data['tel_no'],
+        ]);
+
+        $branchid = explode(' ', $data['branch'],2);
+
+        $customer = Customer::create([
+            'id' => $user->id,
+            'fName' => $data['fname'],
+            'mName' => $data['mname'],
+            'lName' => $data['lname'],
+            'hNo' => $data['hno'],
+            'add1' => $data['line1'],
+            'add2' => $data['line2'],
+            'town' => $data['town'],
+            'tel' => $data['tel'],
+            'dob' => $data['dob'],
+            'nic' => $data['nic'],
+            'branch_id' => $branchid[0],
         ]);
         return $user;
     }
