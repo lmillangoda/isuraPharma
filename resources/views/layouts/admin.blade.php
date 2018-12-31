@@ -59,16 +59,15 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
+                                <i class="ni ni-user-run"></i>
                       {{ __('Logout') }}
                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf 
                   </form>
                 </a>
-              </div>
               </div>
             </li>
           </ul>
@@ -104,31 +103,31 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="admin">
+                <a class="nav-link" href="/admin">
                   <i class="ni ni-tv-2 text-primary"></i> Dashboard
                 </a>
               </li>
      
               <li class="nav-item">
-                <a class="nav-link" href="products">
+                <a class="nav-link" href="/products">
                   <i class="ni ni-bag-17 text-orange"></i> Products
                 </a>
               </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="branches">
+                    <a class="nav-link" href="/branches">
                       <i class="ni ni-building text-orange"></i> Branches
                     </a>
                   </li>
 
                   <li class="nav-item">
-                      <a class="nav-link" href="suppliers">
+                      <a class="nav-link" href="/suppliers">
                         <i class="ni ni-ambulance text-orange"></i> Suppliers
                       </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="employees">
+                        <a class="nav-link" href="/employees">
                           <i class="ni ni-ambulance text-orange"></i> Employees
                         </a>
                       </li>
@@ -215,6 +214,28 @@
           </div>
         </nav>
 @yield('content')
+
+<footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; 2018 <a href="" class="font-weight-bold ml-1" target="_blank">Isura Pharmacies (PVT) Ltd</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="" class="nav-link" target="_blank">Isura Pharmacies (PVT) Ltd</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link" target="_blank">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+</div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="{{URL::asset('assets-dash/vendor/jquery/dist/jquery.min.js')}}"></script>

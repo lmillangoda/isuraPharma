@@ -4,7 +4,7 @@
   <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
       <div class="header-body">
-
+          <center><a href = "branches/create"><button  class="btn btn-danger">Add New Branch</button></a></center>
       </div>
     </div>
   </div>

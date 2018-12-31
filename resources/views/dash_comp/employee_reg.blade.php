@@ -4,7 +4,7 @@
     <div class="card bg-secondary shadow">
       <div class="card-header bg-white border-0">
         <div class="row align-items-center">
-          <div class="col-8">
+          <div class="col-12">
             <h3 class="mb-0">Employee Registration Form</h3>
           </div>
         </div>
@@ -191,11 +191,14 @@
                               </div>
                             </div>
                           </div>
+                        </div>
+                          <hr class="my-4" />
+                         <div class="row" id="checkRadios">
 
-                          <div class="row" id="checkRadios">
-
-                              <div class="col-sm-6 col-lg-3 mb-4">
-                                  <p class="category">Role</p>
+                              <div class="col-3">
+                                    <label class="form-control-label" for="role">Role</label>
+                                </div>
+                                <div class="col-3">
                                   <div class="form-check form-check-radio">
                                     <label class="form-check-label">
                                       <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="1">
@@ -203,6 +206,8 @@
                                       Pharmacist
                                     </label>
                                   </div>
+                                </div>
+                                  <div class="col-3">
                                   <div class="form-check form-check-radio">
                                     <label class="form-check-label">
                                       <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="2">
@@ -211,8 +216,9 @@
                                     </label>
                                   </div>
                                 </div>
-                             
                             </div>
+                             
+                            <hr class="my-4" />
 
                           <div class="row">
                               <div class="col-md-12">
