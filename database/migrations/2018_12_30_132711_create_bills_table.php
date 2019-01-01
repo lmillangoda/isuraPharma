@@ -21,7 +21,12 @@ class CreateBillsTable extends Migration
 
             $table->foreign('cashier_id')
               ->references('id')
-              ->on('cashiers')
+              ->on('users')
+              ->onDelete('cascade');
+
+            $table->foreign('pharmacist_id')
+              ->references('id')
+              ->on('users')
               ->onDelete('cascade');
         });
     }

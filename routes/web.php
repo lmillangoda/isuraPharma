@@ -62,3 +62,6 @@ Route::put('/stock/substract/branch/{branch}/product/{product}', 'StockControlle
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
+//Bills Route
+Route::resource('bills', 'BillsController');
+Route::get('/bills/display/', 'BillsController@displayBill')->name('bill.display');

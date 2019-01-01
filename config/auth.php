@@ -55,14 +55,14 @@ return [
             'provider' => 'admins',
         ],
 
-        'pharmacist' => [
-            'driver' => 'session',
-            'provider' => 'pharmacists',
-        ],
-        'pharmacist-api' => [
-            'driver' => 'token',
-            'provider' => 'pharmacists',
-        ],
+        // 'pharmacist' => [
+        //     'driver' => 'session',
+        //     'provider' => 'pharmacists',
+        // ],
+        // 'pharmacist-api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'pharmacists',
+        // ],
     ],
 
     /*
@@ -93,10 +93,10 @@ return [
           'model' => App\Admin::class,
         ],
 
-        'pharmacists' => [
-          'driver' => 'eloquent',
-          'model' => App\Pharmacist::class,
-        ],
+        // 'pharmacists' => [
+        //   'driver' => 'eloquent',
+        //   'model' => App\Pharmacist::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',

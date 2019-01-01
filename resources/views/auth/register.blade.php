@@ -1,232 +1,69 @@
 @extends('layouts.auth')
-
 @section('content')
-<div class = "conatainer">
-<div class="card bg-default shadow">
+<div class="container">
 
-<form method="POST" action="{{ route('register') }}">
+
+<form id="reg" method="POST" action="{{ route('register') }}">
         @csrf
-        <div class="card-body">
+            <input id="fname" class="form-control" placeholder ="First Name" name="fname" value="" type="text" required autofocus>
 
-            <h6 class="heading-small mb-4">Registration</h6>
+              <input id="mname" class="form-control" placeholder ="Middle Name" name="mname" value="" type="text">
 
-            <div class="pl-lg-4">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-username">User Name</label>
-                      <input id="input-username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder ="User Name" name="username" value="{{ old('username') }}" type="text" required autofocus>
+              <input id="lname" class="form-control" placeholder ="Last Name" name="lname" value="" type="text">
 
-                                @if ($errors->has('username'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-email">Email address</label>
-                      <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="example@123.com" required>
-  
-                              @if ($errors->has('email'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                              @endif
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-fname">First Name</label>
-                          <input id="input-fname" class="form-control{{ $errors->has('fname') ? ' is-invalid' : '' }}" placeholder ="First Name" name="fname" value="{{ old('fname') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('fname'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('fname') }}</strong>
-                                        </span>
-                                    @endif
-                        </div>
-                  </div>
-                  <div class="col-lg-6">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-mname">Middle Name</label>
-                          <input id="input-mname" class="form-control{{ $errors->has('mname') ? ' is-invalid' : '' }}" placeholder ="Middle Name" name="mname" value="{{ old('mname') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('mname'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('mname') }}</strong>
-                                        </span>
-                                    @endif
-                        </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-lname">Last Name</label>
-                          <input id="input-lname" class="form-control{{ $errors->has('lname') ? ' is-invalid' : '' }}" placeholder ="Last Name" name="lname" value="{{ old('lname') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('lname'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('lname') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                  </div>
+            <input id="tel_no" type="text" class="form-control" placeholder = "Telephone Number" name="tel" required>
+
+            <input id="hNo" type="text" class="form-control" placeholder = "Home No." name="hNo" required>
+
+            <input id="add1" type="text" class="form-control" placeholder = "Address Line 1" name="add1" required>
+
+            <input id="add2" type="text" class="form-control" placeholder = "Address Line 2" name="add2">
+
+            <input id="town" type="text" class="form-control" placeholder = "Town" name="town" required>
+
+            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="E-Mail" required>
+
+            @if ($errors->has('email'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+
+          <!-- Brnaches -->
+
+            <select class="form-control" name="branch" form="reg" required>
+              @foreach($branches as $branch)
+                <option value="{{$branch->id}}">{{$branch->town}}</option>
+              @endforeach
+            </select>
+
+          <!-- Roles -->
+
+            <select class="form-control" name="role" form="reg" required>
+              @foreach($roles as $role)
+                <option value="{{$role->id}}">{{$role->role}}</option>
+              @endforeach
+            </select>
+
+                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+
+                @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+
+
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder= "Confirm Password" required>
+
+                <button class="btn btn-primary" type="submit">Register</button>
+        <div class="text-center">
+                <h6>
+                  <a href="/login" class="link">Already have an account? Login</a>
+                </h6>
               </div>
 
-              <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-dob">Date of Birth</label>
-                          <input id="input-dob" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" placeholder ="Date Of Birth" name="dob" value="{{ old('dob') }}" type="date" required autofocus>
-    
-                                    @if ($errors->has('dob'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('dob') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-nic">NIC</label>
-                          <input id="input-nic" class="form-control{{ $errors->has('nic') ? ' is-invalid' : '' }}" placeholder ="NIC" name="nic" value="{{ old('nic') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('nic'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('nic') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-tel">Telephone NO</label>
-                          <input id="input-tel" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" placeholder ="Telephone NO" name="tel" value="{{ old('tel') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('tel'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('tel') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <h6 class="heading-small mb-4">Address</h6>
-
-                <div class="pl-lg-4">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-hno">Home Address NO</label>
-                            <input id="input-hno" class="form-control{{ $errors->has('hno') ? ' is-invalid' : '' }}" placeholder ="Home Address NO" name="hno" value="{{ old('hno') }}" type="text" required autofocus>
-
-                            @if ($errors->has('hno'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('hno') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-line1">Address Line 1</label>
-                            <input id="input-line1" class="form-control{{ $errors->has('line1') ? ' is-invalid' : '' }}" placeholder ="Line 1" name="line1" value="{{ old('line1') }}" type="text" required autofocus>
-
-                            @if ($errors->has('line1'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('line1') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-line2">Address Line 2</label>
-                            <input id="input-line2" class="form-control{{ $errors->has('line2') ? ' is-invalid' : '' }}" placeholder ="Line 2" name="line2" value="{{ old('line2') }}" type="text" required autofocus>
-
-                            @if ($errors->has('line2'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('line2') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                              <label class="form-control-label" for="input-town">Last Name</label>
-                              <input id="input-town" class="form-control{{ $errors->has('town') ? ' is-invalid' : '' }}" placeholder ="Town" name="town" value="{{ old('town') }}" type="text" required autofocus>
-        
-                                        @if ($errors->has('town'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('town') }}</strong>
-                                            </span>
-                                        @endif
-                          </div>
-                        </div>
-                      </div>
-                </div>
-
-
-                    <div class="pl-lg-4">
-                        <div class="row">
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <label class="form-control-label" for="input-password">Password</label>
-                                <input id="input-password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                              </div>
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <label class="form-control-label" for="input-password">Confirm Password</label>
-                                <input id="input-password-confirm" type="password" class="form-control" name="password_confirmation" placeholder= "Confirm Password" required>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-branch">Branch</label>
-                                    <select class = "form-control" id = "input-branch" name = "branch">
-                                      @foreach ($branch as $item)
-                                         <option>{{$item->id}} - {{$item->town}}</option> 
-                                      @endforeach
-                                    </select>
-                                </div>
-                              </div>
-                            </div>
-                    </div> 
-                    
-                    <div class="pl-lg-4">
-                        <button class="btn btn-primary" type="submit">Register</button>
-                          <div class="text-center">
-                          <h6>
-                           <a href="/login" class="link">Already have an account? Login</a>
-                          </h6>
-                        </div>
-                        </div>
-          
-                  </div>
-                </div>         
       </form>
-</div>
-</div>
-@endsection
+      </div>
 
+@endsection
