@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCashiersTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCashiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('cashiers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fName');
             $table->string('mName');
@@ -23,11 +23,11 @@ class CreateCashiersTable extends Migration
             $table->string('add2');
             $table->string('town');
             $table->string('tel');
-            $table->date('dob');
-            $table->string('nic')->unique();
-            $table->integer('branch_id')->unsigned();
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('branch_id')->unsigned();
+            $table->integer('role_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
 
@@ -35,6 +35,11 @@ class CreateCashiersTable extends Migration
               ->references('id')
               ->on('branches')
               ->onDelete('cascade');
+
+              $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
         });
     }
 
@@ -45,6 +50,6 @@ class CreateCashiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cashiers');
+        Schema::dropIfExists('users');
     }
 }
