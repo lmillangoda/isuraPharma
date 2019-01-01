@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
+use App\Branch;
 
 class RegisterController extends Controller
 {
@@ -63,17 +65,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-<<<<<<< HEAD
-         User::create([
-=======
+      // dd($data);
         $user = User::create([
->>>>>>> 7d6cd00cc7437529ab25a9982dd2fc3d65d03e53
-            'name' => $data['name'],
+            'fname' => $data['fname'],
+            'mname' => $data['mname'],
+            'lname' => $data['lname'],
+            'hNo' => $data['hNo'],
+            'add1' => $data['add1'],
+            'add2' => $data['add2'],
+            'town' => $data['town'],
+            'tel' => $data['tel'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'token' => str_random(25),
+            'branch_id' => $data['branch'],
+            'role_id' => $data['role']
         ]);
-        $user->sendverificationEmail();
         return $user;
+    }
+
+    //override default showRegistrationForm function
+    protected function showRegistrationForm()
+    {
+      $branches = Branch::all();
+      $roles = Role::all();
+
+      return view('auth.register')->withBranches($branches)->withRoles($roles);
     }
 }

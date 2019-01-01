@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Supplier;
+use App\Branch;
 use DB;
 use Storage;
 
@@ -16,8 +18,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::with('Suppliers')->get();
-        return view('products.index')->with('products', $products);
+        $products = Product::all();
+        return view('products.index')->withProducts($products);
     }
 
     /**
@@ -27,7 +29,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $suppliers = Supplier::all();
+        return view('products.create')->withSuppliers($suppliers);
     }
 
     /**
@@ -38,6 +41,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
           'brandName' => 'required',
           'medicalName' => 'required',
@@ -49,7 +53,15 @@ class ProductsController extends Controller
         $product->medicalName = $request->Input('medicalName');
         $product->price = $request->Input('price');
         $product->image = $this->filenameToStore($request);
+
         $product->save();
+
+        //sync suppliers
+        $product->suppliers()->sync($request->suppliers, false);
+
+        //sync branches
+        $branches = Branch::all();
+        $product->branches()->sync($branches);
 
         return redirect('/products')->with('success', 'Product Details Added Successfully!');
     }
@@ -62,7 +74,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        $suppliers = $product->suppliers;
+        $branches = $product->branches;
+        return view('products.view')->withProduct($product)->withSuppliers($suppliers)->withBranches($branches);
     }
 
     /**
@@ -74,7 +89,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        return view('products.create')->with('product', $product);
+        $suppliers = Supplier::all();
+        return view('products.create')->withProduct($product)->withSuppliers($suppliers);
     }
 
     /**
@@ -96,6 +112,7 @@ class ProductsController extends Controller
         Storage::delete($oldFilename);
       }
       $product->save();
+      $product->suppliers()->sync($request->suppliers);
 
       return redirect('/products')->with('success', 'Product Details Saved Successfully!');
     }

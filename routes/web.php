@@ -1,4 +1,5 @@
 <?php
+use App\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,27 +13,44 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Product::all();
+    return view('welcome',compact('products'));
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('messages', 'pagescontroller@messages')->name('messages');
 
-<<<<<<< HEAD
-Route::resource('products', 'ProductsController');
-
-Route::resource('suppliers', 'SuppliersController');
-=======
 Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
+// Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
 
-Route::get("propic",'userprofcontroller@index');
+Route::get("propic",'userprofcontroller@index')->name('propic');
 
 Route::post("store",'userprofcontroller@store');
 
 Route::get("profile",'userprofcontroller@profile')->name('profile');
 
-Route::get('admin','adminUIController@adminDash')->name('admin');
->>>>>>> 7d6cd00cc7437529ab25a9982dd2fc3d65d03e53
+Route::get("/admin",'adminUIController@index')->name('admin');
+
+Route::resource('products', 'ProductsController');
+
+Route::resource('suppliers', 'SuppliersController');
+
+Route::resource('branches', 'BranchesController');
+
+//Stock Routes
+Route::resource('stock', 'StockController');
+Route::get('/stock/create/branch/{branch}/product/{product}', 'StockController@create')->name('stock.create');
+Route::get('/stock/edit/branch/{branch}/product/{product}', 'StockController@edit')->name('stock.edit');
+Route::put('/stock/add/branch/{branch}/product/{product}', 'StockController@update')->name('stock.update');
+Route::put('/stock/substract/branch/{branch}/product/{product}', 'StockController@substract')->name('stock.substract'); //substracts from the currnt Stock
+
+//facebook socialite routes
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
+//Bills Route
+Route::resource('bills', 'BillsController');
+Route::get('/bills/display/', 'BillsController@displayBill')->name('bill.display');

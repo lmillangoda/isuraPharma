@@ -17,10 +17,10 @@ class CreateStockTable extends Migration
           $table->increments('id');
           $table->integer('branch_id')->unsigned();
           $table->integer('product_id')->unsigned();
-          $table->DateTime('expDate');
+          $table->date('expDate');
           $table->integer('amount');
 
-          // $table->primary(['branch_id', 'product_id']);
+          $table->unique(['branch_id', 'product_id']);
           $table->timestamps();
 
           $table->foreign('product_id')

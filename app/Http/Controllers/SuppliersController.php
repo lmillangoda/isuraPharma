@@ -15,8 +15,8 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::with('suppliers')->get();
-        return view('suppliers.index')->with('suppliers', $suppliers);
+      $suppliers = Supplier::all();
+      return view('suppliers.index')->withSuppliers($suppliers);
     }
 
     /**
@@ -43,7 +43,7 @@ class SuppliersController extends Controller
         'telephone' => 'required',
       ]);
 
-      $supplier = new supplier;
+      $supplier = new Supplier;
       $supplier->name = $request->Input('name');
       $supplier->email = $request->Input('email');
       $supplier->telephone = $request->Input('telephone');
@@ -71,8 +71,8 @@ class SuppliersController extends Controller
      */
     public function edit($id)
     {
-      $supplier = Supplier::find($id);
-      return view('suppliers.create')->with('supplier', $supplier);
+        $supplier = Supplier::find($id);
+        return view('suppliers.create')->with('supplier', $supplier);
     }
 
     /**
@@ -84,13 +84,20 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $supplier = Supplier::find($id);
-      $supplier->name = $request->Input('name');
-      $supplier->email = $request->Input('email');
-      $supplier->telephone = $request->Input('telephone');
-      $supplier->save();
+        $supplier = Supplier::find($id);
+        $this->validate($request, [
+          'name' => 'required',
+          'email' => 'required',
+          'telephone' => 'required',
+        ]);
 
-      return redirect('/suppliers')->with('success', 'Supplier Details Saved Successfully!');
+        $supplier = new Supplier;
+        $supplier->name = $request->Input('name');
+        $supplier->email = $request->Input('email');
+        $supplier->telephone = $request->Input('telephone');
+        $supplier->save();
+
+        return redirect('/suppliers')->with('success', 'Supplier Details saved Successfully!');
     }
 
     /**
