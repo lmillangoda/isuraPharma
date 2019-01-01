@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','token','email_verified_at','address','tel_no',
+        'fname', 'mname', 'lname', 'hNo', 'add1', 'add2', 'town', 'tel', 'email', 'password','token','email_verified_at','branch_id','role_id',
     ];
 
     /**
@@ -29,4 +29,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    public function roles()
+    {
+      return $this->belongsTo('App\Role');
+    }
+
+    public function branches()
+    {
+      return $this->belongsTo('App\Branch');
+    }
 }

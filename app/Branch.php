@@ -8,19 +8,9 @@ class Branch extends Model
 {
   protected $fillable = array('App\town');
 
-  public function customers()
+  public function users()
   {
-    return $this->hasMany('App\Customer');
-  }
-
-  public function pharmacists()
-  {
-    return $this->hasMany('App\Pharmacist');
-  }
-
-  public function cashiers()
-  {
-    return $this->hasMany('App\Cashier');
+    return $this->hasMany('App\User');
   }
 
   public function products()
