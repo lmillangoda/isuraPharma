@@ -7,7 +7,17 @@
       </div>
     </div>
   </div>
-<div class="container">
+  <div class="section">
+      <div class="container">
+          <div class="card bg-secondary shadow">
+              <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                  <div class="col-12">
+                    <h3 class="mb-0">Add new Product</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
   @if(isset($product))
     <form class="" action="{{route('products.update',['id'=>$product->id])}}" method="post" enctype="multipart/form-data">
       @method('PUT')
@@ -61,5 +71,8 @@
 
         <input class="btn btn-primary" type="submit" name="submit" value="Submit">
 
+</div>
+</div>
+</div>
 </div>
 @endsection

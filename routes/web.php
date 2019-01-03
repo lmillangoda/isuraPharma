@@ -35,7 +35,9 @@ Route::post("store",'userprofcontroller@store');
 
 Route::get("profile",'userprofcontroller@profile')->name('profile');
 
-Route::get("/admin",'adminUIController@index')->name('admin');
+Route::get("/admin",'AdminController@index')->name('admin');
+
+Route::post('admin/empRegister','AdminController@employeeReg')->name('empregister');
 
 Route::resource('products', 'ProductsController');
 

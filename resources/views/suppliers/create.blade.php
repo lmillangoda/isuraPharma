@@ -7,6 +7,17 @@
       </div>
     </div>
   </div>
+  <div class="section">
+      <div class="container">
+          <div class="card bg-secondary shadow">
+              <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                  <div class="col-12">
+                    <h3 class="mb-0">Supplier Registration</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
 <div class="well">
   @if(isset($supplier))
     {!! Form::model($supplier, [
@@ -47,5 +58,10 @@
         {{Form::submit('Submit', ['class'=> 'btn btn-primary'])}}
       </div>
     {!! Form::close() !!}
+</div>
+</div>
+</div>
+</div>
+
 </div>
 @endsection()

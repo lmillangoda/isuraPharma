@@ -9,22 +9,17 @@
     </div>
   </div>
 <!-- Page Content -->
-    <div class="container">
-
-      <!-- <div class="row">
-
-        <div class="col-lg-3">
-          <h1 class="my-4">Shop Name</h1>
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+<div class="section">
+  <div class="container">
+      <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-12">
+                <h3 class="mb-0">Add new Product</h3>
+              </div>
+            </div>
           </div>
-        </div> -->
-        <!-- /.col-lg-3 -->
-
-        <!-- <div class="col-lg-9"> -->
-
+          <div class="card-body">
           <div class="card mt-4">
             <img class="card-img-top img-fluid" src="/storage/product_images/{{$product->image}}" alt="Image for {{$product->medicalName}}">
             <div class="card-body">
@@ -91,7 +86,8 @@
         <!-- /.col-lg-9 -->
 
       </div>
-
     </div>
+  </div>
+</div>
     <!-- /.container -->
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
       <div class="header-body">
@@ -7,7 +8,17 @@
       </div>
     </div>
   </div>
+
 <div class="container">
+    <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <h3 class="mb-0">Branch Registration</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
   @if(isset($branch))
     {!! Form::model($branch, [
       'action' => ['BranchesController@update', $branch->id],
@@ -35,5 +46,9 @@
         {{Form::submit('Submit', ['class'=> 'btn btn-primary'])}}
       </div>
     {!! Form::close() !!}
+  </div>
 </div>
+</div>
+
+
 @endsection()

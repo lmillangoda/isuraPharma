@@ -8,8 +8,7 @@
       </div>
     </div>
   </div>
-<div class="container">
-
+  <div class="section">
       <!-- Page Heading -->
       <h1 class="my-4">Our Products</h1>
       <div class="row">
@@ -24,18 +23,24 @@
                   <a href="/products/{{$product->id}}/">{{$product->medicalName}}</a>
                 </h4>
                 <p class="card-text">Price : {{$product->price}}LKR</p>
-                <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
-                {!! Form::open(['action' => ['ProductsController@destroy', $product->id],'method' => 'POST', 'class' => 'pull-right'])!!}
-                  {{  Form::hidden('_method', 'DELETE')}}
-                  {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
-                {!! Form::close() !!}
+                <div class= "row">
+                  <div class = "col-6">
+                    <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
+                  </div>
+                  <div class = "col-6">
+                    {!! Form::open(['action' => ['ProductsController@destroy', $product->id],'method' => 'POST', 'class' => 'pull-right'])!!}
+                    {{  Form::hidden('_method', 'DELETE')}}
+                    {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
+                    {!! Form::close() !!}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
     @endforeach
-  </div>
+
   <!-- /.row -->
 
   <!-- Pagination -->
@@ -64,7 +69,5 @@
   </ul>
 
 </div>
-<!-- /.container -->
-
 
 @endsection

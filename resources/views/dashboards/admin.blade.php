@@ -9,6 +9,5 @@
         </div>
       </div>
     </div>
-      <!-- Footer -->
   
 @endsection

@@ -8,8 +8,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use App\Role;
-use App\Branch;
+
+
 
 class RegisterController extends Controller
 {
@@ -76,9 +80,9 @@ class RegisterController extends Controller
             'fname' => $data['fname'],
             'mname' => $data['mname'],
             'lname' => $data['lname'],
-            'hNo' => $data['hNo'],
-            'add1' => $data['add1'],
-            'add2' => $data['add2'],
+            'hNo' => $data['hno'],
+            'add1' => $data['line1'],
+            'add2' => $data['line2'],
             'town' => $data['town'],
             'tel' => $data['tel'],
             'email' => $data['email'],
@@ -89,12 +93,4 @@ class RegisterController extends Controller
         return $user;
     }
 
-    //override default showRegistrationForm function
-    protected function showRegistrationForm()
-    {
-      $branches = Branch::all();
-      $roles = Role::all();
-
-      return view('auth.register')->withBranches($branches)->withRoles($roles);
-    }
 }

@@ -7,7 +7,7 @@
       </div>
     </div>
   </div>
-  <div class="section">
+
     <center>@include('dash_comp.employee_reg')</center>
-  </div>
+
 @endsection
