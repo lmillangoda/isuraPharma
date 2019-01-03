@@ -12,6 +12,6 @@ class adminUIController extends Controller
         $this->middleware('auth:web');
     }
     public function index(){
-        return view('admin');
+        return view('dashboards.admin');
     }
 }

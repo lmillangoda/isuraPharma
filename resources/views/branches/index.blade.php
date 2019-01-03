@@ -1,6 +1,13 @@
-@extends('layouts.users')
+@extends('layouts.admin')
 @section('content')
 <!-- Page Content -->
+  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+          <center><a href = "branches/create"><button  class="btn btn-danger">Add New Branch</button></a></center>
+      </div>
+    </div>
+  </div>
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
@@ -11,7 +18,7 @@
 
       <!-- Project One -->
       @foreach($branches as $branch)
-      <div class="row">
+      <center><div class="row">
         <div class="col-md-7">
           <a href="#">
             <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
@@ -24,7 +31,7 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
         </div>
-      </div>
+      </div></center>
       <!-- /.row -->
       <hr>
       @endforeach
