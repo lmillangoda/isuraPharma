@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+<div class="header bg-gradient-default pb-6 pt-5 pt-md-6">
     <div class="container-fluid">
       <div class="header-body">
           <center><a href = "products/create"><button  class="btn btn-danger">Add New Product</button></a></center>
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="container-fluid">
       <!-- Page Heading -->
       <h1 class="my-4">Our Products</h1>
       <div class="row">
         @foreach($products as $product)
-          <div class="col-lg-4 col-sm-6 portfolio-item">
-            <div class="card h-100">
+        <div class="col-xl-4">
+            <div class="card" style="width: 18rem;">
               <a href="/products/{{$product->id}}">
-                <img class="card-img-top" src="storage/product_images/{{$product->image}}" alt="">
+                <img class="card-img-top" src="storage/product_images/{{$product->image}}" alt="Card image cap">
               </a>
               <div class="card-body">
                 <h4 class="card-title">
@@ -24,10 +24,10 @@
                 </h4>
                 <p class="card-text">Price : {{$product->price}}LKR</p>
                 <div class= "row">
-                  <div class = "col-6">
-                    <a href="/products/{{$product->id}}/edit" class="btn btn-warning">Edit</a>
+                  <div class = "col-8">
+                    <a href="/products/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
                   </div>
-                  <div class = "col-6">
+                  <div>
                     {!! Form::open(['action' => ['ProductsController@destroy', $product->id],'method' => 'POST', 'class' => 'pull-right'])!!}
                     {{  Form::hidden('_method', 'DELETE')}}
                     {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
@@ -37,9 +37,9 @@
               </div>
             </div>
           </div>
+          @endforeach
         </div>
 
-    @endforeach
 
   <!-- /.row -->
 

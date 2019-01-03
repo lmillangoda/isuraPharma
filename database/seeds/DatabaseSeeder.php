@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 4,
             'branch_id'=> 1,
         ]);
+
         DB::table('role')->insert([
             'id' => 1,
             'role' =>'Pharmacist'

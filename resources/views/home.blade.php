@@ -1,62 +1,57 @@
 @extends('layouts.home')
 
 @section('content')
-<div class="position-relative">
-    <section class ="section section-components pb-0">
-        <div class="container container-lg">
-                <div class="row">
-                        <div class="col-md-6 mb-5 mb-md-0">
-                          <div class="card card-lift--hover shadow border-0">
-                            <a href="/profile" title="Landing Page">
-                              <img src="./assets/img/theme/profile.jpg" class="card-img">
-                            </a>
-                          </div>
-                          <div class="row justify-content-center">
-                                <h3>Profile</h3>
-                                </div>
-                        </div>
-                        <div class="col-md-6 mb-5 mb-lg-0">
-                          <div class="card card-lift--hover shadow border-0">
-                            <a href="/products" title="Profile Page">
-                              <img src="./assets/img/theme/product.jpg" class="card-img">
-                            </a>
-                          </div>
-                          <div class="row justify-content-center">
-                                <h3>Products</h3>
-                                </div>
-                        </div>
-                      </div>
-            </div>
-            
-    </section>
 
-    <section class ="section section-components pb-0">
-            <div class="container container-lg">
-                    <div class="row">
-                            <div class="col-md-6 mb-5 mb-md-0">
-                              <div class="card card-lift--hover shadow border-0">
-                                <a href="/messages" title="Landing Page">
-                                  <img src="./assets/img/theme/notification.jpg" class="card-img">
-                                </a>
-                              </div>
-                              <div class="row justify-content-center">
-                                <h3>Messages</h3>
-                                </div>
-                        </div>
-                            <div class="col-md-6 mb-5 mb-lg-0">
-                              <div class="card card-lift--hover shadow border-0">
-                                <a href="" title="Profile Page">
-                                  <img src="./assets/img/theme/placeholder.png" class="card-img">
-                                </a>
-                              </div>
-                              <div class="row justify-content-center">
-                                <h3>Placeholder</h3>
-                                </div>
-                            </div>
-                          </div>
-                </div>
-                
-        </section>
+  <div class="container-fluid">
+      <!-- Page Heading -->
+      <h1 class="my-4">Our Products</h1>
+      <div class="row">
+        @foreach($products as $product)
+        <div class="col-xl-3">
+            <div class="card" style="width: 18rem;">
+              <a href="/products/{{$product->id}}">
+                <img class="card-img-top" src="storage/product_images/{{$product->image}}" alt="Card image cap">
+              </a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="/products/{{$product->id}}/">{{$product->medicalName}}</a>
+                </h4>
+                <p class="card-text">Price : {{$product->price}}LKR</p>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+
+
+  <!-- /.row -->
+
+  <!-- Pagination -->
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+
 </div>
- 
+</div>
+
 @endsection

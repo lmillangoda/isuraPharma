@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+<div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
     <div class="container-fluid">
       <div class="header-body">
 
@@ -10,22 +10,26 @@
   </div>
 <!-- Page Content -->
 <div class="section">
-  <div class="container">
+  <div class="container col-5">
       <div class="card bg-secondary shadow">
           <div class="card-header bg-white border-0">
-            <div class="row align-items-center">
-              <div class="col-12">
-                <h3 class="mb-0">Add new Product</h3>
+            <div class="row justify-content-center">
+              <div class="col-5">
+                <h3 class="mb-0">Product Details</h3>
               </div>
             </div>
           </div>
-          <div class="card-body">
           <div class="card mt-4">
-            <img class="card-img-top img-fluid" src="/storage/product_images/{{$product->image}}" alt="Image for {{$product->medicalName}}">
             <div class="card-body">
+            
+            <img class="card-img-top img-fluid" src="/storage/product_images/{{$product->image}}" alt="Image for {{$product->medicalName}}">
               <h3 class="card-title">Medical Name : {{$product->medicalName}}</h3>
               <h4>Maximum retail price : {{$product->price}}LKR</h4>
-
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container col-11">
               <!-- Suppliers Table -->
               <h3>Suppliers' Details</h3>
               <table class="table table-striped">
@@ -80,14 +84,6 @@
               </table>
               <!-- End of table -->
             </div>
-          </div>
-
-        <!-- </div> -->
-        <!-- /.col-lg-9 -->
-
-      </div>
-    </div>
-  </div>
-</div>
+            </div>
     <!-- /.container -->
 @endsection

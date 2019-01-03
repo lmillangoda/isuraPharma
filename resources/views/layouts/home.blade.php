@@ -63,7 +63,11 @@
           </li>
           </ul>
         @else
-
+        <ul class="navbar-nav ml-auto">
+            <li><a class="nav-link" href = "/home">Home</a></li>
+                            <li><a class="nav-link" href = "/profile">Profile</a></li>
+                            <li><a class="nav-link" href = "/messages">Messages</a></li>
+          </ul>
         <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
                             </i>
