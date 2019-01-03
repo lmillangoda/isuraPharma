@@ -16,15 +16,10 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cashier_id')->unsigned();
-            $table->integer('pharmacist_id')->unsigned();
+            // $table->integer('pharmacist_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('cashier_id')
-              ->references('id')
-              ->on('users')
-              ->onDelete('cascade');
-
-            $table->foreign('pharmacist_id')
               ->references('id')
               ->on('users')
               ->onDelete('cascade');
