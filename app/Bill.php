@@ -6,23 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
-  public function cashiers()
+  public function cashier()
   {
-    return $this->hasOne('App\Cashier');
+    return $this->belongsTo('App\User');
   }
 
-  public function pharmacists()
+  public function pharmacist()
   {
-    return $this->hasOne('App\Pharmacist');
+    return $this->belongsTo('App\User');
   }
 
   public function products()
   {
-    return $this->belongsToMany('App\Product');
-  }
-
-  public function customers()
-  {
-    return $this->hasOne('App\Customer');
+    return $this->belongsToMany('App\Product')->withPivot('amount','cost')->withTimestamps();
   }
 }

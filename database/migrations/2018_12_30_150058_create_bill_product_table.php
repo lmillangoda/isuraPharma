@@ -14,14 +14,15 @@ class CreateBillProductTable extends Migration
     public function up()
     {
         Schema::create('bill_product', function (Blueprint $table) {
-          $table->increments('id');
           $table->integer('bill_id')->unsigned();
           $table->integer('product_id')->unsigned();
+          $table->integer('amount');
+          $table->double('cost');
 
-          $table->unique(['bill_id', 'product_id']);
+          $table->primary(['bill_id', 'product_id']);
           $table->timestamps();
 
-          $table->unique('product_id')
+          $table->foreign('product_id')
             ->references('id')
             ->on('products')
             ->onDelete('cascade');

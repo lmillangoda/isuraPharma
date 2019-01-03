@@ -52,4 +52,5 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 
 //Bills Route
 Route::resource('bills', 'BillsController');
-Route::get('/bills/display/', 'BillsController@displayBill')->name('bill.display');
+Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
+Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
