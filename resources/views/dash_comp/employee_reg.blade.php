@@ -1,6 +1,6 @@
 <div class ="section">
-<div class ="container col-12">
-<div class="col-8">
+<div class ="container col-10">
+<div class="col-10">
     <div class="card bg-secondary shadow">
       <div class="card-header bg-white border-0">
         <div class="row align-items-center">
@@ -10,26 +10,14 @@
         </div>
       </div>
       <div class="card-body">
-          <form method="POST" action="">
+          <form method="POST" action="{{ route('empregister') }}">
               @csrf
 
             <h6 class="heading-small mb-4">Basic Info</h6>
 
             <div class="pl-lg-4">
                 <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-username">User Name</label>
-                      <input id="input-username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" placeholder ="User Name" name="username" value="{{ old('username') }}" type="text" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-control-label" for="input-email">Email address</label>
                       <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="example@123.com" required>
@@ -69,7 +57,7 @@
                   </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
                           <label class="form-control-label" for="input-lname">Last Name</label>
                           <input id="input-lname" class="form-control{{ $errors->has('lname') ? ' is-invalid' : '' }}" placeholder ="Last Name" name="lname" value="{{ old('lname') }}" type="text" required autofocus>
@@ -81,49 +69,20 @@
                                     @endif
                       </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-tel">Telephone NO</label>
+                            <input id="input-tel" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" placeholder ="Telephone NO" name="tel" value="{{ old('tel') }}" type="text" required autofocus>
+      
+                                      @if ($errors->has('tel'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('tel') }}</strong>
+                                          </span>
+                                      @endif
+                        </div>
+                      </div>
                   </div>
               </div>
-
-              <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-dob">Date of Birth</label>
-                          <input id="input-dob" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" placeholder ="Date Of Birth" name="dob" value="{{ old('dob') }}" type="date" required autofocus>
-    
-                                    @if ($errors->has('dob'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('dob') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-nic">NIC</label>
-                          <input id="input-nic" class="form-control{{ $errors->has('nic') ? ' is-invalid' : '' }}" placeholder ="NIC" name="nic" value="{{ old('nic') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('nic'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('nic') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                          <label class="form-control-label" for="input-tel">Telephone NO</label>
-                          <input id="input-tel" class="form-control{{ $errors->has('tel') ? ' is-invalid' : '' }}" placeholder ="Telephone NO" name="tel" value="{{ old('tel') }}" type="text" required autofocus>
-    
-                                    @if ($errors->has('tel'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('tel') }}</strong>
-                                        </span>
-                                    @endif
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 <hr class="my-4" />
                 <h6 class="heading-small mb-4">Address</h6>
@@ -167,9 +126,23 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row">
+                            <div class="col-lg-12">
+                              <div class="form-group">
+                                <label class="form-control-label" for="input-email">Town</label>
+                                <input id="input-town" type="town" class="form-control{{ $errors->has('town') ? ' is-invalid' : '' }}" name="town" value="{{ old('town') }}" placeholder ="Town" required>
+            
+                                        @if ($errors->has('town'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('town') }}</strong>
+                                          </span>
+                                        @endif
+                              </div>
+                            </div>
+                          </div>
                 </div>
 
-
+                <hr class="my-4" />
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">
@@ -193,30 +166,6 @@
                           </div>
                         </div>
                           <hr class="my-4" />
-                         <div class="row" id="checkRadios">
-
-                              <div class="col-3">
-                                    <label class="form-control-label" for="role">Role</label>
-                                </div>
-                                <div class="col-3">
-                                  <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="1">
-                                      <span class="form-check-sign"></span>
-                                      Pharmacist
-                                    </label>
-                                  </div>
-                                </div>
-                                  <div class="col-3">
-                                  <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                      <input class="form-check-input" type="radio" name="exampleRadios" id="role" value="2">
-                                      <span class="form-check-sign"></span>
-                                      Cashier
-                                    </label>
-                                  </div>
-                                </div>
-                            </div>
                              
                             <hr class="my-4" />
 
@@ -226,20 +175,34 @@
                                     <label class="form-control-label" for="input-branch">Branch</label>
                                     <select class = "form-control" id = "input-branch" name = "branch">
                                       @foreach ($branch as $item)
-                                         <option>{{$item->id}} - {{$item->town}}</option> 
+                                         <option value ="{{$item->id}}">{{$item->id}} - {{$item->town}}</option> 
                                       @endforeach 
                                     </select>
                                 </div>
                               </div>
                             </div>
-                    </div>   
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label class="form-control-label" for="role">Role</label>
+                                      <select class = "form-control" id = "role" name = "role">
+                                           <option value = "1">Pharmacist</option>
+                                           <option value = "2">Cashier</option>  
+                                      </select>
+                                  </div>
+                                </div>
+                              </div>
+
+   
                     <div class="pl-lg-4">
                         <center><button class="btn btn-primary" type="submit">Submit</button></center>
                         </div>
         </form>
+    </div>
       </div>
     </div>
   </div>
 </div> 
-</div>
+
 

@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="card card-login card-plain col-md-10">
+<div class="card bg-default col-8">
 <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="card-header text-center">
@@ -10,7 +10,8 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="input-group no-border input-lg">
+          <div class = "row justify-content-center">
+          <div class="input-group no-border input-lg col-8">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="now-ui-icons users_circle-08"></i>
@@ -24,7 +25,9 @@
                 </span>
             @endif
           </div>
-          <div class="input-group no-border input-lg">
+          </div>
+          <div class = "row justify-content-center">
+          <div class="input-group no-border input-lg col-8">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="now-ui-icons ui-1_lock-circle-open"></i>
@@ -38,6 +41,8 @@
                                     </span>
                                 @endif
           </div>
+          </div>
+
           <div class="form-check">
                 <label class="form-check-label">
                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

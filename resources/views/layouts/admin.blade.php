@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-dark bg-dark" id="sidenav-main">
         <div class="container-fluid">
           <!-- Toggler -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,17 +89,7 @@
                 </div>
               </div>
             </div>
-            <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-              <div class="input-group input-group-rounded input-group-merge">
-                <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <span class="fa fa-search"></span>
-                  </div>
-                </div>
-              </div>
-            </form>
+
             <!-- Navigation -->
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -131,6 +121,11 @@
                           <i class="ni ni-ambulance text-orange"></i> Employees
                         </a>
                       </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/bills/create">
+                            <i class="ni ni-ambulance text-orange"></i> Billing
+                          </a>
+                        </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">
@@ -155,16 +150,6 @@
             <!-- Brand -->
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="admin">Dashboard</a>
             <!-- Form -->
-            <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-              <div class="form-group mb-0">
-                <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Search" type="text">
-                </div>
-              </div>
-            </form>
             <!-- User -->
             <ul class="navbar-nav align-items-center d-none d-md-flex">
               <li class="nav-item dropdown">
@@ -213,29 +198,11 @@
             </ul>
           </div>
         </nav>
+        
 @yield('content')
 
-<footer class="footer">
-    <div class="row align-items-center justify-content-xl-between">
-      <div class="col-xl-6">
-        <div class="copyright text-center text-xl-left text-muted">
-          &copy; 2018 <a href="" class="font-weight-bold ml-1" target="_blank">Isura Pharmacies (PVT) Ltd</a>
-        </div>
-      </div>
-      <div class="col-xl-6">
-        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-          <li class="nav-item">
-            <a href="" class="nav-link" target="_blank">Isura Pharmacies (PVT) Ltd</a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link" target="_blank">About Us</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
 </div>
-</div>
+
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="{{URL::asset('assets-dash/vendor/jquery/dist/jquery.min.js')}}"></script>

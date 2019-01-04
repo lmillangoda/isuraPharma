@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Branch;
+use App\Stock;
 use DB;
 
 class BranchesController extends Controller
@@ -41,6 +42,17 @@ class BranchesController extends Controller
         $branch->town = $request->Input('town');
 
         $branch->save();
+
+        $stocks = Stock::all();
+
+        if(!is_null($stocks)){
+            foreach ($stocks as $stock){
+                $new = new Stock;
+                $new->branch_id = $branch->id;
+                $new->product_id = $stock->product_id; 
+                $new->save();
+            }
+        }
 
         return redirect('/branches')->with('success', 'Branches Details Added Successfully!');
     }

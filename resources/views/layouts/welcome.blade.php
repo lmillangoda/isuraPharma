@@ -18,7 +18,9 @@
     <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
   </head>
-  
+  <style>
+      
+  </style>
   <body>
 
     @yield('welcome')

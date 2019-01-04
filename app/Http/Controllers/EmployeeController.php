@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use Illuminate\Http\Request;
+use App\User;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +15,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employees.index');
+        $pharmacist = User::where('role_id',1)->get();
+        $cashier = User::where('role_id',2)->get();
+        $branch = Branch::all();
+        return view('employees.index',compact('pharmacist','cashier','branch'));
     }
 
     /**
