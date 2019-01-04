@@ -143,4 +143,70 @@ class ProductsController extends Controller
 
         return $filenameToStore;
     }
+
+    public function search(Request $request)
+    {
+      if($request->ajax())
+      {
+        $output = '';
+        $keyword = $request->keyword;
+        if($keyword!='')
+        {
+          $data = DB::table('products')
+          ->where('medicalName','like','%'.$keyword.'%')
+          ->orWhere('brandName','like','%'.$keyword.'%')
+          ->get();
+        }
+        else
+        {
+          $data = Product::all();
+        }
+
+        $total_rows = $data->count();
+        if($total_rows>0)
+        {
+          foreach($data as $row)
+          {
+            $output .= '
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                  <a href="/products/' . $row->id . '">
+                    <img class="card-img-top" src="storage/product_images/' . $row->image . '" alt="Card image cap">
+                  </a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="/products/' . $row->id . '/">' . $row->medicalName . '</a>
+                    </h4>
+                    <p class="card-text">Price : ' . $row->price . 'LKR</p>
+                    <div class= "row">
+                      <div class = "col-8">
+                        <a href="/products/' . $row->id . ' /edit" class="btn btn-primary">Edit</a>
+                      </div>
+                      <div>
+                        <form class="pull-right delete" action="' . route('products.destroy',['id'=>$row->id]) . '" method="post">
+                          <input type="hidden" name="_method" value="DELETE"/>
+                          <input type="hidden" name="_token" id="csrf-token" value="' . $request->session()->token() . '" />
+                          <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ';
+          }
+        }
+        else {
+          $output = '
+            <p>No data Found</p>
+          ';
+        }
+
+        $data = array(
+          'cards' => $output
+        );
+
+        return response()->json($data);
+      }
+    }
 }
