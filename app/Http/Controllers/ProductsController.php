@@ -52,6 +52,8 @@ class ProductsController extends Controller
         $product->brandName = $request->Input('brandName');
         $product->medicalName = $request->Input('medicalName');
         $product->price = $request->Input('price');
+        $product->buying_price = $request->Input('buying_price');
+        $product->reorder_level = $request->Input('reorder_level');
         $product->image = $this->filenameToStore($request);
 
         $product->save();
@@ -106,6 +108,8 @@ class ProductsController extends Controller
       $product->brandName = $request->Input('brandName');
       $product->medicalName = $request->Input('medicalName');
       $product->price = $request->Input('price');
+      $product->buying_price = $request->Input('buying_price');
+      $product->reorder_level = $request->Input('reorder_level');
       if($request->hasFile('image')){
         $oldFilename = 'public/product_images/'.$product->image;
         $product->image = $this->filenameToStore($request);
