@@ -9,5 +9,5 @@
   </div>
 
     <center>@include('dash_comp.employee_reg')</center>
-
+ 
 @endsection

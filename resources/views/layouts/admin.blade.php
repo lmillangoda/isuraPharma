@@ -123,7 +123,7 @@
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="/bills/create">
-                            <i class="ni ni-ambulance text-orange"></i> Billing
+                            <i class="ni ni-money-coins text-orange"></i> Billing
                           </a>
                         </li>
             </ul>

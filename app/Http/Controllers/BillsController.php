@@ -179,7 +179,7 @@ class BillsController extends Controller
             <td>' . $p->price . '</td>
             <td>' . $properties[0] . '</td>
             <td>' . $properties[1] . '</td>
-            <td> <button class="btn btn-danger" onclick="removeItem(' . $cart_product . ')"> Remove Item </td>
+            <td> <button class="btn btn-sm btn-danger" onclick="removeItem(' . $cart_product . ')"> Remove Item </td>
           </tr>
         ';
         $count++;

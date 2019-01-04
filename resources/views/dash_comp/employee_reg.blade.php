@@ -1,4 +1,4 @@
-<div class ="section">
+<div class ="section fluid">
 <div class ="container col-10">
 <div class="col-10">
     <div class="card bg-secondary shadow">
