@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('brandName');
             $table->string('medicalName');
             $table->double('price');
+            $table->double('buying_price');
+            $table->integer('reorder_level');
             $table->string('image');
             $table->timestamps();
         });

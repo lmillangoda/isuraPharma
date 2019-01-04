@@ -40,6 +40,14 @@
         <input class="form-control" type="text" name="price" value="{{isset($product->price) ? $product->price : null}}" placeholder="10">
       </div>
       <div class="form-group">
+        <label for="buying_price">Buying Price</label>
+        <input class="form-control" type="text" name="buying_price" value="{{isset($product->buying_price) ? $product->buying_price : null}}" placeholder="10">
+      </div>
+      <div class="form-group">
+        <label for="reorder_level">Reorder Level</label>
+        <input class="form-control" type="text" name="reorder_level" value="{{isset($product->reorder_level) ? $product->reorder_level : null}}" placeholder="10">
+      </div>
+      <div class="form-group">
         <label for="image">Image</label>
         <input class="form-control-file" type="file" name="image">
       </div>
