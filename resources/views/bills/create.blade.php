@@ -43,11 +43,11 @@
         <div class="row">
             <div class="col-lg-12">
             <label style="color: white;" for="product_id">Product ID</label>
-            <input id='product' type="text" name="product_id" value="">
+            <input class="form-control" id='product' type="text" name="product_id" value="">
           </div>
           <div class="col-lg-12">
             <label style="color: white;" for="amount">Amount</label>
-            <input id='amount' type="text" name="amount" value="">
+            <input class="form-control" id='amount' type="text" name="amount" value="">
           </div>
         </div>
       </div>

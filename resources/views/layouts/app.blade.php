@@ -23,7 +23,7 @@
     <header class="header-global">
       <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent bg-default headroom">
         <div class="container">
-          <a class="navbar-brand mr-lg-5" href="./">
+          <a style = "color:thistle" class ="navbar-brand mr-lg-5" href="./">
             Isura Pharmacies
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,10 +61,10 @@
         @guest
         <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a style = "color:white" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a style = "color:white"  class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
           </li>
           </ul>
         @else

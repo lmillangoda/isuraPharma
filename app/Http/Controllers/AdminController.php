@@ -5,7 +5,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     /**
@@ -31,8 +31,14 @@ class AdminController extends Controller
     protected function validator(request $request)
     {
         return Validator::make($request, [
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'fname' => ['required', 'string', 'max:255'],
+            'mname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'tel' => ['required', 'string', 'min:10','max:10'],
+            'hno' => ['required', 'string', 'max:255'],
+            'town' => ['required','string','max:255'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -60,5 +66,11 @@ class AdminController extends Controller
             'role_id' => $request['role']
         ]);
         return redirect()->action('EmployeeController@create');
+    }
+    protected function profile()
+    {
+        $user = Auth::user();
+        $role = $user->role_ID;
+        return view('admin_profile.profile',compact('user','role'));
     }
 }

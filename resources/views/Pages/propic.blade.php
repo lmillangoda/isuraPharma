@@ -38,7 +38,7 @@
 
                               <div class="pl-lg-4">
                                       <div class="row justify-content-center">
-                                          <img src="./assets/img/{{$user->name}}" class="rounded-circle" width ="200" height ="200">  
+                                          <img src="" class="rounded-circle" width ="200" height ="200">  
                                       </div>
                                   </div>
                 <form action = "store" method = "POST" enctype = "multipart/form-data">

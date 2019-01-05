@@ -1,4 +1,4 @@
-@extends('layouts.prof')
+@extends('layouts.users')
 
 @section('content')
     <section class="section-profile-cover section-shaped my-0">
@@ -28,7 +28,6 @@
                 <div class="card bg-secondary shadow">
                   <div class="card-header bg-white border-0">
                   <div class="card-body">
-                        <form action = "propic" method = "get" enctype = "multipart/form-data">
                             <div class="pl-lg-4">
                                     <div class="d-flex justify-content-between">
                                             <h5 class="heading-small text-muted mb-4">User Profile</h5>
@@ -36,48 +35,84 @@
                                           </div>
                             </div>
                             <div class="pl-lg-4">
-                                    <div class="row justify-content-center">
-                                        <img src="./assets/img/{{$user->name}}" class="rounded-circle" width ="200" height ="200">  
-                                    </div>
-                                </div>
-
-                                  <hr class="my-4">
-                      <h6 class="heading-small text-muted mb-4">User information</h6>
-                      <div class="pl-lg-4">
-                            <div class="row">
-                                    <div class="col-md-12">
-                                      <div class="form-group focused">
-                                        <label class="form-control-label" for="input-address">Name</label>
-                                        <input id="input-name" class="form-control form-control-alternative" Value="{{$user2->name}}"  type="text">
-                                      </div>
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group">
+                                      <label class="form-control-label" for="email">Email address</label>
+                                    <input id="email" type="email" class="form-control" name="email" value="" placeholder ="{{$user2->email}}">
                                     </div>
                                   </div>
-                                  <div class="row">
-                                        <div class="col-md-12">
-                                          <div class="form-group focused">
-                                            <label class="form-control-label" for="input-address">E-mail</label>
-                                            <input id="input-email" class="form-control form-control-alternative" Value="{{$user2->email}}"  type="text">
-                                          </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-fname">First Name</label>
+                                          <input id="input-fname" class="form-control" placeholder ="{{$user2->fName}}" name="fname" value="" type="text">
+                                        </div>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-mname">Middle Name</label>
+                                          <input id="input-mname" class="form-control" placeholder ="{{$user2->mName}}" name="mname" value="" type="text">
+                                        </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-lname">Last Name</label>
+                                          <input id="input-lname" class="form-control" placeholder ="{{$user2->lName}}" name="lname" value="" type="text">
+                                      </div>
+                                    </div>
+              
+                                      <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-tel">Telephone NO</label>
+                                            <input id="input-tel" class="form-control" placeholder ="{{$user2->tel}}" name="tel" value="" type="text">
                                         </div>
                                       </div>
-                                      <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="form-group focused">
-                                                <label class="form-control-label" for="input-address">Address</label>
-                                                <input id="input-address" class="form-control form-control-alternative" Value="{{$user2->address}}"  type="text">
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="row">
-                                                <div class="col-md-12">
-                                                  <div class="form-group focused">
-                                                    <label class="form-control-label" for="input-address">Tel-NO</label>
-                                                    <input id="input-telno" class="form-control form-control-alternative" Value="{{$user2->tel_no}}"  type="text">
-                                                  </div>
-                                                </div>
-                                              </div>                         
-                      </div>
-                      <hr class="my-4">
+                                    </div>
+                              </div>
+                
+                                <h6 class="heading-small mb-4">Address</h6>
+                
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                      <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-hno">Home Address NO</label>
+                                            <input id="input-hno" class="form-control" placeholder ="{{$user2->hNo}}" name="hno" value="" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-line1">Address Line 1</label>
+                                            <input id="input-line1" class="form-control" placeholder ="{{$user2->add1}}" name="line1" value="" type="text">
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-line2">Address Line 2</label>
+                                            <input id="input-line2" class="form-control" placeholder ="{{$user2->add2}}" name="line2" value="" type="text">
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+              
+                                <div class="pl-lg-4">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-lname">Town</label>
+                                        <input id="input-town" class="form-control" placeholder ="{{$user2->town}}" name="town" value="" type="text">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+            
+                      
+
                     </form>
                   </div>
                 </div>
