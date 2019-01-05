@@ -39,7 +39,9 @@ Route::get("/admin",'AdminController@index')->name('admin');
 
 Route::post('admin/empRegister','AdminController@employeeReg')->name('empregister');
 
+//products routes
 Route::resource('products', 'ProductsController');
+Route::post('/products/search/', 'ProductsController@search')->name('products.search');
 
 Route::resource('suppliers', 'SuppliersController');
 

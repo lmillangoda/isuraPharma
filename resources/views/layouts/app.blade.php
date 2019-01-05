@@ -4,7 +4,7 @@
       <meta charset="utf-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Isura Pharmacies</title>
@@ -18,7 +18,7 @@
     <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
   </head>
-  
+
   <body>
     <header class="header-global">
       <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent bg-default headroom">
@@ -54,9 +54,9 @@
                         </a>
                       </li>
                 </ul>
-    
+
                 <!-- Right Side Of Navbar -->
-                
+
                     <!-- Authentication Links -->
         @guest
         <ul class="navbar-nav ml-auto">
@@ -68,36 +68,36 @@
           </li>
           </ul>
         @else
-            
-        
+
+
         <ul class="navbar-nav ml-auto">
             <li><a class="nav-link" href = "/home">Home</a></li>
                         <li class="nav-item dropdown">
-                            
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-    
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-    
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>
           </li>
         </ul>
-        
+
                     @endguest
           </div>
 
         </div>
       </nav>
-  
+
     </header>
     <main>
 
@@ -112,7 +112,7 @@
       </div>
 
       @yield('content')
-     
+
     </main>
     <footer class="footer has-cards">
       <div class="container container-lg">
@@ -150,8 +150,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxkZBrDJNxRlReduc7v-z4NMvgzvNTgLw "></script>
     <!-- Argon JS -->
     <script src="{{URL::asset('assets-dash/js/argon.js?v=1.0.0')}}"></script>
-  
+
   </body>
-  
-  
+
+
   </html>
