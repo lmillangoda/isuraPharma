@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+    @extends('layouts.admin')
 
-@section('content')
+    @section('content')
 
-<div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
-        <div class="container-fluid">
-          <div class="header-body">
-    
-          </div>
+    <div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
+            <div class="container-fluid">
+            <div class="header-body">
+        
+            </div>
+            </div>
         </div>
-      </div>
-      
-@endsection
+        
+    @endsection

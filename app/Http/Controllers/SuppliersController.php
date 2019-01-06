@@ -13,6 +13,12 @@ class SuppliersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+    
     public function index()
     {
       $suppliers = Supplier::all();
@@ -91,13 +97,13 @@ class SuppliersController extends Controller
           'telephone' => 'required',
         ]);
 
-        $supplier = new Supplier;
+        $supplier = Supplier::where('id',$id)->first();
         $supplier->name = $request->Input('name');
         $supplier->email = $request->Input('email');
         $supplier->telephone = $request->Input('telephone');
         $supplier->save();
 
-        return redirect('/suppliers')->with('success', 'Supplier Details saved Successfully!');
+        return redirect('/suppliers')->with('success', 'Supplier Details updated Successfully!');
     }
 
     /**
@@ -108,6 +114,7 @@ class SuppliersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Supplier::find($id)->delete();
+        return redirect()->route('suppliers.index');
     }
 }

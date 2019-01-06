@@ -9,16 +9,9 @@
     </div>
   </div>
 
-<div class="container">
+<div class="container col-7">
     <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-12">
-              <h3 class="mb-0">Branch Registration</h3>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
+        <div class="card-body col-12">
   @if(isset($branch))
     {!! Form::model($branch, [
       'action' => ['BranchesController@update', $branch->id],
@@ -26,7 +19,7 @@
       'enctype' => 'multipart/form-data'
       ])
     !!}
-    <h1>Edit branch details</h1>
+    <center><h1>Edit branch details</h1></center>
   @else
     {!! Form::open([
       'action' => 'BranchesController@store',
@@ -34,17 +27,19 @@
       'enctype' => 'multipart/form-data'
       ])
     !!}
-    <h1>Add a branch</h1>
+    <center><h1>Add a branch</h1></center>
   @endif
       <div class="form-group">
-        {{Form::label('town', 'Town')}}
+          <div class = "col-12">
+        <center>{{Form::label('town', 'Town',['style' => "color:black;" ,'class'=>"form-control-label"])}}</center>
         {{Form::text('town',
         isset($branch->town) ? $branch->town : null,
         ['class' => 'form-control'])}}
+        </div>
       </div>
-      <div class="">
+      <center><div class="">
         {{Form::submit('Submit', ['class'=> 'btn btn-primary'])}}
-      </div>
+      </div></center>
     {!! Form::close() !!}
   </div>
 </div>

@@ -31,11 +31,11 @@
       <td>{{$supplier->name}}</td>
       <td>{{$supplier->email}}</td>
       <td>{{$supplier->telephone}}</td>
-      <td><a href="/suppliers/{{$supplier->id}}/edit" class="btn btn-warning">Edit</a></td>
+      <td><a href="/suppliers/{{$supplier->id}}/edit" class="btn btn-sm btn-warning">Edit</a></td>
       <td>
         {!! Form::open(['action' => ['SuppliersController@destroy', $supplier->id],'method' => 'POST', 'class' => 'pull-right'])!!}
           {{  Form::hidden('_method', 'DELETE')}}
-          {{  Form::Submit('Delete', ['class' => 'btn btn-danger'])}}
+          {{  Form::Submit('Delete', ['class' => 'btn btn-sm btn-danger'])}}
         {!! Form::close() !!}
       </td>
     </tr>
