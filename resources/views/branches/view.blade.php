@@ -5,7 +5,6 @@
 <div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
     <div class="container-fluid">
       <div class="header-body">
-
       </div>
     </div>
   </div>
@@ -16,7 +15,7 @@
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Products</h3>
+              <h3 class="text-white mb-0">{{$branch->town}} Branch - Products</h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">

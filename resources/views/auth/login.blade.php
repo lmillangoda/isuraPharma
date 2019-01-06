@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="card bg-default col-8">
+<div class="card bg-default col-7">
 <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="card-header text-center">
@@ -53,18 +53,20 @@
 
         </div>
         <div class="card-footer text-center">
+            <div class = "row">
+                <div class="col-6">
+                    <h6>
+                      <a href="/register" class="link">Register</a>
+                    </h6>
+                  </div>
+                  <div class="col-6">
+                        <h6>
+                          <a href="{{ route('password.request') }}" class="link">Forgot Your Password?</a>
+                        </h6>
+                      </div>
+                    </div>
                 <button class="btn btn-primary" type="submit">Login</button>
         </div>
-          <div class="pull-left">
-            <h6>
-              <a href="/register" class="link">Register</a>
-            </h6>
-          </div>
-          <div class="pull-right">
-                <h6>
-                  <a href="{{ route('password.request') }}" class="link">Forgot Your Password?</a>
-                </h6>
-              </div>
               
       </form>
 </div>

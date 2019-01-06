@@ -52,10 +52,9 @@
 
         @else
         <ul class="navbar-nav ml-auto">
-            <li></i><a class="nav-link" href = "/home">Home</a></li>
+                            <li><a class="nav-link" href = "/home">Home</a></li>
                             <li><a class="nav-link" href = "/profile">Profile</a></li>
                             <li><a class="nav-link" href = "/messages">Messages</a></li>
-                            <li><a class="nav-link" href = "/products">Products</a></li>
           </ul>
         <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
@@ -89,6 +88,7 @@
       <div class="position-relative">
         <!-- Hero for FREE version -->
         <section class="section section-lg section-lg section-shaped">
+
           <!-- SVG separator -->
           <div class="separator separator-bottom separator-skew zindex-100">
             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">

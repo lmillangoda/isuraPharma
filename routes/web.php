@@ -49,6 +49,8 @@ Route::resource('branches', 'BranchesController');
 
 Route::resource('employees', 'EmployeeController');
 
+Route::resource('reports', 'ReportController');
+
 //dash components
 Route::get('employeeReg',function(){
     $branch = Branch::all();
@@ -75,3 +77,5 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 Route::resource('bills', 'BillsController');
 Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
 Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
+
+Route::get('/admin/profile','AdminController@profile')->name('aProfile');

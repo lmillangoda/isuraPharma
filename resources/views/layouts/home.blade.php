@@ -100,6 +100,15 @@
       <div class="position-relative">
         <!-- Hero for FREE version -->
         <section class="section section-lg section-lg section-shaped">
+            <div class="shape shape-style-1 shape-primary alpha-4">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
           <!-- SVG separator -->
           <div class="separator separator-bottom separator-skew zindex-100">
             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
