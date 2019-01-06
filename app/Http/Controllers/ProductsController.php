@@ -63,7 +63,10 @@ class ProductsController extends Controller
 
         //sync branches
         $branches = Branch::all();
-        $product->branches()->sync($branches);
+        foreach ($branches as $branch) {
+          $product->branches()->attach([$branch->id => ['batch' => 1]]);
+          $product->branches()->attach([$branch->id => ['batch' => 2]]);
+        }
 
         return redirect('/products')->with('success', 'Product Details Added Successfully!');
     }

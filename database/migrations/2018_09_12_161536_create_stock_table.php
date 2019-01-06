@@ -14,13 +14,13 @@ class CreateStockTable extends Migration
     public function up()
     {
         Schema::create('stock', function (Blueprint $table) {
-          $table->increments('id');
           $table->integer('branch_id')->unsigned();
           $table->integer('product_id')->unsigned();
+          $table->integer('batch')->default(1);
           $table->date('expDate')->nullable();
           $table->integer('amount')->default(0);
 
-          $table->unique(['branch_id', 'product_id']);
+          $table->primary(['branch_id', 'product_id', 'batch']);
           $table->timestamps();
 
           $table->foreign('product_id')

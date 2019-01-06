@@ -63,6 +63,11 @@ Route::get('/stock/create/branch/{branch}/product/{product}', 'StockController@c
 Route::get('/stock/edit/branch/{branch}/product/{product}', 'StockController@edit')->name('stock.edit');
 Route::put('/stock/add/branch/{branch}/product/{product}', 'StockController@update')->name('stock.update');
 Route::put('/stock/substract/branch/{branch}/product/{product}', 'StockController@substract')->name('stock.substract'); //substracts from the currnt Stock
+Route::delete('/stock/delete/branch/{branch}/product/{product}', 'StockController@destroy')->name('stock.delete');
+Route::get('/stock/add/backup/branch/{branch}/product/{product}', 'StockController@createBackup')->name('backup_stock.create');
+Route::put('/stock/add/backup/branch/{branch}/product/{product}', 'StockController@storeBackup')->name('backup_stock.store');
+Route::put('/stock/substract/backup/branch/{branch}/product/{product}', 'StockController@substractBackup')->name('backup_stock.substract'); //substracts from the currnt Stock
+Route::delete('/stock/delete/backup/branch/{branch}/product/{product}', 'StockController@destroyBackup')->name('backup_stock.delete');
 
 //facebook socialite routes
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');

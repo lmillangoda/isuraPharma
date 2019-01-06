@@ -19,4 +19,16 @@ class Branch extends Model
       ->withPivot('expDate', 'amount')
       ->withTimeStamps();
   }
+
+  public function main_products()
+  {
+    return $this->products()
+      ->wherePivot('batch', 1);
+  }
+
+  public function backup_products()
+  {
+    return $this->products()
+      ->wherePivot('batch', 2);
+  }
 }
