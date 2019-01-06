@@ -4,7 +4,7 @@
 <div class="header bg-gradient-default pb-6 pt-5 pt-md-6">
     <div class="container-fluid">
       <div class="header-body">
-          <center><a href = "products/create"><button  class="btn btn-danger">Add New Product</button></a></center>
+          <center><a href = "{{route('products.create')}}"><button  class="btn btn-danger">Add New Product</button></a></center>
       </div>
     </div>
   </div>

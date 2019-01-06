@@ -49,7 +49,7 @@ class BranchesController extends Controller
             foreach ($stocks as $stock){
                 $new = new Stock;
                 $new->branch_id = $branch->id;
-                $new->product_id = $stock->product_id; 
+                $new->product_id = $stock->product_id;
                 $new->save();
             }
         }
@@ -66,9 +66,16 @@ class BranchesController extends Controller
     public function show($id)
     {
         $branch = Branch::find($id);
+        $main_products = $branch->main_products;
+        $backup_products = $branch->backup_products;
         $products = $branch->products;
         // dd($products);
-        return view('branches.view')->withBranch($branch)->withProducts($products);
+        return view('branches.view')
+          ->withBranch($branch)
+          ->withProducts($products)
+          ->with('main_products', $main_products)
+          ->with('backup_products', $backup_products);
+          // ->with('total_stock', $total_stock);
     }
 
     /**
