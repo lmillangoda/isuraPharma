@@ -61,7 +61,7 @@
       </div>
       </div>
     </div>
- 
+
         </form>
         </div>
       </div>
@@ -93,9 +93,16 @@ $(document).ready(function () {
         // console.log(data);
         $('#bill-table-body').empty();
         $('#bill-table-body').append(data.table_data);
-        $('#product').val("");
-        $('#amount').val("");
+
+      },
+      error: function()
+      {
+        alert('Something went wrong. Check your product ID or There are no stocks');
       }
+    })
+    .always(function() {
+      $('#product').val("");
+      $('#amount').val("");
     });
   });
   });

@@ -22,4 +22,16 @@ class Product extends Model
       ->withPivot('expDate', 'amount')
       ->withTimeStamps();
     }
+
+    public function main_branches()
+    {
+      return $this->branches()
+        ->wherePivot('batch', 1);
+    }
+
+    public function backup_branches()
+    {
+      return $this->branches()
+        ->wherePivot('batch', 2);
+    }
 }
