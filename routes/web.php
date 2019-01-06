@@ -79,3 +79,6 @@ Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.displa
 Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
 
 Route::get('/admin/profile','AdminController@profile')->name('aProfile');
+
+//warnings
+Route::resource('warnings', 'WarningsController');

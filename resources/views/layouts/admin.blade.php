@@ -13,7 +13,7 @@
   <link href="{{URL::asset('assets-dash/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
   <link href="{{URL::asset('assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <!-- Argon CSS -->
-  <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0" rel=')}}" rel ="stylesheet">
+  <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0')}}" rel ="stylesheet">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
                                 <i class="ni ni-user-run"></i>
                                 Logout
                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf 
+                      @csrf
                   </form>
                 </a>
               </div>
@@ -119,6 +119,12 @@
                               <i class="ni ni-money-coins text-orange"></i> Reports
                             </a>
                           </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="/warnings">
+                                <i class="ni ni-money-coins text-orange"></i> Warnings
+                                <span class="badge badge-warning"> 4 </span>
+                              </a>
+                            </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3">
@@ -165,7 +171,7 @@
                         onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf 
+                        @csrf
                     </form>
                     <i class="ni ni-user-run"></i>
                     <span>Logout</span>
@@ -175,7 +181,7 @@
             </ul>
           </div>
         </nav>
-        
+
 @yield('content')
 
 </div>
