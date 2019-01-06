@@ -49,7 +49,13 @@
                   <td>
                       Pharmacist
                   </td>
-                 
+                  <td><a href="/employees/{{$item->id}}/edit" class="btn btn-sm btn-warning">Edit</a></td>
+                  <td>
+                    {!! Form::open(['action' => ['EmployeeController@destroy', $item->id],'method' => 'POST', 'class' => 'pull-right'])!!}
+                      {{  Form::hidden('_method', 'DELETE')}}
+                      {{  Form::Submit('Delete', ['class' => 'btn btn-sm btn-danger'])}}
+                    {!! Form::close() !!}
+                  </td>
                 </tr>
 @endforeach    
 @foreach ($cashier as $item)
@@ -72,7 +78,13 @@
                   <td>
                       Cashier
                   </td>
-                 
+                  <td><a href="/employees/{{$item->id}}/edit" class="btn btn-sm btn-warning">Edit</a></td>
+                  <td>
+                    {!! Form::open(['action' => ['EmployeeController@destroy', $item->id],'method' => 'POST', 'class' => 'pull-right'])!!}
+                      {{  Form::hidden('_method', 'DELETE')}}
+                      {{  Form::Submit('Delete', ['class' => 'btn btn-sm btn-danger'])}}
+                    {!! Form::close() !!}
+                  </td>
                 </tr>
 @endforeach 
               </tbody>
