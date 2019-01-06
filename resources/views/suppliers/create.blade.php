@@ -7,17 +7,11 @@
       </div>
     </div>
   </div>
-  <div class="section">
-      <div class="container fluid">
-          <div class="card bg-secondary shadow">
-              <div class="card-header bg-white border-0">
-                <div class="row align-items-center">
-                  <div class="col-12">
-                    <h3 class="mb-0">Supplier Registration</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
+<section class="section">
+<div class="container col-6">
+ <div class="card bg-secondary shadow">
+<div class="card-body col-12">
+                
 <div class="well">
   @if(isset($supplier))
     {!! Form::model($supplier, [
@@ -26,7 +20,7 @@
       'enctype' => 'multipart/form-data'
       ])
     !!}
-    <h1>Edit supplier details</h1>
+    <center><h1>Edit supplier details</h1></center>
   @else
     {!! Form::open([
       'action' => 'SuppliersController@store',
@@ -34,27 +28,27 @@
       'enctype' => 'multipart/form-data'
       ])
     !!}
-    <h1>Add a supplier</h1>
+    <center><h1>Add a supplier</h1></center>
   @endif
       <div class="form-group">
-        {{Form::label('name', 'Name')}}
+        <center>{{Form::label('name', 'Name',['style' => "color:black;" ,'class'=>"form-control-label"])}}</center>
         {{Form::text('name',
         isset($supplier->name) ? $supplier->name : null,
         ['class' => 'form-control', 'placeholder' => 'Glaxo Smith (Pvt) Ltd.'])}}
       </div>
       <div class="form-group">
-        {{Form::label('email', 'Email Address')}}
+        <center>{{Form::label('email', 'Email Address',['style' => "color:black;" ,'class'=>"form-control-label"])}}</center>
         {{Form::text('email',
         isset($supplier->email) ? $supplier->email : null,
         ['class' => 'form-control', 'placeholder' => 'ruwan@glaxo.com'])}}
       </div>
       <div class="form-group">
-        {{Form::label('telephone', 'Telephone Number')}}
+        <center>{{Form::label('telephone', 'Telephone Number',['style' => "color:black;" ,'class'=>"form-control-label"])}}</center>
         {{Form::text('telephone',
         isset($supplier->telephone) ? $supplier->telephone : null,
         ['class' => 'form-control', 'placeholder' => '0715687456'])}}
       </div>
-      <div class="">
+      <center><div class="">
         {{Form::submit('Submit', ['class'=> 'btn btn-primary'])}}
       </div>
     {!! Form::close() !!}

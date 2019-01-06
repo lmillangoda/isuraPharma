@@ -28,19 +28,6 @@ class AdminController extends Controller
         return view('dashboards.admin');
     }
 
-    protected function validator(request $request)
-    {
-        return Validator::make($request, [
-            'fname' => ['required', 'string', 'max:255'],
-            'mname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'tel' => ['required', 'string', 'min:10','max:10'],
-            'hno' => ['required', 'string', 'max:255'],
-            'town' => ['required','string','max:255'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -51,6 +38,16 @@ class AdminController extends Controller
     protected function employeeReg(request $request)
     {
       // dd($request);
+      $this->validate($request, [
+        'fname' => 'required|string|max:255',
+        'mname' => 'required|string|max:255',
+        'lname' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'tel' => 'required|string|min:10|max:10',
+        'hno' => 'required|string|max:255',
+        'town' => 'required|string|max:255',
+        'password' => 'required|string|min:6|confirmed',
+    ]);
         $user = User::create([
             'fname' => $request['fname'],
             'mname' => $request['mname'],
@@ -67,10 +64,5 @@ class AdminController extends Controller
         ]);
         return redirect()->action('EmployeeController@create');
     }
-    protected function profile()
-    {
-        $user = Auth::user();
-        $role = $user->role_ID;
-        return view('admin_profile.profile',compact('user','role'));
-    }
+
 }
