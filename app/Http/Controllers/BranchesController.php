@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Branch;
-use App\Role;
-use App\Product;
-use App\Bill;
+use App\Stock;
+use DB;
 
-class BillsController extends Controller
+class BranchesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +16,8 @@ class BillsController extends Controller
      */
     public function index()
     {
-        //
+        $branches = Branch::all();
+        return view('branches.index')->withBranches($branches);
     }
 
     /**
@@ -29,9 +27,7 @@ class BillsController extends Controller
      */
     public function create()
     {
-      $products = Product::all();
-        return view('bills.create')->withProducts($products);
-      // echo DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
+      return view('branches.create');
     }
 
     /**
@@ -42,44 +38,23 @@ class BillsController extends Controller
      */
     public function store(Request $request)
     {
-      // echo(DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount'));
-        // dd($request);
-        $products = array();
-        foreach ($request->session()->get('cart') as $product_id => $properties) {
-          $product = Product::find($product_id);
-          $amount = $properties[0];
-          $cost = $properties[1];
-          $stock_method = $properties[2];
-          $branch = Auth::user()->branch_id;
+        $branch =  new Branch;
+        $branch->town = $request->Input('town');
 
-          $products[$product->id] = array('amount' => $amount, 'cost' => $cost);
+        $branch->save();
 
-          //update the stocks
-          //check where the stocks are coming from
-          //if the tranaction from main stock
-          $current_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
-          if($stock_method=='main') {
-            DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->update(['amount'=>$current_stock-$amount]);
-          } else if ($stock_method=='combined') {
-            $remaining_amount = $amount - $current_stock;
-            $backup_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',2]])->value('amount');
-            //remove main stock
-            DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->delete();
-            //make backup stock as main stock
-            DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',2]])->update(['batch'=>1, 'amount'=>$backup_stock-$remaining_amount]);
-            //add backup stock
-            $product->branches()->attach([$branch => ['batch' => 2]]);
-          }
+        $stocks = Stock::all();
+
+        if(!is_null($stocks)){
+            foreach ($stocks as $stock){
+                $new = new Stock;
+                $new->branch_id = $branch->id;
+                $new->product_id = $stock->product_id;
+                $new->save();
+            }
         }
-        $bill = new Bill;
-        $bill->cashier_id = Auth::id();
-        // $bill->pharmacist_id = Auth::id();
-        $bill->save();
 
-        $bill->products()->sync($products);
-
-        //clear the cart
-        $request->session()->forget('cart');
+        return redirect('/branches')->with('success', 'Branches Details Added Successfully!');
     }
 
     /**
@@ -90,7 +65,17 @@ class BillsController extends Controller
      */
     public function show($id)
     {
-        //
+        $branch = Branch::find($id);
+        $main_products = $branch->main_products;
+        $backup_products = $branch->backup_products;
+        $products = $branch->products;
+        // dd($products);
+        return view('branches.view')
+          ->withBranch($branch)
+          ->withProducts($products)
+          ->with('main_products', $main_products)
+          ->with('backup_products', $backup_products);
+          // ->with('total_stock', $total_stock);
     }
 
     /**
@@ -125,123 +110,5 @@ class BillsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    //function for display the bill while adding items
-    public function displayBill(Request $request)
-    {
-      // dd($request);
-
-      // $request->session()->forget('cart');
-
-      if($request->ajax())
-      {
-        $product = Product::find($request->product);
-        $amount = $request->amount;
-        $cost = $product->price*$amount;
-        $branch = Auth::user()->branch_id;
-
-        //check for main stock
-        $main_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
-        //check for backup stock
-        $backup_stock = 0;
-        if(DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',2]])->exists()) {
-          $backup_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',2]])->value('amount');
-        }
-        // echo $main_stock;
-
-
-          if ($request->session()->exists('cart') && array_key_exists($product->id, $request->session()->get('cart')))
-         {
-            $product_temp = $request->session()->get('cart')[$request->product];
-            $amount = $product_temp[0] + $amount;
-            $cost = $product_temp[1] + $cost;
-            //keeps a session variable for the ease of stock updating
-            if($main_stock>=$amount) {
-              $stock_method = 'main';
-            } else if(($main_stock + $backup_stock) > $amount) {
-              $stock_method = 'combined';
-            }
-
-            $request->session()->put('cart.' . $product->id, array(
-              $amount,
-              $cost,
-              $stock_method
-            ));
-            // echo "Hello";
-          }
-          else {
-            // array_push($this->products_arr, [
-            //   $product->id => array($amount, $cost)
-            // ]);
-            if($main_stock>=$amount) {
-              $stock_method = 'main';
-            } else if(($main_stock + $backup_stock) > $amount) {
-              $stock_method = 'combined';
-            }
-
-            $request->session()->put('cart',
-                array_add($request->session()->get('cart'),
-                  $product->id, array($amount,$cost,$stock_method)
-                )
-            );
-          }
-
-          $response = $this->setTableRows($request);
-
-          // $response = array(
-          //   'hello' => 'world'
-          // );
-
-          // print_r($this->products_arr);
-        }
-        return response()->json($response);
-    }
-
-    public function removeItem(Request $request)
-    {
-      if($request->ajax())
-      {
-        $request->session()->forget('cart.' . $request->product);
-
-        $response = $this->setTableRows($request);
-        return response()->json($response);
-      }
-    }
-
-    private function setTableRows($request)
-    {
-      $count = 1;
-      $output = '';
-      $total = 0;
-      foreach ($request->session()->get('cart') as $cart_product=>$properties) {
-      // $cart_product = $request->session()->get('cart')[$product->id];
-        $p = Product::find($cart_product);
-        $output .= '
-          <tr id="' . $cart_product . '">
-            <td>' . $count . '</td>
-            <td>' . $p->medicalName . '</td>
-            <td>' . $p->price . '</td>
-            <td>' . $properties[0] . '</td>
-            <td>' . $properties[1] . '</td>
-            <td> <button class="btn btn-sm btn-danger" onclick="removeItem(' . $cart_product . ')"> Remove Item </td>
-          </tr>
-        ';
-        $count++;
-        $total+=$properties[1];
-      }
-
-      $output .= '
-        <tr id="total">
-          <td colspan="6"><p align="center">Total : ' . $total . 'LKR</p></td>
-        </tr>
-      ';
-
-      $response = array(
-        'table_data' => $output,
-        'total_cost' => $total
-      );
-
-      return $response;
     }
 }
