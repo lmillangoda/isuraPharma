@@ -17,7 +17,7 @@ class BillsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function __construct()
     {
         $this->middleware('auth:web');
@@ -34,8 +34,10 @@ class BillsController extends Controller
   }
     public function index()
     {
-      if($this->checkRole()){ 
+      if($this->checkRole()){
+        $bills = Bill::all();
 
+        return view('bills.index')->withBills($bills);
       }else{
 
      return redirect()->route('home');}
@@ -100,7 +102,7 @@ class BillsController extends Controller
         //clear the cart
         $request->session()->forget('cart');
 
-        return redirect()->route('bills.create');
+        return redirect()->route('bills.index');
     }
 
     /**
@@ -111,7 +113,10 @@ class BillsController extends Controller
      */
     public function show($id)
     {
-        //
+      $bill = Bill::find($id);
+      $products = $bill->products;
+
+        return view('bills.view')->withBill($bill)->withProducts($products);
     }
 
     /**
