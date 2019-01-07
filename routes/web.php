@@ -87,3 +87,5 @@ Route::resource('warnings', 'WarningsController');
     Route::post('/admin/profile/changepassword','EmployeeController@cPassword')->name('cPassword');
 
     Route::post('/admin/employee/edit',"EmployeeController@empupdate")->name('empupdate');
+
+Route::get('/pdf/{bill}/{total}', 'BillsController@printBill')->name('pdf');

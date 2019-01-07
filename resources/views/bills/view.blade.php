@@ -7,7 +7,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Product</th>
-          <th scope="col">Price</th>
+          <th scope="col">Unit Price</th>
           <th scope="col">Amount</th>
           <th scope="col">Cost</th>
        </tr>
