@@ -49,7 +49,7 @@
                             <i class="ni ni-user-run"></i>
                             Logout
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf 
+                  @csrf
               </form>
             </a>
           </div>
@@ -153,7 +153,7 @@
                     onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf 
+                    @csrf
                 </form>
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
@@ -163,7 +163,7 @@
         </ul>
       </div>
     </nav>
-    
+
 @yield('content')
 
 </div>
