@@ -108,7 +108,7 @@ class BillsController extends Controller
         $request->session()->forget('cart');
         // $this->printBill($bill);
         return redirect()->route('pdf',['bill'=>$bill->id, 'total'=>$total]);
-        // return redirect()->route('bills.index');
+        // return redirect()->route('bills.show',['bill'=>$bill->id]);
     }
 
     public function printBill($bill_id, $total)

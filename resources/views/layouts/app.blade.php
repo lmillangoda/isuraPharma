@@ -117,13 +117,7 @@
   <footer class="footer has-cards">
     <div class="container container-lg">
     <div class="container">
-        <div class="row">
-            <div class="col">
-              <div class="card shadow border-0">
-                <div id="map-canvas" class="map-canvas" data-lat="7.0316" data-lng="79.9222" style="height: 400px;"></div>
-              </div>
-            </div>
-          </div>
+        
       <div class="row row-grid align-items-center my-md">
         <div class="col-lg-6">
           <h3 class="text-primary font-weight-light mb-2">Thank you for supporting us!</h3>

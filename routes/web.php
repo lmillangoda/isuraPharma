@@ -89,3 +89,5 @@ Route::resource('warnings', 'WarningsController');
     Route::post('/admin/employee/edit',"EmployeeController@empupdate")->name('empupdate');
 
 Route::get('/pdf/{bill}/{total}', 'BillsController@printBill')->name('pdf');
+
+Route::resource('messages', 'MessagesController');
