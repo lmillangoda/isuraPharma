@@ -21,7 +21,7 @@
     <center><div class="row">
       <div class="col-md-7">
         <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="{{URL::asset('assets/img/location.jpg')}}" alt="">
         </a>
       </div>
       <div class="col-md-5">
@@ -35,6 +35,7 @@
     <!-- /.row -->
     <hr>
     @endforeach
+
 
   </div>
   <!-- /.container -->

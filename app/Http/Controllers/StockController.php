@@ -40,8 +40,8 @@ class StockController extends Controller
         $role = $user->role_id;
        $branch = Branch::find($branch_id);
        $product = Product::find($product_id);
-       $amount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->value('amount');
-       return view('stock.create')->withBranch($branch)->withProduct($product)->with('amount',$amount)->with('role',$role);
+       $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]]);
+       return view('stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with(['amount',$stock->amount],['expDate',$stock->expDate]);
      }
 
      public function createBackup($branch_id, $product_id)
@@ -50,8 +50,8 @@ class StockController extends Controller
         $role = $user->role_id;
          $branch = Branch::find($branch_id);
          $product = Product::find($product_id);
-         $amount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',2]])->value('amount');
-         return view('backup_stock.create')->withBranch($branch)->withProduct($product)->with('amount',$amount)->with('role',$role);
+         $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',2]])->first();
+         return view('backup_stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with('amount',$stock->amount)->with('expDate',$stock->expDate);
      }
 
     /**
@@ -88,8 +88,9 @@ class StockController extends Controller
         $role = $user->role_id;
       $branch = Branch::find($branch_id);
       $product = Product::find($product_id);
-      $amount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->value('amount');
-      return view('stock.create')->withBranch($branch)->withProduct($product)->with('amount',$amount)->with('role',$role);
+      $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->first();
+      return view('stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with('amount',$stock->amount)->with('expDate',$stock->expDate);
+
     }
 
     /**

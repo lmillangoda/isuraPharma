@@ -31,7 +31,7 @@
         <input class="form-control" type="text" name="amount" value="">
         <br>
         <label for="expire">Expire Date : </label>
-        <input class="form-control" type="date" name="expire" value="">
+        <input class="form-control" type="date" name="expire" value="{{$expDate}}">
         <button form="form" class="btn btn-primary" formaction="{{action('StockController@update',['branch_id'=>$branch, 'product_id'=>$product])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="addBtn">Add to Stock</button>
         <button form="form" class="btn btn-warning" formaction="{{action('StockController@substract',['branch_id'=>$branch, 'product_id'=>$product])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="subBtn">Substract from Stock</button>
       </form>

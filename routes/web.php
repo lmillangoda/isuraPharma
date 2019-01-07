@@ -49,7 +49,8 @@
 
     Route::resource('employees', 'EmployeeController');
 
-    Route::resource('reports', 'ReportController');
+    Route::resource('reports', 'ReportsController');
+    Route::post('/reports/display', 'ReportsController@displayReport')->name('reports.display');
 
     //dash components
     Route::get('employeeReg',function(){
@@ -78,8 +79,13 @@ Route::delete('/stock/delete/backup/branch/{branch}/product/{product}', 'StockCo
     Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
     Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
 
+//warnings
+Route::resource('warnings', 'WarningsController');
+
     Route::get('/admin/profile','EmployeeController@profile')->name('aProfile');
 
     Route::post('/admin/profile/changepassword','EmployeeController@cPassword')->name('cPassword');
 
     Route::post('/admin/employee/edit',"EmployeeController@empupdate")->name('empupdate');
+
+Route::get('/pdf/{bill}/{total}', 'BillsController@printBill')->name('pdf');

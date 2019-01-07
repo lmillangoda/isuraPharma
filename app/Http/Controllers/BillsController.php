@@ -9,6 +9,9 @@ use App\Branch;
 use App\Role;
 use App\Product;
 use App\Bill;
+use PDF;
+
+// set_time_limit(300);
 
 class BillsController extends Controller
 {
@@ -17,7 +20,7 @@ class BillsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function __construct()
     {
         $this->middleware('auth:web');
@@ -34,8 +37,10 @@ class BillsController extends Controller
   }
     public function index()
     {
-      if($this->checkRole()){ 
+      if($this->checkRole()){
+        $bills = Bill::all();
 
+        return view('bills.index')->withBills($bills);
       }else{
 
      return redirect()->route('home');}
@@ -66,7 +71,9 @@ class BillsController extends Controller
       // echo(DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount'));
         // dd($request);
         $products = array();
+        $total = 0;
         foreach ($request->session()->get('cart') as $product_id => $properties) {
+          $total+=$properties[1];
           $product = Product::find($product_id);
           $amount = $properties[0];
           $cost = $properties[1];
@@ -101,8 +108,22 @@ class BillsController extends Controller
 
         //clear the cart
         $request->session()->forget('cart');
+        // $this->printBill($bill);
+        return redirect()->route('pdf',['bill'=>$bill->id, 'total'=>$total]);
+        // return redirect()->route('bills.index');
+    }
 
-        return redirect()->route('bills.create');
+    public function printBill($bill_id, $total)
+    {
+      $bill = Bill::find($bill_id);
+      $products = $bill->products;
+      $data = array(
+        'bill' => $bill,
+        'products' => $products,
+        'total' => $total
+      );
+      $pdf = PDF::loadView('pdf.invoice',$data);
+      return $pdf->download('invoice.pdf');
     }
 
     /**
@@ -113,7 +134,10 @@ class BillsController extends Controller
      */
     public function show($id)
     {
-        //
+      $bill = Bill::find($id);
+      $products = $bill->products;
+
+        return view('bills.view')->withBill($bill)->withProducts($products);
     }
 
     /**
