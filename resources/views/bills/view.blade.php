@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+  <div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
+    <div class="container-fluid">
+      <div class="header-body">
+
+      </div>
+    </div>
+  </div>
+  <br>
+
   <div class="container">
     <table class="table align-items-center table-dark table-flush">
       <thead class="thead-dark">
