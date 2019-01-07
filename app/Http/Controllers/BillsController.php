@@ -9,6 +9,9 @@ use App\Branch;
 use App\Role;
 use App\Product;
 use App\Bill;
+use PDF;
+
+// set_time_limit(300);
 
 class BillsController extends Controller
 {
@@ -66,7 +69,9 @@ class BillsController extends Controller
       // echo(DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount'));
         // dd($request);
         $products = array();
+        $total = 0;
         foreach ($request->session()->get('cart') as $product_id => $properties) {
+          $total+=$properties[1];
           $product = Product::find($product_id);
           $amount = $properties[0];
           $cost = $properties[1];
@@ -101,8 +106,22 @@ class BillsController extends Controller
 
         //clear the cart
         $request->session()->forget('cart');
+        // $this->printBill($bill);
+        return redirect()->route('pdf',['bill'=>$bill->id, 'total'=>$total]);
+        // return redirect()->route('bills.index');
+    }
 
-        return redirect()->route('bills.index');
+    public function printBill($bill_id, $total)
+    {
+      $bill = Bill::find($bill_id);
+      $products = $bill->products;
+      $data = array(
+        'bill' => $bill,
+        'products' => $products,
+        'total' => $total
+      );
+      $pdf = PDF::loadView('pdf.invoice',$data);
+      return $pdf->download('invoice.pdf');
     }
 
     /**
