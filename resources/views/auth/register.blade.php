@@ -185,7 +185,7 @@
                               </div>
                             </div>
                       <div class="pl-lg-4">
-                          <center><button class="btn btn-primary" type="submit">Register</button></center>
+                          <center><button id="register" class="btn btn-primary" type="submit">Register</button></center>
                           </div>
 
                           <center><div>
