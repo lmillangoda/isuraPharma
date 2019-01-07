@@ -35,11 +35,13 @@ class EmployeeController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         if($this->checkRole()){ 
         $pharmacist = User::where('role_id',1)->get();
         $cashier = User::where('role_id',2)->get();
         $branch = Branch::all();
-        return view('employees.index',compact('pharmacist','cashier','branch'));
+        return view('employees.index',compact('pharmacist','cashier','branch','role'));
         }else{
             return redirect()->route('home');}
 
@@ -53,8 +55,10 @@ class EmployeeController extends Controller
     public function create()
     {
         if($this->checkRole()){
+            $user = Auth::user();
+            $role = $user->role_id;
             $branch = Branch::all();
-            return view('employees.create',compact('branch'));
+            return view('employees.create',compact('branch','role'));
          }else{
             return redirect()->route('home');}
 
@@ -91,9 +95,11 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         if($this->checkRole()){
+            $user = Auth::user();
+            $role = $user->role_id;
             $branch = Branch::all();
             $employee = User::find($id);
-            return view('employees.create',compact('employee','branch'));
+            return view('employees.create',compact('employee','branch','role'));
          }else{
             return redirect()->route('home');}
 
@@ -167,8 +173,6 @@ class EmployeeController extends Controller
         $user = Auth::user();
         $role = $user->role_id;
         if($role != 3){
-            $user = Auth::user();
-            $role = $user->role_ID;
             return view('admin_profile.profile',compact('user','role'));
          }else{
             return redirect()->route('home');

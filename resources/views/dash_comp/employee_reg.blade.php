@@ -37,9 +37,9 @@
                         <label style = "color:black;" class="form-control-label" for="input-email">Email address</label>
                         
                         @if(isset($employee))
-                        <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $employee->email}}" placeholder ="example@123.com" required>
+                        <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $employee->email}}" placeholder ="example@123.com" required autofocus>
                         @else
-                        <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="example@123.com" required>
+                        <input id="input-email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="example@123.com" required autofocus>
                         @endif
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">

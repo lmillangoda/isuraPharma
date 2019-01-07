@@ -91,34 +91,40 @@
               <i class="ni ni-bag-17 text-orange"></i> Products
             </a>
           </li>
-
+          @if($role == 4 || $role == 1)
             <li class="nav-item">
                 <a class="nav-link" href="/branches">
                   <i class="ni ni-building text-orange"></i> Branches
                 </a>
               </li>
-
+              @endif
+              @if($role == 4 || $role == 1)
               <li class="nav-item">
                   <a class="nav-link" href="/suppliers">
                     <i class="ni ni-ambulance text-orange"></i> Suppliers
                   </a>
                 </li>
-
+                @endif
+                @if($role == 4)
                 <li class="nav-item">
                     <a class="nav-link" href="/employees">
                       <i class="ni ni-ambulance text-orange"></i> Employees
                     </a>
                   </li>
+                  @endif
+                  @if($role == 4)
+                  <li class="nav-item">
+                      <a class="nav-link" href="/reports">
+                        <i class="ni ni-money-coins text-orange"></i> Reports
+                      </a>
+                    </li>
+                    @endif
                   <li class="nav-item">
                       <a class="nav-link" href="/bills/create">
                         <i class="ni ni-money-coins text-orange"></i> Billing
                       </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/reports">
-                          <i class="ni ni-money-coins text-orange"></i> Reports
-                        </a>
-                      </li>
+
         </ul>
       </div>
     </div>

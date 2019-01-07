@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -19,7 +19,9 @@ class ReportController extends Controller
     
     public function index()
     {
-        return view('report.report');
+        $user = Auth::user();
+        $role = $user->role_id;
+        return view('report.report',compact('role'));
     }
 
     /**

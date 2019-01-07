@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Branch;
 use App\Stock;
 use DB;
@@ -18,11 +19,13 @@ class BranchesController extends Controller
     {
         $this->middleware('auth:web');
     }
-    
+
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $branches = Branch::all();
-        return view('branches.index')->withBranches($branches);
+        return view('branches.index')->withBranches($branches)->with('role',$role);
     }
 
     /**
@@ -32,7 +35,9 @@ class BranchesController extends Controller
      */
     public function create()
     {
-      return view('branches.create');
+        $user = Auth::user();
+        $role = $user->role_id;
+      return view('branches.create',compact('role'));
     }
 
     /**
@@ -70,17 +75,18 @@ class BranchesController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $branch = Branch::find($id);
         $main_products = $branch->main_products;
         $backup_products = $branch->backup_products;
         $products = $branch->products;
         // dd($products);
-        return view('branches.view')
+        return view('branches.view',compact("role"))
           ->withBranch($branch)
           ->withProducts($products)
           ->with('main_products', $main_products)
           ->with('backup_products', $backup_products);
-          // ->with('total_stock', $total_stock);
     }
 
     /**

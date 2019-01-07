@@ -48,8 +48,10 @@ class BillsController extends Controller
      */
     public function create()
     {
+      $user = Auth::user();
+      $role = $user->role_id;
       $products = Product::all();
-        return view('bills.create')->withProducts($products);
+        return view('bills.create',compact('role'))->withProducts($products);
       // echo DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Supplier;
@@ -24,8 +24,10 @@ class ProductsController extends Controller
     
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $products = Product::all();
-        return view('products.index')->withProducts($products);
+        return view('products.index')->withProducts($products)->with('role',$role);
     }
 
     /**
@@ -35,8 +37,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $suppliers = Supplier::all();
-        return view('products.create')->withSuppliers($suppliers);
+        return view('products.create')->withSuppliers($suppliers)->with('role',$role);
     }
 
     /**
@@ -85,10 +89,12 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $product = Product::find($id);
         $suppliers = $product->suppliers;
         $branches = $product->branches;
-        return view('products.view')->withProduct($product)->withSuppliers($suppliers)->withBranches($branches);
+        return view('products.view')->withProduct($product)->withSuppliers($suppliers)->withBranches($branches)->with('role',$role);
     }
 
     /**
@@ -99,9 +105,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $product = Product::find($id);
         $suppliers = Supplier::all();
-        return view('products.create')->withProduct($product)->withSuppliers($suppliers);
+        return view('products.create')->withProduct($product)->withSuppliers($suppliers)->with('role',$role);
     }
 
     /**

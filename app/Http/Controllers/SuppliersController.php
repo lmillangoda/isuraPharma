@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use DB;
-
+use Illuminate\Support\Facades\Auth;
 class SuppliersController extends Controller
 {
     /**
@@ -21,8 +21,10 @@ class SuppliersController extends Controller
     
     public function index()
     {
+        $user = Auth::user();
+        $role = $user->role_id;
       $suppliers = Supplier::all();
-      return view('suppliers.index')->withSuppliers($suppliers);
+      return view('suppliers.index')->withSuppliers($suppliers)->with('role',$role);
     }
 
     /**
@@ -32,7 +34,9 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        return view('suppliers.create');
+        $user = Auth::user();
+        $role = $user->role_id;
+        return view('suppliers.create',compact('role'));
     }
 
     /**
@@ -77,8 +81,10 @@ class SuppliersController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         $supplier = Supplier::find($id);
-        return view('suppliers.create')->with('supplier', $supplier);
+        return view('suppliers.create')->with('supplier', $supplier)->with('role',$role);
     }
 
     /**

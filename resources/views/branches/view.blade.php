@@ -33,7 +33,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @for($i=0; $i<sizeof($main_products); $i++)
+                    @for($i=0; $i<(sizeof($main_products)); $i++)
                     
                       <tr>
                       <td>{{$main_products[$i]->id}}</td>
