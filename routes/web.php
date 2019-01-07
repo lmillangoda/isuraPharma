@@ -49,7 +49,8 @@
 
     Route::resource('employees', 'EmployeeController');
 
-    Route::resource('reports', 'ReportController');
+    Route::resource('reports', 'ReportsController');
+    Route::post('/reports/display', 'ReportsController@displayReport')->name('reports.display');
 
     //dash components
     Route::get('employeeReg',function(){
