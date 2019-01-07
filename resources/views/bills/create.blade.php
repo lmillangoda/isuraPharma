@@ -24,7 +24,7 @@
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Cost</th>
                  </tr>
                   </thead>
                 <tbody id="bill-table-body">
@@ -64,6 +64,9 @@
 
         </form>
         </div>
+      </div>
+      <div class="">
+        <a href="{{route('bills.index')}}" class="btn btn-primary">View Bills</a>
       </div>
     </div>
       </div>
