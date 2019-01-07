@@ -7,14 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Admin Dashboard</title>
 
-<<<<<<< HEAD
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <!-- Icons -->
-  <link href="{{URL::asset('assets-dash/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
-  <link href="{{URL::asset('assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-  <!-- Argon CSS -->
-  <link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0')}}" rel ="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<!-- Icons -->
+<link href="{{URL::asset('assets-dash/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets-dash/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+<!-- Argon CSS -->
+<link type="text/css" href="{{URL::asset('assets-dash/css/argon.css?v=1.0.0" rel=')}}" rel ="stylesheet">
 </head>
 
 <body>
@@ -65,7 +64,6 @@
               <a href="admin">
                 <img src="{{URL::asset('assets-dash/img/theme/isura.jpg')}}">
               </a>
-
             </div>
             <div class="col-6 collapse-close">
               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
@@ -121,24 +119,6 @@
                           <i class="ni ni-money-coins text-orange"></i> Reports
                         </a>
                       </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="/warnings">
-                                <i class="ni ni-money-coins text-orange"></i> Warnings
-                                <span class="badge badge-warning"> 4 </span>
-                              </a>
-                            </li>
-        </ul>
-        <!-- Divider -->
-        <hr class="my-3">
-        <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Documentation</h6>
-        <!-- Navigation -->
-        <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ni ni-spaceship"></i> Getting started
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -183,6 +163,7 @@
         </ul>
       </div>
     </nav>
+
 @yield('content')
 
 </div>

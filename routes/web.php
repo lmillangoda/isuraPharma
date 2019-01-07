@@ -79,11 +79,9 @@ Route::delete('/stock/delete/backup/branch/{branch}/product/{product}', 'StockCo
     Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
     Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
 
-
-Route::get('/admin/profile','AdminController@profile')->name('aProfile');
-
 //warnings
 Route::resource('warnings', 'WarningsController');
+
     Route::get('/admin/profile','EmployeeController@profile')->name('aProfile');
 
     Route::post('/admin/profile/changepassword','EmployeeController@cPassword')->name('cPassword');
