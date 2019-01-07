@@ -14,7 +14,7 @@
                     <div class="col-lg-12">
                       <div class="form-group">
                         <label class="form-control-label" for="email">Email address</label>
-                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="E-Mail" required>
+                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder ="E-Mail" required autofocus>
 
     
                                 @if ($errors->has('email'))

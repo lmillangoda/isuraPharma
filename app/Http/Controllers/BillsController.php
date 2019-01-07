@@ -23,9 +23,22 @@ class BillsController extends Controller
         $this->middleware('auth:web');
     }
 
+    public function checkRole(){
+      $user = Auth::user();
+      $role = $user->role_id;
+      if($role != 3){
+          return true;
+      }else{
+          false;
+      }
+  }
     public function index()
     {
-        //
+      if($this->checkRole()){ 
+
+      }else{
+
+     return redirect()->route('home');}
     }
 
     /**
@@ -86,6 +99,8 @@ class BillsController extends Controller
 
         //clear the cart
         $request->session()->forget('cart');
+
+        return redirect()->route('bills.create');
     }
 
     /**

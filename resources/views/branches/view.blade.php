@@ -10,9 +10,9 @@
 </div>
 
 <!-- Stock Details -->
-<div class="stock container">
+<div class="stock container col-12">
     <div class="row mt-5">
-        <div class="col">
+        <div class="col-12">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
               <h3 class="text-white mb-0">{{$branch->town}} Branch - Products</h3>
@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     @for($i=0; $i<sizeof($main_products); $i++)
-                    {
+                    
                       <tr>
                       <td>{{$main_products[$i]->id}}</td>
                       <td>{{$main_products[$i]->medicalName}}</td>
@@ -46,13 +46,13 @@
                       <td>{{$main_products[$i]->pivot->updated_at}}</td>
                       <td>{{$backup_products[$i]->pivot->updated_at}}</td>
                         <td>
-                          <a class="btn btn-primary "href="{{route('backup_stock.create',['branch'=>$branch, 'product'=>$main_products[$i]])}}">Update Backup Stock</a>
+                          <a class="btn btn-sm btn-primary "href="{{route('backup_stock.create',['branch'=>$branch, 'product'=>$main_products[$i]])}}">Update Backup Stock</a>
                         </td>
                         <td>
-                          <a class="btn btn-primary" href="{{route('stock.edit',['branch'=>$branch, 'product'=>$main_products[$i]])}}">Update Main Stock</a>
+                          <a class="btn btn-sm btn-primary" href="{{route('stock.edit',['branch'=>$branch, 'product'=>$main_products[$i]])}}">Update Main Stock</a>
                         </td>
                       </tr>
-                    }
+                    
                   @endfor
               </tbody>
                 </table>

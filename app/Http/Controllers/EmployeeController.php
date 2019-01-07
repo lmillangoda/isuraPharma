@@ -23,12 +23,26 @@ class EmployeeController extends Controller
         $this->middleware('auth:web');
     }
 
+    public function checkRole(){
+        $user = Auth::user();
+        $role = $user->role_id;
+        if($role == 4){
+            return true;
+        }else{
+            false;
+        }
+    }
+
     public function index()
     {
+        if($this->checkRole()){ 
         $pharmacist = User::where('role_id',1)->get();
         $cashier = User::where('role_id',2)->get();
         $branch = Branch::all();
         return view('employees.index',compact('pharmacist','cashier','branch'));
+        }else{
+            return redirect()->route('home');}
+
     }
 
     /**
@@ -38,8 +52,12 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $branch = Branch::all();
-        return view('employees.create',compact('branch'));
+        if($this->checkRole()){
+            $branch = Branch::all();
+            return view('employees.create',compact('branch'));
+         }else{
+            return redirect()->route('home');}
+
     }
 
     /**
@@ -72,9 +90,13 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $branch = Branch::all();
-        $employee = User::find($id);
-        return view('employees.create',compact('employee','branch'));
+        if($this->checkRole()){
+            $branch = Branch::all();
+            $employee = User::find($id);
+            return view('employees.create',compact('employee','branch'));
+         }else{
+            return redirect()->route('home');}
+
     }
 
     /**
@@ -91,32 +113,36 @@ class EmployeeController extends Controller
 
     public function empupdate(Request $request)
     {
-        $this->validate($request, [
-            'fname' => 'required|string|max:255',
-            'mname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'tel' => 'required|string|min:10|max:10',
-            'hno' => 'required|string|max:255',
-            'town' => 'required|string|max:255',
-        ]);
-            $user = User::where('id',$request->id)->first();
-
-                $user->fName = $request['fname'];
-                $user->mname = $request['mname'];
-                $user->lname = $request['lname'];
-                $user->hNo = $request['hno'];
-                $user->add1 = $request['line1'];
-                $user->add2 = $request['line2'];
-                $user->town = $request['town'];
-                $user->tel = $request['tel'];
-                $user->email = $request['email'];
-                $user->branch_id = $request['branch'];
-                $user->role_id = $request['role'];
-
-                $user->save();
-            
-            return redirect()->action('EmployeeController@index');
+        if($this->checkRole()){
+            $this->validate($request, [
+                'fname' => 'required|string|max:255',
+                'mname' => 'required|string|max:255',
+                'lname' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255',
+                'tel' => 'required|string|min:10|max:10',
+                'hno' => 'required|string|max:255',
+                'town' => 'required|string|max:255',
+            ]);
+                $user = User::where('id',$request->id)->first();
+    
+                    $user->fName = $request['fname'];
+                    $user->mname = $request['mname'];
+                    $user->lname = $request['lname'];
+                    $user->hNo = $request['hno'];
+                    $user->add1 = $request['line1'];
+                    $user->add2 = $request['line2'];
+                    $user->town = $request['town'];
+                    $user->tel = $request['tel'];
+                    $user->email = $request['email'];
+                    $user->branch_id = $request['branch'];
+                    $user->role_id = $request['role'];
+    
+                    $user->save();
+                
+                return redirect()->action('EmployeeController@index');
+         }else{
+            return redirect()->route('home');}
+       
     }
 
     /**
@@ -127,26 +153,38 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('employees.index');
+        if($this->checkRole()){ 
+            User::find($id)->delete();
+            return redirect()->route('employees.index');
+        }else{
+            return redirect()->route('home');}
+      
     }
    
-    protected function validator(request $request)
-    {
-        return Validator::make($request, [
-            'old_password' => ['required','string','min:6'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
-    }
+
     protected function profile()
     {
         $user = Auth::user();
-        $role = $user->role_ID;
-        return view('admin_profile.profile',compact('user','role'));
+        $role = $user->role_id;
+        if($role != 3){
+            $user = Auth::user();
+            $role = $user->role_ID;
+            return view('admin_profile.profile',compact('user','role'));
+         }else{
+            return redirect()->route('home');
+        
     }
+}
 
     public function cPassword(request $request)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
+        if($role != 3){
+            $this->validate($request, [
+                'old_password' => 'required|string|min:6',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
         $user = Auth::user();
         $old_pass = $user->password;
         $new_pass =  Hash::make($request['password']);
@@ -155,10 +193,16 @@ class EmployeeController extends Controller
             $user->save();
             $user = Auth::user();
             $role = $user->role_ID;
+ 
             return view('admin_profile.profile',compact('user','role'));
         }else{
             return "Password Change Failed"; 
         }
+    }else{
+        return redirect()->route('home');
     }
+    }
+
+
 
 }

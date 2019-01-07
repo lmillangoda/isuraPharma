@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Supplier;
+use App\Bill;
+use Carbon\Carbon;
+use App\Product;
+
 class AdminController extends Controller
 {
     /**
@@ -25,8 +30,18 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('dashboards.admin');
-    }
+        $user = Auth::user();
+        $role = $user->role_id;
+
+        if($role == 1||$role == 2||$role == 4){
+            $customers = User::where('role_id',3)->get()->count();
+            $suppliers = Supplier::all()->count();
+            $day = Carbon::today();
+            $daily_sale = Bill::whereRaw('DATE(created_at) = ?', [$day])->get()->count();
+            }
+            return view('dashboards.admin',compact('customers','suppliers','daily_sale','role'));
+        }
+
 
 
     /**

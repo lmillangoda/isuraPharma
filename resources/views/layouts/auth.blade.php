@@ -20,7 +20,7 @@
 
 <body class="login-page sidebar-collapse">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="50">
+  <nav class="navbar navbar-expand-lg bg-default fixed-top navbar-transparent " color-on-scroll="50">
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="/" rel="tooltip" title="Welcome" data-placement="bottom">

@@ -16,7 +16,7 @@
       <div id="product-row" class="row">
 
         </div>
-</div>
+</div> 
 
 @endsection
 
