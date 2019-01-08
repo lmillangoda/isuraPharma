@@ -1,12 +1,14 @@
 @extends('layouts.admin')
 @section('content')
-<div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
-    <div class="container-fluid">
-      <div class="header-body">
 
-      </div>
+<div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
+  <div class="container-fluid">
+    <div class="header-body">
+       
     </div>
   </div>
+</div>
+
 
   <div class="container-fluid">
       <div class="row mt-5">
@@ -64,9 +66,6 @@
 
         </form>
         </div>
-      </div>
-      <div class="">
-        <a href="{{route('bills.index')}}" class="btn btn-primary">View Bills</a>
       </div>
     </div>
       </div>

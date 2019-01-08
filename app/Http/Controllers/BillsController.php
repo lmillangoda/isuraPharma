@@ -26,24 +26,13 @@ class BillsController extends Controller
         $this->middleware('auth:web');
     }
 
-    public function checkRole(){
-      $user = Auth::user();
-      $role = $user->role_id;
-      if($role != 3){
-          return true;
-      }else{
-          false;
-      }
-  }
     public function index()
     {
-      if($this->checkRole()){
+        $user = Auth::user();
+        $role = $user->role_id;
         $bills = Bill::all();
 
-        return view('bills.index')->withBills($bills);
-      }else{
-
-     return redirect()->route('home');}
+        return view('bills.index',compact('role'))->withBills($bills); 
     }
 
     /**
@@ -56,7 +45,7 @@ class BillsController extends Controller
       $user = Auth::user();
       $role = $user->role_id;
       $products = Product::all();
-        return view('bills.create',compact('role'))->withProducts($products);
+      return view('bills.create',compact('role'))->withProducts($products);
       // echo DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
     }
 
@@ -115,6 +104,8 @@ class BillsController extends Controller
 
     public function printBill($bill_id, $total)
     {
+      $user = Auth::user();
+      $role = $user->role_id;
       $bill = Bill::find($bill_id);
       $products = $bill->products;
       $data = array(
@@ -134,10 +125,11 @@ class BillsController extends Controller
      */
     public function show($id)
     {
+      $user = Auth::user();
+      $role = $user->role_id;
       $bill = Bill::find($id);
       $products = $bill->products;
-
-        return view('bills.view')->withBill($bill)->withProducts($products);
+        return view('bills.view')->with('role',$role)->withBill($bill)->withProducts($products);
     }
 
     /**

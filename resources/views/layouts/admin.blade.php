@@ -76,6 +76,7 @@
 
         <!-- Navigation -->
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <a class="nav-link" href="/admin">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
@@ -86,25 +87,38 @@
                 <i class="ni ni-circle-08 text-orange"></i> Profile
               </a>
             </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/products">
               <i class="ni ni-bag-17 text-orange"></i> Products
             </a>
           </li>
-          @if($role == 4 || $role == 1)
-            <li class="nav-item">
-                <a class="nav-link" href="/branches">
-                  <i class="ni ni-building text-orange"></i> Branches
-                </a>
-              </li>
-              @endif
-              @if($role == 4 || $role == 1)
-              <li class="nav-item">
-                  <a class="nav-link" href="/suppliers">
-                    <i class="ni ni-ambulance text-orange"></i> Suppliers
-                  </a>
-                </li>
-                @endif
+
+                  @if($role == 4 || $role == 1)
+                  <li class="nav-item">
+                      <a class="nav-link" href="/branches">
+                        <i class="ni ni-building text-orange"></i> Branches
+                      </a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/suppliers">
+                        <i class="ni ni-ambulance text-orange"></i> Suppliers
+                      </a>
+                    </li>
+                    @if($role == 4)
+                  <li class="nav-item">
+                      <a class="nav-link" href="/reports">
+                        <i class="ni ni-money-coins text-orange"></i> Reports
+                      </a>
+                    </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="/warnings">
+                          <i class="ni ni-money-coins text-orange"></i> Warnings
+                        </a>
+                      </li>
+                    @endif
+                    
                 @if($role == 4)
                 <li class="nav-item">
                     <a class="nav-link" href="/employees">
@@ -112,28 +126,21 @@
                     </a>
                   </li>
                   @endif
+
                   @if($role == 4)
                   <li class="nav-item">
-                      <a class="nav-link" href="/reports">
-                        <i class="ni ni-money-coins text-orange"></i> Reports
+                      <a class="nav-link" href="{{route('bills.index')}}">
+                        <i class="ni ni-money-coins text-orange"></i> Bills
                       </a>
                     </li>
-                    @endif
+                  @endif
+                  @if($role == 1 ||$role == 2)
                   <li class="nav-item">
                       <a class="nav-link" href="/bills/create">
                         <i class="ni ni-money-coins text-orange"></i> Billing
                       </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/reports">
-                          <i class="ni ni-money-coins text-orange"></i> Reports
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/warnings">
-                            <i class="ni ni-money-coins text-orange"></i> Warnings
-                          </a>
-                        </li>
+              @endif
         </ul>
       </div>
     </div>

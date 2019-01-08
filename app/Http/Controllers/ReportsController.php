@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Bill;
 use App\Branch;
 use App\Product;
@@ -23,7 +24,9 @@ class ReportsController extends Controller
 
     public function index()
     {
-        return view('report.report');
+      $user = Auth::user();
+      $role = $user->role_id;
+      return view('report.report',compact('role'));
 
 
     }
