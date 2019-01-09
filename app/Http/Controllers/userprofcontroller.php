@@ -16,6 +16,7 @@ class userprofcontroller extends Controller
     {
         $this->middleware('auth:web');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,15 +26,15 @@ class userprofcontroller extends Controller
     {
         $user2 = Auth::user();
         $id = 0;
-        $user = propic::where('id',$user2->id)->first();
-        if(is_null($user)){
-        $user = propic::where('id',$id)->first();
+        $user = propic::where('id', $user2->id)->first();
+        if (is_null($user)) {
+            $user = propic::where('id', $id)->first();
         }
-        if(is_null($user)){
-            return view('pages.propic',compact('user','user2'));
+        if (is_null($user)) {
+            return view('pages.propic', compact('user', 'user2'));
         }
-        return view("pages.propic",compact('user','user2'));
-        }
+        return view("pages.propic", compact('user', 'user2'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -48,72 +49,72 @@ class userprofcontroller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $user2 = Auth::user();
         $id = $user2->id;
-        $test = propic::where('id',$id)->first();
-        
-        
-            if(is_null($test)){
-                $user = new propic;  
-            }
-            if(!is_null($test)){
-                $user = propic::where('id',$id)->first();
-            }
-            $pic = $request->image;
-            if(!is_null($pic)){   
-                $file = Input::file('image');
-                $file->move(public_path().'/assets/img',$request->image->getClientOriginalName());
-                $user->name = $request->image->getClientOriginalName();
-                $user->id = $user2->id ;
-                $user->save();
-            }
-            $Nme = Input::get('input-name');
-           if(!is_null($Nme)){
+        $test = propic::where('id', $id)->first();
+
+
+        if (is_null($test)) {
+            $user = new propic;
+        }
+        if (!is_null($test)) {
+            $user = propic::where('id', $id)->first();
+        }
+        $pic = $request->image;
+        if (!is_null($pic)) {
+            $file = Input::file('image');
+            $file->move(public_path() . '/assets/img', $request->image->getClientOriginalName());
+            $user->name = $request->image->getClientOriginalName();
+            $user->id = $user2->id;
+            $user->save();
+        }
+        $Nme = Input::get('input-name');
+        if (!is_null($Nme)) {
             $user2->name = $Nme;
-           }
-           $Eml = Input::get('input-email');
-           if(!is_null($Eml)){
+        }
+        $Eml = Input::get('input-email');
+        if (!is_null($Eml)) {
             $user2->email = $Eml;
-           }
-           $tel =  Input::get('input-telno');
-           if(!is_null($tel)){
+        }
+        $tel = Input::get('input-telno');
+        if (!is_null($tel)) {
             $user2->tel_no = $tel;
-           }
-        
+        }
+
         $user2->save();
         return redirect()->route('propic');
-        } 
-    
-       
+    }
+
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function profile()
     {
         $user2 = Auth::user();
         $id = 0;
-        $user = propic::where('id',$user2->id)->first();
-        if(is_null($user)){
-        $user = propic::where('id',$id)->first();
+        $user = propic::where('id', $user2->id)->first();
+        if (is_null($user)) {
+            $user = propic::where('id', $id)->first();
         }
-        if(is_null($user)){
-            return view('pages.profile',compact('user','user2'));
+        if (is_null($user)) {
+            return view('pages.profile', compact('user', 'user2'));
         }
-        return view("pages.profile",compact('user','user2'));
-        }
+        return view("pages.profile", compact('user', 'user2'));
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -124,8 +125,8 @@ class userprofcontroller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -136,7 +137,7 @@ class userprofcontroller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

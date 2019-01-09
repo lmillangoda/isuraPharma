@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Product;
@@ -14,28 +15,48 @@ class WarningsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+
+    public function checkRole()
     {
         $user = Auth::user();
         $role = $user->role_id;
-      $products = Product::all();
-      $branches = Branch::all();
-      //reorder level warnings
-      $warnings = array();
-      foreach ($products as $product) {
-        foreach ($branches as $branch) {
-          $backup_stock = DB::table('stock')->where([['branch_id',$branch->id],['product_id',$product->id],['batch',2]])->value('amount');
-          $available_stock = DB::table('stock')->where([['branch_id',$branch->id],['product_id',$product->id],['batch',1]])->first();
-          if($backup_stock==0 && $product->reorder_level > $available_stock->amount)
-          {
-            $warnings[] = array('product' => $product, 'branch' => $branch, 'available' => $available_stock->amount);
-          }
+        if ($role == 4 || $role == 1) {
+            return true;
+        } else {
+            false;
+        }
+    }
+
+    public function index()
+    {
+        if ($this->checkRole()) {
+            $user = Auth::user();
+            $role = $user->role_id;
+            $products = Product::all();
+            $branches = Branch::all();
+            //reorder level warnings
+            $warnings = array();
+            foreach ($products as $product) {
+                foreach ($branches as $branch) {
+                    $backup_stock = DB::table('stock')->where([['branch_id', $branch->id], ['product_id', $product->id], ['batch', 2]])->value('amount');
+                    $available_stock = DB::table('stock')->where([['branch_id', $branch->id], ['product_id', $product->id], ['batch', 1]])->first();
+                    if ($backup_stock == 0 && $product->reorder_level > $available_stock->amount) {
+                        $warnings[] = array('product' => $product, 'branch' => $branch, 'available' => $available_stock->amount);
+                    }
+                }
+
+            }
+
+            // print_r ($warnings);
+            return view('warnings.index', compact('role'))->with('warnings', $warnings);
+        } else {
+            return redirect()->route('home');
         }
 
-      }
-
-      // print_r ($warnings);
-      return view('warnings.index',compact('role'))->with('warnings',$warnings);
     }
 
     /**
@@ -51,7 +72,7 @@ class WarningsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,7 +83,7 @@ class WarningsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,7 +94,7 @@ class WarningsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,8 +105,8 @@ class WarningsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +117,7 @@ class WarningsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

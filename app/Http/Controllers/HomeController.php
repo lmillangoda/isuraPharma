@@ -27,11 +27,11 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $role = $user->role_id;
-        if($role == 3){
+        if ($role == 3) {
             $products = Product::all();
-            return view('welcome',compact('products',compact('role')));
-        }else
+            return view('welcome', compact('products', compact('role')));
+        } else
             return redirect()->route('admin');
-        }
     }
+}
 

@@ -63,9 +63,9 @@
                 <h3>Cashier : {{$bill->cashier->fName}}</h3>
                 <pre>
 
-<br /><br />
+<br/><br/>
 Timestamp: {{$bill->created_at}}
-Payment: Cash
+                    Payment: Cash
 </pre>
 
 
@@ -94,23 +94,23 @@ Payment: Cash
     <table width="100%">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Product</th>
-          <th scope="col">Price</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Cost</th>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Cost</th>
         </tr>
         </thead>
         <tbody>
-          @foreach($products as $product)
-          <tr>
-            <td>{{$product->id}}</td>
-            <td>{{$product->medicalName}}</td>
-            <td>{{$product->price}}</td>
-            <td>{{$product->pivot->amount}}</td>
-            <td>{{$product->pivot->cost}}</td>
-        </tr>
-          @endforeach
+        @foreach($products as $product)
+            <tr>
+                <td>{{$product->id}}</td>
+                <td>{{$product->medicalName}}</td>
+                <td>{{$product->price}}</td>
+                <td>{{$product->pivot->amount}}</td>
+                <td>{{$product->pivot->cost}}</td>
+            </tr>
+        @endforeach
         </tbody>
 
         <tfoot>

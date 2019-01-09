@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Supplier;
 use DB;
 use Illuminate\Support\Facades\Auth;
+
 class SuppliersController extends Controller
 {
     /**
@@ -18,13 +19,29 @@ class SuppliersController extends Controller
     {
         $this->middleware('auth:web');
     }
-    
-    public function index()
+
+    public function checkRole()
     {
         $user = Auth::user();
         $role = $user->role_id;
-      $suppliers = Supplier::all();
-      return view('suppliers.index')->withSuppliers($suppliers)->with('role',$role);
+        if ($role == 4 || $role == 1) {
+            return true;
+        } else {
+            false;
+        }
+    }
+
+    public function index()
+    {
+        if ($this->checkRole()) {
+            $user = Auth::user();
+            $role = $user->role_id;
+            $suppliers = Supplier::all();
+            return view('suppliers.index')->withSuppliers($suppliers)->with('role', $role);
+        } else {
+            return redirect()->route('home');
+        }
+
     }
 
     /**
@@ -34,38 +51,48 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $role = $user->role_id;
-        return view('suppliers.create',compact('role'));
+        if ($this->checkRole()) {
+            $user = Auth::user();
+            $role = $user->role_id;
+            return view('suppliers.create', compact('role'));
+        } else {
+            return redirect()->route('home');
+        }
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-      $this->validate($request, [
-        'name' => 'required',
-        'email' => 'required',
-        'telephone' => 'required',
-      ]);
+        if ($this->checkRole()) {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'telephone' => 'required',
+            ]);
 
-      $supplier = new Supplier;
-      $supplier->name = $request->Input('name');
-      $supplier->email = $request->Input('email');
-      $supplier->telephone = $request->Input('telephone');
-      $supplier->save();
+            $supplier = new Supplier;
+            $supplier->name = $request->Input('name');
+            $supplier->email = $request->Input('email');
+            $supplier->telephone = $request->Input('telephone');
+            $supplier->save();
 
-      return redirect('/suppliers')->with('success', 'Supplier Details Added Successfully!');
+            return redirect('/suppliers')->with('success', 'Supplier Details Added Successfully!');
+        } else {
+            return redirect()->route('home');
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -76,51 +103,66 @@ class SuppliersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user = Auth::user();
-        $role = $user->role_id;
-        $supplier = Supplier::find($id);
-        return view('suppliers.create')->with('supplier', $supplier)->with('role',$role);
+        if ($this->checkRole()) {
+            $user = Auth::user();
+            $role = $user->role_id;
+            $supplier = Supplier::find($id);
+            return view('suppliers.create')->with('supplier', $supplier)->with('role', $role);
+        } else {
+            return redirect()->route('home');
+        }
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $supplier = Supplier::find($id);
-        $this->validate($request, [
-          'name' => 'required',
-          'email' => 'required',
-          'telephone' => 'required',
-        ]);
+        if ($this->checkRole()) {
+            $supplier = Supplier::find($id);
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required',
+                'telephone' => 'required',
+            ]);
 
-        $supplier = Supplier::where('id',$id)->first();
-        $supplier->name = $request->Input('name');
-        $supplier->email = $request->Input('email');
-        $supplier->telephone = $request->Input('telephone');
-        $supplier->save();
+            $supplier = Supplier::where('id', $id)->first();
+            $supplier->name = $request->Input('name');
+            $supplier->email = $request->Input('email');
+            $supplier->telephone = $request->Input('telephone');
+            $supplier->save();
 
-        return redirect('/suppliers')->with('success', 'Supplier Details updated Successfully!');
+            return redirect('/suppliers')->with('success', 'Supplier Details updated Successfully!');
+
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Supplier::find($id)->delete();
-        return redirect()->route('suppliers.index');
+        if ($this->checkRole()) {
+            Supplier::find($id)->delete();
+            return redirect()->route('suppliers.index');
+        } else {
+            return redirect()->route('home');
+        }
+
     }
 }
