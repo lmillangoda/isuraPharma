@@ -20,7 +20,7 @@ class StockController extends Controller
     {
         $this->middleware('auth:web');
     }
-    
+
     public function index()
     {
         $user = Auth::user();
@@ -34,24 +34,9 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function create($branch_id, $product_id)
+     public function create($branch_id, $product_id, $batch)
      {
-        $user = Auth::user();
-        $role = $user->role_id;
-       $branch = Branch::find($branch_id);
-       $product = Product::find($product_id);
-       $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]]);
-       return view('stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with(['amount',$stock->amount],['expDate',$stock->expDate]);
-     }
-
-     public function createBackup($branch_id, $product_id)
-     {
-        $user = Auth::user();
-        $role = $user->role_id;
-         $branch = Branch::find($branch_id);
-         $product = Product::find($product_id);
-         $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',2]])->first();
-         return view('backup_stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with('amount',$stock->amount)->with('expDate',$stock->expDate);
+       //
      }
 
     /**
@@ -82,15 +67,14 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($branch_id, $product_id)
+    public function edit($branch_id, $product_id, $batch)
     {
         $user = Auth::user();
         $role = $user->role_id;
       $branch = Branch::find($branch_id);
       $product = Product::find($product_id);
-      $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->first();
-      return view('stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with('amount',$stock->amount)->with('expDate',$stock->expDate);
-
+      $stock = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',$batch]])->first();
+      return view('stock.create',compact('role'))->withBranch($branch)->withProduct($product)->with('amount',$stock->amount)->with('expDate',$stock->expDate)->with('batch',$batch);
     }
 
     /**
@@ -100,62 +84,46 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $branch_id, $product_id)
+    public function update(Request $request, $branch_id, $product_id, $batch)
     {
         $branch = Branch::find($branch_id);
         $product = $branch->main_products->find($product_id);
 
         $expire = $request->input('expire');
         $amount = $request->input('amount');
-        $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->value('amount');
-        $branch->main_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount + $amount]);
-
+        $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',$batch]])->value('amount');
+        if($batch==1)
+        {
+          $branch->main_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount + $amount]);
+        }
+        else if($batch==2)
+        {
+          $branch->backup_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount + $amount]);
+        }
         return redirect()->action(
-          'StockController@edit',['branch'=>$branch, 'product'=>$product]
+          'StockController@edit',['branch'=>$branch, 'product'=>$product, 'batch'=>$batch]
         )->with('Status', 'Stock Updated');
     }
 
-    public function substract(Request $request, $branch_id, $product_id)
+    public function substract(Request $request, $branch_id, $product_id, $batch)
     {
-        $branch = Branch::find($branch_id);
-        $product = $branch->main_products->find($product_id);
+      $branch = Branch::find($branch_id);
+      $product = $branch->main_products->find($product_id);
 
-        $amount = $request->input('amount');
-        $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',1]])->value('amount');
-        $branch->main_products()->updateExistingPivot($product_id, ['amount'=>$currentAmount - $amount]);
-
-        return redirect()->action(
-          'StockController@edit',['branch'=>$branch, 'product'=>$product]
-        )->with('Status', 'Stock Updated');
-    }
-
-    public function storeBackup(Request $request, $branch_id, $product_id)
-    {
-        $branch = Branch::find($branch_id);
-        $product = $branch->products->find($product_id);
-
-        $expire = $request->input('expire');
-        $amount = $request->input('amount');
-        $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',2]])->value('amount');
-        $branch->backup_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount + $amount]);
-
-        return redirect()->action(
-          'StockController@createBackup',['branch'=>$branch, 'product'=>$product]
-        )->with('Status', 'Stock Updated');
-    }
-
-    public function substractBackup(Request $request, $branch_id, $product_id)
-    {
-        $branch = Branch::find($branch_id);
-        $product = $branch->backup_products->find($product_id);
-
-        $amount = $request->input('amount');
-        $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',2]])->value('amount');
-        $branch->backup_products()->updateExistingPivot($product_id, ['amount'=>$currentAmount - $amount]);
-
-        return redirect()->action(
-          'StockController@createBackup',['branch'=>$branch, 'product'=>$product]
-        )->with('Status', 'Stock Updated');
+      $expire = $request->input('expire');
+      $amount = $request->input('amount');
+      $currentAmount = DB::table('stock')->where([['branch_id',$branch_id],['product_id',$product_id],['batch',$batch]])->value('amount');
+      if($batch==1)
+      {
+        $branch->main_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount - $amount]);
+      }
+      else if($batch==2)
+      {
+        $branch->backup_products()->updateExistingPivot($product_id, ['expDate'=>$expire, 'amount'=>$currentAmount - $amount]);
+      }
+      return redirect()->action(
+        'StockController@edit',['branch'=>$branch, 'product'=>$product, 'batch'=>$batch]
+      )->with('Status', 'Stock Updated');
     }
 
     /**
@@ -166,13 +134,24 @@ class StockController extends Controller
      */
     public function destroy($branch_id, $product_id)
     {
-        $branch = Branch::find($branch_id);
-        $branch->main_products()->updateExistingPivot($product_id, ['amount'=>0, 'expDate'=>null]);
+        //
     }
 
-    public function destroyBackup($branch_id, $product_id)
+    public function empty(Request $request, $branch_id, $product_id, $batch)
     {
-        $branch = Branch::find($branch_id);
+      $branch = Branch::find($branch_id);
+      $product = Product::find($product_id);
+      if($batch==1)
+      {
+        $branch->main_products()->updateExistingPivot($product_id, ['amount'=>0, 'expDate'=>null]);
+      }
+      else if($batch==2)
+      {
         $branch->backup_products()->updateExistingPivot($product_id, ['amount'=>0, 'expDate'=>null]);
+      }
+
+      return redirect()->action(
+        'StockController@edit',['branch'=>$branch, 'product'=>$product, 'batch'=>$batch]
+      )->with('Status', 'Stock Updated');
     }
 }

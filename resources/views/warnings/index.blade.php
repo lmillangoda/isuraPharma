@@ -19,7 +19,7 @@
       <p>Reorder Level : {{$warnings[$i]['product']->reorder_level}}</p>
       <p>Currently Available : {{$warnings[$i]['available']}}</p>
       <a class="btn btn-sm btn-danger" href="{{route('products.show',['product'=>$warnings[$i]['product']])}}">View Suppliers</a>
-      <a class="btn btn-sm btn-danger" href="{{route('backup_stock.create',['product'=>$warnings[$i]['product'], 'branch'=>$warnings[$i]['branch']])}}">Update Backup Stocks</a>
+      <a class="btn btn-sm btn-danger" href="{{route('stock.edit',['product'=>$warnings[$i]['product'], 'branch'=>$warnings[$i]['branch'], 'batch'=>2])}}">Update Backup Stocks</a>
     </div>
   </div>
   @endfor

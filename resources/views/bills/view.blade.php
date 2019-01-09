@@ -31,6 +31,9 @@
           <td>{{$product->pivot->cost}}</td>
       </tr>
         @endforeach
+        <tr>
+          <td colspan="5"><p align="center">Total : {{$total}} LKR</p></td>
+        </tr>
       </tbody>
   </div>
 @endsection

@@ -13,36 +13,56 @@
               <div class="card-header bg-white border-0">
                 <div class="row align-items-center">
                   <div class="col-12">
-                    <h3 class="mb-0">Add New Stock</h3>
+                    @if($batch==1)
+                    <h3 class="mb-0">Update Main Stock</h3>
+                    @elseif($batch==2)
+                    <h3 class="mb-0">Update Backup Stock</h3>
+                    @endif
                   </div>
                 </div>
               </div>
               <div class="card-body">
     <div id="stock" class="">
-      Manage Stock for {{$product->medicalName}}
+      <p>Manage Stock for
+        <br>
+        Medical Name : {{$product->medicalName}}
+        <br>
+        Brand Name : {{$product->brandName}}
+      </p>
       <br>
       for {{$branch->town}} Branch
       <br>
       <h3>Remaining Stocks : {{$amount}}</h3>
-      <form id="form" class="form" action="#" method="post">
+      <form id="form" class="form" action="#" method="post" onsubmit="return validateForm()">
         @method('PUT')
         @csrf
         <label for="amount">Amount : </label>
-        <input class="form-control" type="text" name="amount" value="">
+        <input id="amount" class="form-control" type="number" name="amount" value="">
         <br>
         <label for="expire">Expire Date : </label>
-        <input class="form-control" type="date" name="expire" value="{{$expDate}}">
-        <button form="form" class="btn btn-primary" formaction="{{action('StockController@update',['branch_id'=>$branch, 'product_id'=>$product])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="addBtn">Add to Stock</button>
-        <button form="form" class="btn btn-warning" formaction="{{action('StockController@substract',['branch_id'=>$branch, 'product_id'=>$product])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="subBtn">Substract from Stock</button>
+        <input id="expire" class="form-control" type="date" name="expire" value="{{$expDate}}">
+        <br>
+        <button form="form" class="btn btn-primary" formaction="{{action('StockController@update',['branch_id'=>$branch, 'product_id'=>$product, 'batch'=>$batch])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="addBtn">Add to Stock</button>
+        <button form="form" class="btn btn-warning" formaction="{{action('StockController@substract',['branch_id'=>$branch, 'product_id'=>$product, 'batch'=>$batch])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="subBtn">Substract from Stock</button>
+        <button form="form" class="btn btn-danger" formaction="{{action('StockController@empty',['branch_id'=>$branch, 'product_id'=>$product, 'batch'=>$batch])}}" formenctype="multipart/form-data" formmethod="post" type="submit" name="delBtn">Empty Stock</button>
       </form>
-      <form class="delete" action="{{route('stock.delete',['branch_id'=>$branch, 'product_id'=>$product])}}" method="post">
-        @csrf
-        @method('delete')
-        <input class="btn btn-danger" type="submit" name="delete" value="Empty Stock">
-      </form>
+
+
+
     </div>
   </div>
 </div>
 </div>
 </div>
 @endsection
+
+<script type="text/javascript">
+  function validateForm()
+  {
+    var amount = $('#amount').val();
+    if(amount<1)
+    {
+      alert("Please enter a valid Number!");
+    }
+  }
+</script>
