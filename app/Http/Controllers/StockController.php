@@ -21,7 +21,7 @@ class StockController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -36,14 +36,14 @@ class StockController extends Controller
     public function index()
     {
         if ($this->checkRole()) {
-
+            $user = Auth::user();
+            $role = $user->role_id;
+            $branches = Branch::all();
+            return view('stock.index')->withBranches($branches)->with('role', $role);
         } else {
             return redirect()->route('home');
         }
-        $user = Auth::user();
-        $role = $user->role_id;
-        $branches = Branch::all();
-        return view('stock.index')->withBranches($branches)->with('role', $role);
+
     }
 
     /**
@@ -54,16 +54,16 @@ class StockController extends Controller
     public function create($branch_id, $product_id)
     {
         if ($this->checkRole()) {
-
+            $user = Auth::user();
+            $role = $user->role_id;
+            $branch = Branch::find($branch_id);
+            $product = Product::find($product_id);
+            $stock = DB::table('stock')->where([['branch_id', $branch_id], ['product_id', $product_id], ['batch', 1]]);
+            return view('stock.create', compact('role'))->withBranch($branch)->withProduct($product)->with(['amount', $stock->amount], ['expDate', $stock->expDate]);
         } else {
             return redirect()->route('home');
         }
-        $user = Auth::user();
-        $role = $user->role_id;
-        $branch = Branch::find($branch_id);
-        $product = Product::find($product_id);
-        $stock = DB::table('stock')->where([['branch_id', $branch_id], ['product_id', $product_id], ['batch', 1]]);
-        return view('stock.create', compact('role'))->withBranch($branch)->withProduct($product)->with(['amount', $stock->amount], ['expDate', $stock->expDate]);
+      
     }
 
     public function createBackup($branch_id, $product_id)
@@ -117,7 +117,7 @@ class StockController extends Controller
             $branch = Branch::find($branch_id);
             $product = Product::find($product_id);
             $stock = DB::table('stock')->where([['branch_id', $branch_id], ['product_id', $product_id], ['batch', 1]])->first();
-            return view('stock.create', compact('role'))->withBranch($branch)->withProduct($product)->with('amount', $stock->amount)->with('expDate', $stock->expDate);
+            return view('stock.create', compact('role'))->withBranch($branch)->withProduct($product)->with('amount', $stock->amount)->with('expDate', $stock->expDate)->with('status','Action Successfull');
         } else {
             return redirect()->route('home');
         }
@@ -221,7 +221,6 @@ class StockController extends Controller
         if ($this->checkRole()) {
             $branch = Branch::find($branch_id);
             $branch->main_products()->updateExistingPivot($product_id, ['amount' => 0, 'expDate' => null]);
-
         } else {
             return redirect()->route('home');
         }

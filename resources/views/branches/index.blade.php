@@ -11,7 +11,14 @@
         </div>
     </div>
     <div class="container">
-
+        @if (\Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show">              
+          <p>{{ \Session::get('success') }}</p> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>  
+        </div>
+        @endif  
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3">Find Us
             <br>

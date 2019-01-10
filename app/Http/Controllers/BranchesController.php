@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Branch;
+use App\Product;
 use App\Stock;
 use DB;
 
@@ -19,7 +20,7 @@ class BranchesController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -75,13 +76,19 @@ class BranchesController extends Controller
 
             $branch->save();
 
-            $stocks = Stock::all();
+            $products = Product::all();
 
-            if (!is_null($stocks)) {
-                foreach ($stocks as $stock) {
+            if (!is_null($products)) {
+                foreach ($products as $product) {
                     $new = new Stock;
                     $new->branch_id = $branch->id;
-                    $new->product_id = $stock->product_id;
+                    $new->product_id = $product->id;
+                    $new->batch = 1;
+                    $new->save();
+                    $new = new Stock;
+                    $new->branch_id = $branch->id;
+                    $new->product_id = $product->id;
+                    $new->batch = 2;
                     $new->save();
                 }
             }

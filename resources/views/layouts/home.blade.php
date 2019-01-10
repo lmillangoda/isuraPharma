@@ -16,8 +16,7 @@
     <link href="{{URL::asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- Argon CSS -->
     <link type="text/css" href="{{URL::asset('assets/css/argon.css?v=1.0.1')}}" rel="stylesheet">
-    <!-- Docs CSS -->
-    <link type="text/css" href="{{URL::asset('assets/css/docs.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -68,9 +67,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li><a class="nav-link" href="/home">Home</a></li>
                         <li><a class="nav-link" href="/profile">Profile</a></li>
-                        <li><a class="nav-link" href="/messages">Messages</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
+
                         <li class="nav-item dropdown">
                             </i>
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

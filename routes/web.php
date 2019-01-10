@@ -1,62 +1,66 @@
-    <?php
-    use App\Product;
-    use App\Branch;
+<?php
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider within a group which
-    | contains the "web" middleware group. Now create something great!
-    |
-    */
+use App\Product;
+use App\Branch;
 
-    Route::get('/', function () {
-        $products = Product::all();
-        return view('welcome',compact('products'));
-    });
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-    Auth::routes(['verify' => true]);
+Route::get('/', function () {
+    $products = Product::all();
+    return view('welcome', compact('products'));
+});
 
-    Route::get('register',"Auth\RegisterController@reg");
-    Route::post('register',"Auth\RegisterController@register")->name('register');
+Auth::routes(['verify' => true]);
+Route::get('register', "Auth\RegisterController@reg");
+Route::post('register', "Auth\RegisterController@register")->name('register');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('messages', 'pagescontroller@messages')->name('messages');
+//Customer routes
+Route::get("custedit", 'userprofcontroller@index')->name('custedit');
+Route::post("store", 'userprofcontroller@store')->name('custstore');
+Route::get("profile", 'userprofcontroller@profile')->name('profile');
 
-    // Route::get('/verify/{token}','verifycontroller@verify')->name('verify');
+//AdminController routes
+Route::get("/admin", 'AdminController@index')->name('admin');
+Route::post('admin/empRegister', 'AdminController@employeeReg')->name('empregister');
+Route::post('/admin/profile/changepassword', 'EmployeeController@cPassword')->name('cPassword');
 
-    Route::get("propic",'userprofcontroller@index')->name('propic');
+//employee controller
+Route::get('/admin/profile', 'EmployeeController@profile')->name('aProfile');
+Route::post('/admin/employee/edit', "EmployeeController@empupdate")->name('empupdate');
 
-    Route::post("store",'userprofcontroller@store');
+//products routes
+Route::resource('products', 'ProductsController');
+Route::post('/products/search/', 'ProductsController@search')->name('products.search');
 
-    Route::get("profile",'userprofcontroller@profile')->name('profile');
+//Supplier routes
+Route::resource('suppliers', 'SuppliersController');
 
-    Route::get("/admin",'AdminController@index')->name('admin');
+//Branch routes
+Route::resource('branches', 'BranchesController');
 
-    Route::post('admin/empRegister','AdminController@employeeReg')->name('empregister');
+//Employee routes
+Route::resource('employees', 'EmployeeController');
 
-    //products routes
-    Route::resource('products', 'ProductsController');
-    Route::post('/products/search/', 'ProductsController@search')->name('products.search');
+//Reports routes
+Route::resource('reports', 'ReportsController');
+Route::post('/reports/display', 'ReportsController@displayReport')->name('reports.display');
 
-    Route::resource('suppliers', 'SuppliersController');
-
-    Route::resource('branches', 'BranchesController');
-
-    Route::resource('employees', 'EmployeeController');
-
-    Route::resource('reports', 'ReportsController');
-    Route::post('/reports/display', 'ReportsController@displayReport')->name('reports.display');
-
-    //dash components
-    Route::get('employeeReg',function(){
-        $branch = Branch::all();
-        return view('dash_comp.employee_reg',compact('branch'));
-    });
+//dash components
+Route::get('employeeReg', function () {
+    $branch = Branch::all();
+    return view('dash_comp.employee_reg', compact('branch'));
+});
 
 //Stock Routes
 Route::resource('stock', 'StockController');
@@ -70,24 +74,13 @@ Route::put('/stock/add/backup/branch/{branch}/product/{product}', 'StockControll
 Route::put('/stock/substract/backup/branch/{branch}/product/{product}', 'StockController@substractBackup')->name('backup_stock.substract'); //substracts from the currnt Stock
 Route::delete('/stock/delete/backup/branch/{branch}/product/{product}', 'StockController@destroyBackup')->name('backup_stock.delete');
 
-    //facebook socialite routes
-    Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-    Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
-
-    //Bills Route
-    Route::resource('bills', 'BillsController');
-    Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
-    Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
+//Bills Route
+Route::resource('bills', 'BillsController');
+Route::post('/bills/display/', 'BillsController@displayBill')->name('bill.display');
+Route::post('/bills/removeItem/', 'BillsController@removeItem')->name('bill.removeItem');
+Route::get('/pdf/{bill}/{total}', 'BillsController@printBill')->name('pdf');
 
 //warnings
 Route::resource('warnings', 'WarningsController');
-
-    Route::get('/admin/profile','EmployeeController@profile')->name('aProfile');
-
-    Route::post('/admin/profile/changepassword','EmployeeController@cPassword')->name('cPassword');
-
-    Route::post('/admin/employee/edit',"EmployeeController@empupdate")->name('empupdate');
-
-Route::get('/pdf/{bill}/{total}', 'BillsController@printBill')->name('pdf');
 
 Route::resource('messages', 'MessagesController');

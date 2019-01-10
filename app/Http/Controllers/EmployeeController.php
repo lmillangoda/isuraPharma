@@ -22,7 +22,7 @@ class EmployeeController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -102,7 +102,7 @@ class EmployeeController extends Controller
             $role = $user->role_id;
             $branch = Branch::all();
             $employee = User::find($id);
-            return view('employees.create', compact('employee', 'branch', 'role'));
+            return view('employees.create', compact('employee', 'branch', 'role'))->with('edited', 'Employee Details Edited Successfully!');
         } else {
             return redirect()->route('home');
         }
@@ -149,7 +149,7 @@ class EmployeeController extends Controller
 
             $user->save();
 
-            return redirect()->action('EmployeeController@index');
+            return redirect()->action('EmployeeController@index')->with('update', 'Employee Details updated Successfully!');
         } else {
             return redirect()->route('home');
         }
@@ -166,7 +166,7 @@ class EmployeeController extends Controller
     {
         if ($this->checkRole()) {
             User::find($id)->delete();
-            return redirect()->route('employees.index');
+            return redirect()->route('employees.index')->with('delete', 'Employee Deleted Added Successfully!');
         } else {
             return redirect()->route('home');
         }
@@ -203,10 +203,11 @@ class EmployeeController extends Controller
                 $user->save();
                 $user = Auth::user();
                 $role = $user->role_ID;
-
-                return view('admin_profile.profile', compact('user', 'role'));
+                return redirect()->route('aProfile')->with('user',$user)->with('role',$role)->with('success', 'Admin Password Changed Successfully!');
             } else {
-                return "Password Change Failed";
+                $user = Auth::user();
+                $role = $user->role_ID;
+                return redirect()->route('aProfile')->with('user',$user)->with('role',$role)->with('fail', 'Current Password check failed.Password Change Unsuccessful');
             }
         } else {
             return redirect()->route('home');

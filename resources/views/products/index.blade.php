@@ -11,6 +11,14 @@
         </div>
     </div>
     <div class="container-fluid">
+            @if (\Session::has('success'))
+            <div class="alert alert-success alert-dismissible fade show">              
+              <p>{{ \Session::get('success') }}</p> 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+            @endif  
         <!-- Page Heading -->
         <h1 class="my-4">Our Products</h1>
         <input id="search" class="form-control" type="text" name="" value=""

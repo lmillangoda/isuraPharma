@@ -19,7 +19,7 @@ class SuppliersController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -142,7 +142,7 @@ class SuppliersController extends Controller
             $supplier->telephone = $request->Input('telephone');
             $supplier->save();
 
-            return redirect('/suppliers')->with('success', 'Supplier Details updated Successfully!');
+            return redirect('/suppliers')->with('update', 'Supplier Details updated Successfully!');
 
         } else {
             return redirect()->route('home');
@@ -159,7 +159,7 @@ class SuppliersController extends Controller
     {
         if ($this->checkRole()) {
             Supplier::find($id)->delete();
-            return redirect()->route('suppliers.index');
+            return redirect()->route('suppliers.index')->with('deleted', 'Supplier Deleted Successfully!');
         } else {
             return redirect()->route('home');
         }

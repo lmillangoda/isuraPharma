@@ -10,6 +10,7 @@
             </div>
         </div>
     </div>
+    
     <!--  Branch wise stock details -->
     @include('branches.index')
 @endsection

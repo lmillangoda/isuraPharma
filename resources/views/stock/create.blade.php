@@ -9,6 +9,14 @@
     </div>
     <div class="section">
         <div class="container fluid">
+                @if (\Session::has('status'))
+                <div class="alert alert-success alert-dismissible fade show">              
+                  <p>{{ \Session::get('status') }}</p>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>  
+                </div>
+                @endif
             <div class="card bg-secondary shadow">
                 <div class="card-header bg-white border-0">
                     <div class="row align-items-center">

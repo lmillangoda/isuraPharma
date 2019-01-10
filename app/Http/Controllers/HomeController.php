@@ -29,7 +29,15 @@ class HomeController extends Controller
         $role = $user->role_id;
         if ($role == 3) {
             $products = Product::all();
-            return view('welcome', compact('products', compact('role')));
+            $user = Auth::user();
+            $verified = $user->email_verified_at;
+            if(is_null($verified)){
+                $verify = 'please verify your email address';
+                return view('home', compact('products', 'role','verify'));
+            }else{
+                return view('home', compact('products','role'));
+            }
+            
         } else
             return redirect()->route('admin');
     }

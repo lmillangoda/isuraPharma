@@ -23,7 +23,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -51,7 +51,7 @@ class AdminController extends Controller
             $suppliers = Supplier::all()->count();
             $day = Carbon::today();
             $daily_sale = Bill::whereRaw('DATE(created_at) = ?', [$day])->get()->count();
-
+            
             return view('dashboards.admin', compact('customers', 'suppliers', 'daily_sale', 'role'));
         } else {
             return redirect()->route('home');
@@ -93,7 +93,7 @@ class AdminController extends Controller
                 'branch_id' => $request['branch'],
                 'role_id' => $request['role']
             ]);
-            return redirect()->action('EmployeeController@create');
+            return redirect()->action('EmployeeController@create')->with('success','Employee Registration Successful');
         } else {
             return redirect()->route('home');
         }

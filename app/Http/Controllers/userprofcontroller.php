@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\propic;
 use App\Product;
+use App\Branch;
+use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +19,16 @@ class userprofcontroller extends Controller
         $this->middleware('auth:web');
     }
 
+    public function checkRole()
+    {
+        $user = Auth::user();
+        $role = $user->role_id;
+        if ($role == 3) {
+            return true;
+        } else {
+            false;
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,16 +36,14 @@ class userprofcontroller extends Controller
      */
     public function index()
     {
-        $user2 = Auth::user();
-        $id = 0;
-        $user = propic::where('id', $user2->id)->first();
-        if (is_null($user)) {
-            $user = propic::where('id', $id)->first();
+        if($this->checkRole()){
+            $branch = Branch::all();
+            $userprof = Auth::user();
+            return view('customer.profile', compact('userprof','branch'));
+        }else{
+            return redirect()->route('home');
         }
-        if (is_null($user)) {
-            return view('pages.propic', compact('user', 'user2'));
-        }
-        return view("pages.propic", compact('user', 'user2'));
+       
     }
 
     /**
@@ -54,40 +64,41 @@ class userprofcontroller extends Controller
      */
     public function store(Request $request)
     {
-        $user2 = Auth::user();
-        $id = $user2->id;
-        $test = propic::where('id', $id)->first();
-
-
-        if (is_null($test)) {
-            $user = new propic;
+        if($this->checkRole()){
+            if ($this->checkRole()) {
+                $this->validate($request, [
+                    'fname' => 'required|string|max:255',
+                    'mname' => 'required|string|max:255',
+                    'lname' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255',
+                    'tel' => 'required|string|min:10|max:10',
+                    'hno' => 'required|string|max:255',
+                    'town' => 'required|string|max:255',
+                ]);
+                $user = User::where('id', $request->id)->first();
+    
+                $user->fName = $request['fname'];
+                $user->mname = $request['mname'];
+                $user->lname = $request['lname'];
+                $user->hNo = $request['hno'];
+                $user->add1 = $request['line1'];
+                $user->add2 = $request['line2'];
+                $user->town = $request['town'];
+                $user->tel = $request['tel'];
+                $user->email = $request['email'];
+                $user->branch_id = $request['branch'];
+                $user->role_id = $request['role'];
+    
+                $user->save();
+    
+                return redirect()->route('profile')->with('update', 'User Details updated Successfully!');
+            } else {
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('home');
         }
-        if (!is_null($test)) {
-            $user = propic::where('id', $id)->first();
-        }
-        $pic = $request->image;
-        if (!is_null($pic)) {
-            $file = Input::file('image');
-            $file->move(public_path() . '/assets/img', $request->image->getClientOriginalName());
-            $user->name = $request->image->getClientOriginalName();
-            $user->id = $user2->id;
-            $user->save();
-        }
-        $Nme = Input::get('input-name');
-        if (!is_null($Nme)) {
-            $user2->name = $Nme;
-        }
-        $Eml = Input::get('input-email');
-        if (!is_null($Eml)) {
-            $user2->email = $Eml;
-        }
-        $tel = Input::get('input-telno');
-        if (!is_null($tel)) {
-            $user2->tel_no = $tel;
-        }
-
-        $user2->save();
-        return redirect()->route('propic');
+        
     }
 
 
@@ -99,16 +110,13 @@ class userprofcontroller extends Controller
      */
     public function profile()
     {
-        $user2 = Auth::user();
-        $id = 0;
-        $user = propic::where('id', $user2->id)->first();
-        if (is_null($user)) {
-            $user = propic::where('id', $id)->first();
+        if($this->checkRole()){
+            $user = Auth::user();
+            return view("customer.profile", compact('user'));
+        }else{
+            return redirect()->route('home');
         }
-        if (is_null($user)) {
-            return view('pages.profile', compact('user', 'user2'));
-        }
-        return view("pages.profile", compact('user', 'user2'));
+        
     }
 
     /**

@@ -9,7 +9,23 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container col-12 mt-5">
+            @if (\Session::has('success'))
+            <div class="alert alert-success alert-dismissible fade show">              
+              <p>{{ \Session::get('success') }}</p> 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+            @endif 
+            @if (\Session::has('fail'))
+            <div class="alert alert-danger alert-dismissible fade show">              
+              <p>{{ \Session::get('fail') }}</p> 
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+            @endif
         <div class="card card-profile shadow">
             <div class="px-4">
                 <div class="row justify-content-center">

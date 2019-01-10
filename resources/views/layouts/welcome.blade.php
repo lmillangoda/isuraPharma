@@ -41,7 +41,11 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active"><a href="#intro">Intro</a></li>
+                @guest
                 <li class="menu-active"><a href="#products">Products</a></li>
+                @else
+            <li class="menu-active"><a href="{{route('home')}}">Products</a></li>
+                @endguest
                 <li class="menu-active"><a href="#footer">Contact Us</a></li>
                 @guest
                     <li class="nav-item">

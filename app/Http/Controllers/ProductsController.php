@@ -22,7 +22,7 @@ class ProductsController extends Controller
     {
         $this->middleware('auth:web');
     }
-
+// Check user level
     public function checkRole()
     {
         $user = Auth::user();
@@ -75,6 +75,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $role = $user->role_id;
         if ($role == 1 || $role == 4) {
 // dd($request);
             $this->validate($request, [
@@ -144,7 +146,7 @@ class ProductsController extends Controller
             $role = $user->role_id;
             $product = Product::find($id);
             $suppliers = Supplier::all();
-            return view('products.create')->withProduct($product)->withSuppliers($suppliers)->with('role', $role);
+            return view('products.create')->withProduct($product)->withSuppliers($suppliers)->with('role', $role)->with('success', 'Product Details Edited Successfully!');
         } else {
             return redirect()->route('home');
         }

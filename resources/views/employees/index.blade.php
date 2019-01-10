@@ -11,6 +11,30 @@
     </div>
 
     <div class="container">
+            @if (\Session::has('success'))
+            <div class="alert alert-success alert-dismissible fade show">              
+              <p>{{ \Session::get('success') }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>  
+            </div>
+            @endif
+            @if (\Session::has('update'))
+            <div class="alert alert-default alert-dismissible fade show">              
+              <p>{{ \Session::get('update') }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>  
+            </div>
+            @endif 
+            @if (\Session::has('delete'))
+            <div class="alert alert-warning alert-dismissible fade show">              
+              <p>{{ \Session::get('delete') }}</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>  
+            </div>
+            @endif   
         <div class="row mt-5">
             <div class="col">
                 <div class="card bg-default shadow">
