@@ -362,4 +362,50 @@ class BillsController extends Controller
         }
 
     }
+
+    public function search(Request $request)
+    {
+      if($request->ajax())
+      {
+        $output = '';
+        $keyword = $request->keyword;
+        if($keyword!='')
+        {
+          $bills = DB::table('bills')
+          ->where('id','like','%'.$keyword.'%')
+          ->orWhere('cashier_id','like','%'.$keyword.'%')
+          ->value('id');
+
+          $data = Bill::findMany([$bills]);
+        }
+        else
+        {
+          $data = Bill::all();
+        }
+
+        $total_rows = $data->count();
+        if($total_rows>0)
+        {
+          foreach($data as $row)
+          {
+            $output .= '
+            <tr>
+              <td>'. $row->id .'</td>
+              <td>'. $row->cashier->id .'</td>
+              <td>'. $row->cashier->fName .'</td>
+              <td>'. $row->created_at .'</td>
+              <td><a class="btn btn-sm btn-primary" href="'. route('bills.show',['bill'=>$row->id]) .'">View Bill Details</a></td>
+            </tr>
+            ';
+          }
+        }
+
+        $data = array(
+          'rows' => $output
+        );
+
+        return response()->json($data);
+        // echo ("Hello");
+    }
+  }
 }
