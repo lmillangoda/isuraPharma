@@ -41,7 +41,7 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Intro</a></li>
-          <li class="menu-active"><a href="#products">Products</a></li>
+          <li class="menu-active"><a href="/products">Products</a></li>
           <li class="menu-active"><a href="#footer">Contact Us</a></li>
           @guest
                           <li class="nav-item">
@@ -58,14 +58,14 @@
                               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                   {{ Auth::user()->fName }} <span class="caret"></span>
                               </a>
-      
+
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                   <a class="dropdown-item" href="{{ route('logout') }}"
                                      onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit();">
                                       {{ __('Logout') }}
                                   </a>
-      
+
                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                       @csrf
                                   </form>

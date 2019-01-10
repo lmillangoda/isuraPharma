@@ -24,7 +24,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="admin">
+      <a class="navbar-brand pt-0" href="/">
         <img src="{{URL::asset('assets-dash/img/theme/isura.jpg')}}" class="navbar-brand-img" alt="..."><br>
         Isura Pharmacies
       </a>
@@ -118,7 +118,7 @@
                         </a>
                       </li>
                     @endif
-                    
+
                 @if($role == 4)
                 <li class="nav-item">
                     <a class="nav-link" href="/employees">

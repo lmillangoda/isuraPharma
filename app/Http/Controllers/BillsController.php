@@ -32,7 +32,7 @@ class BillsController extends Controller
         $role = $user->role_id;
         $bills = Bill::all();
 
-        return view('bills.index',compact('role'))->withBills($bills); 
+        return view('bills.index',compact('role'))->withBills($bills);
     }
 
     /**
@@ -57,6 +57,11 @@ class BillsController extends Controller
      */
     public function store(Request $request)
     {
+      /*
+        cart properties element 1 = products amount
+        cart properties element 2 = products cost
+        cart properties element 2 = stock method
+      */
       // echo(DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount'));
         // dd($request);
         $products = array();
@@ -71,13 +76,18 @@ class BillsController extends Controller
 
           $products[$product->id] = array('amount' => $amount, 'cost' => $cost);
 
-          //update the stocks
-          //check where the stocks are coming from
-          //if the tranaction from main stock
+          //get the main stock
           $current_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->value('amount');
           if($stock_method=='main') {
+            /*
+              if the stock method is main substract the amount from main stock
+            */
             DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',1]])->update(['amount'=>$current_stock-$amount]);
-          } else if ($stock_method=='combined') {
+          }
+
+          else if ($stock_method=='combined')
+          {
+            //calculate the
             $remaining_amount = $amount - $current_stock;
             $backup_stock = DB::table('stock')->where([['branch_id',$branch], ['product_id',$product->id], ['batch',2]])->value('amount');
             //remove main stock
@@ -114,7 +124,7 @@ class BillsController extends Controller
         'total' => $total
       );
       $pdf = PDF::loadView('pdf.invoice',$data);
-      return $pdf->download('invoice.pdf');
+      return $pdf->download('invoice'. $bill_id .'pdf');
     }
 
     /**
@@ -129,7 +139,8 @@ class BillsController extends Controller
       $role = $user->role_id;
       $bill = Bill::find($id);
       $products = $bill->products;
-        return view('bills.view')->with('role',$role)->withBill($bill)->withProducts($products);
+      $total = $bill->products->sum('pivot.cost');
+        return view('bills.view')->with('role',$role)->withBill($bill)->withProducts($products)->with('total',$total);
     }
 
     /**
@@ -283,4 +294,50 @@ class BillsController extends Controller
 
       return $response;
     }
+
+    public function search(Request $request)
+    {
+      if($request->ajax())
+      {
+        $output = '';
+        $keyword = $request->keyword;
+        if($keyword!='')
+        {
+          $bills = DB::table('bills')
+          ->where('id','like','%'.$keyword.'%')
+          ->orWhere('cashier_id','like','%'.$keyword.'%')
+          ->value('id');
+
+          $data = Bill::findMany([$bills]);
+        }
+        else
+        {
+          $data = Bill::all();
+        }
+
+        $total_rows = $data->count();
+        if($total_rows>0)
+        {
+          foreach($data as $row)
+          {
+            $output .= '
+            <tr>
+              <td>'. $row->id .'</td>
+              <td>'. $row->cashier->id .'</td>
+              <td>'. $row->cashier->fName .'</td>
+              <td>'. $row->created_at .'</td>
+              <td><a class="btn btn-sm btn-primary" href="'. route('bills.show',['bill'=>$row->id]) .'">View Bill Details</a></td>
+            </tr>
+            ';
+          }
+        }
+
+        $data = array(
+          'rows' => $output
+        );
+
+        return response()->json($data);
+        // echo ("Hello");
+    }
+  }
 }

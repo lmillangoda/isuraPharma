@@ -21,7 +21,7 @@ class ProductsController extends Controller
     {
         $this->middleware('auth:web');
     }
-    
+
     public function index()
     {
         $user = Auth::user();
