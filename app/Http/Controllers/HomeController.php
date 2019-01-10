@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
-
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -28,7 +28,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $role = $user->role_id;
         if ($role == 3) {
-            $products = Product::all();
+            $products = DB::table('products')->paginate(10);
             $user = Auth::user();
             $verified = $user->email_verified_at;
             if(is_null($verified)){

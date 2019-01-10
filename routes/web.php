@@ -15,7 +15,7 @@ use App\Branch;
 */
 
 Route::get('/', function () {
-    $products = Product::all();
+    $products = DB::table('products')->paginate(10);
     return view('welcome', compact('products'));
 });
 
