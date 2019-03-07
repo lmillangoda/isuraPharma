@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('content')
-    <!--<div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
+    <div class="header bg-gradient-default pb-5 pt-5 pt-md-5">
         <div class="container-fluid">
             <div class="header-body">
 
             </div>
         </div>
-    </div>-->
-    <!--<section class="section">
+    </div>
+    <section class="section">
         <div class="container col-6">
             <div class="card bg-secondary shadow">
                 <div class="card-body col-12">
@@ -58,5 +58,5 @@
             </div>
         </div>
 
-        </div>-->
+        </div>
 @endsection()
