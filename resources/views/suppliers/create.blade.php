@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>-->
-    <section class="section">
+    <!--<section class="section">
         <div class="container col-6">
             <div class="card bg-secondary shadow">
                 <div class="card-body col-12">
@@ -58,5 +58,5 @@
             </div>
         </div>
 
-        </div>
+        </div>-->
 @endsection()
